@@ -161,8 +161,10 @@ export class Engine {
    const persistenceStarted=this.clock();
    await tx.query('UPDATE sdr.candidates SET lead_state=$4,updated_at=now() WHERE tenant_id=$1 AND brand_id=$2 AND id=$3',[...s,candidate.id,JSON.stringify(next)]);
    await persistLeadMemory(tx,channel,candidate.id,next);
-   const handoff=['handoff','stop'].includes(result.nextAction)||!guard.ok;
-   // Laboratory replies and the terminal state commit together; no intermediate ready write is needed.
+   const terminal=['handoff','stop'].includes(result.nextAction)||!guard.ok;
+   // WhatsApp must deliver closing bubbles before pausing. Laboratory commits terminal state immediately.
+   const needsWhatsappDelivery=channel.kind==='whatsapp'&&result.bubbles.length>0&&guard.ok;
+   const handoff=terminal&&!needsWhatsappDelivery;
    await tx.query('UPDATE sdr.jobs SET state=$4,result=$5,usage=$6,completed_at=now(),error_code=$7 WHERE tenant_id=$1 AND brand_id=$2 AND id=$3',[...s,job.id,handoff?'handoff':channel.kind==='laboratory'?'completed':'ready',JSON.stringify(result),JSON.stringify(input.usage??{}),guard.ok?null:'POLICY_GUARD']);
    if(channel.kind==='laboratory'&&!originalGuard.ok)await tx.query("UPDATE sdr.jobs SET context=COALESCE(context,'{}'::jsonb)||$4::jsonb WHERE tenant_id=$1 AND brand_id=$2 AND id=$3",[...s,job.id,JSON.stringify({guardReview:{violations:originalGuard.violations,bubbles:input.result.bubbles,...(repairCode?{repairCode}:{})}})]);
    if(channel.kind==='laboratory'&&result.bubbles.length) {

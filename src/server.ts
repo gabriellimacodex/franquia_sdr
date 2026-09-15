@@ -122,7 +122,13 @@ export async function createServer(db:Database,config:Config,options:{transport?
    const hint=await store.recipientHint(job.id);
    const to=/^\d{10,20}$/.test(hint.authorizedContactId)?hint.authorizedContactId:await kapso.resolveWaId(hint.contactId);
    const wamid=await kapso.sendText({phoneNumberId:hint.phoneNumberId,to,text:reply.join('\n\n')});
-   return store.confirmApiSend(job.id,wamid);
+   const sent=await store.confirmApiSend(job.id,wamid);
+   // After a successful WhatsApp delivery, apply deferred handoff/stop from the model decision.
+   const decision=job.result;
+   if(decision&&(decision.nextAction==='handoff'||decision.nextAction==='stop')) {
+    await store.control(channel,job.conversation_id,decision.nextAction==='stop'?'stop':'handoff',job.id+':after-deliver',input.executionId,input.controlFingerprint);
+   }
+   return sent;
   } catch {
    return store.failApiSend(job.id,'DELIVERY_FAILED');
   }
