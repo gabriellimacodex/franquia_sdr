@@ -194,4 +194,41 @@ export class Store {
      await tx.query("UPDATE sdr.deliveries SET state='unknown',updated_at=now() WHERE tenant_id=$1 AND brand_id=$2 AND job_id=$3 AND state='dispatching'",s);
    });
  }
+ /** Fase 2: after Kapso Messages API send, bind WAMID immediately and mark job sent. */
+ async confirmApiSend(id:string,messageId:string):Promise<TurnView> {
+   const channel=await this.scopeForJob(id);
+   return scoped(this.db,channel,async tx=>{
+     const s=[channel.tenantId,channel.brandId,id];
+     const job=(await tx.query<JobRow>('SELECT * FROM sdr.jobs WHERE tenant_id=$1 AND brand_id=$2 AND id=$3 FOR UPDATE',s)).rows[0];
+     if(!job) throw new ServiceError('JOB_NOT_FOUND',404);
+     if(!['dispatching','dispatched'].includes(job.state)) return this.view(job);
+     await tx.query("UPDATE sdr.deliveries SET message_id=$4,state='sent',updated_at=now() WHERE tenant_id=$1 AND brand_id=$2 AND job_id=$3 AND state IN ('dispatching','unknown')", [...s,messageId]);
+     await tx.query("UPDATE sdr.jobs SET state='sent',completed_at=COALESCE(completed_at,now()) WHERE tenant_id=$1 AND brand_id=$2 AND id=$3 AND state IN ('dispatching','dispatched')",s);
+     const updated=(await tx.query<JobRow>('SELECT * FROM sdr.jobs WHERE tenant_id=$1 AND brand_id=$2 AND id=$3',s)).rows[0];
+     return {...this.view(updated),authorized:true,reply:[]};
+   });
+ }
+ async failApiSend(id:string,errorCode='DELIVERY_FAILED'):Promise<TurnView> {
+   const channel=await this.scopeForJob(id);
+   return scoped(this.db,channel,async tx=>{
+     const s=[channel.tenantId,channel.brandId,id];
+     const job=(await tx.query<JobRow>('SELECT * FROM sdr.jobs WHERE tenant_id=$1 AND brand_id=$2 AND id=$3 FOR UPDATE',s)).rows[0];
+     if(!job) throw new ServiceError('JOB_NOT_FOUND',404);
+     await tx.query("UPDATE sdr.deliveries SET state='failed',updated_at=now() WHERE tenant_id=$1 AND brand_id=$2 AND job_id=$3 AND state IN ('dispatching','unknown')",s);
+     await tx.query("UPDATE sdr.jobs SET state='handoff',error_code=$4,completed_at=COALESCE(completed_at,now()) WHERE tenant_id=$1 AND brand_id=$2 AND id=$3 AND state IN ('dispatching','dispatched','ready')",[...s,errorCode]);
+     const conv=(await tx.query<ConversationRow>('SELECT * FROM sdr.conversations WHERE tenant_id=$1 AND brand_id=$2 AND id=$3',[channel.tenantId,channel.brandId,job.conversation_id])).rows[0];
+     if(conv) await this.controlTx(tx,channel,conv.id,'handoff',id+':delivery-failed');
+     const updated=(await tx.query<JobRow>('SELECT * FROM sdr.jobs WHERE tenant_id=$1 AND brand_id=$2 AND id=$3',s)).rows[0];
+     return {...this.view(updated),authorized:false,reply:[],errorCode};
+   });
+ }
+ async recipientHint(id:string):Promise<{phoneNumberId:string;contactId:string;authorizedContactId:string}> {
+   const channel=await this.scopeForJob(id);
+   return scoped(this.db,channel,async tx=>{
+     const job=(await tx.query<JobRow>('SELECT * FROM sdr.jobs WHERE tenant_id=$1 AND brand_id=$2 AND id=$3',[channel.tenantId,channel.brandId,id])).rows[0];
+     if(!job) throw new ServiceError('JOB_NOT_FOUND',404);
+     const lead=(await tx.query<CandidateRow>('SELECT * FROM sdr.candidates WHERE tenant_id=$1 AND brand_id=$2 AND id=$3',[channel.tenantId,channel.brandId,job.candidate_id])).rows[0];
+     return {phoneNumberId:channel.phoneNumberId,contactId:lead.contact_id,authorizedContactId:lead.authorized_contact_id};
+   });
+ }
 }

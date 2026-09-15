@@ -100,6 +100,33 @@ export async function createServer(db:Database,config:Config,options:{transport?
   }
   return store.authorize(job.id,input.executionId,input.controlFingerprint);
  });
+ /** Fase 2: authorize + send via Kapso Messages API, then wait (Kapso must not Send Text again). */
+ app.post<{Params:{id:string}}>('/internal/turns/:id/deliver',async request=>{
+  const input=z.object({executionId:z.string(),controlFingerprint:z.string(),contextVersion:z.number().optional()}).parse(json(request));
+  const {channel,job}=await store.getJob(request.params.id);
+  if(config.CHANNEL_ENABLED!=='true'||config.NATIVE_CONTROL_VERIFIED!=='true'||!channel.responsibleUserId) return {authorized:false,state:'handoff',reply:[],errorCode:'RELEASE_GATE_CLOSED'};
+  if(job.state==='sent') return {...store.view(job),authorized:true,reply:[]};
+  const state=await native(input.executionId);
+  if(state.status!=='running'||state.conversationId!==job.conversation_id||state.controlFingerprint!==input.controlFingerprint) {
+   await store.control(channel,job.conversation_id,'handoff','deliver-guard:'+state.controlFingerprint,input.executionId,state.controlFingerprint);
+   return {authorized:false,state:'handoff',reply:[]};
+  }
+  const authorization=await store.authorize(job.id,input.executionId,input.controlFingerprint);
+  if(!authorization.authorized) return authorization;
+  const reply=authorization.reply;
+  if(!Array.isArray(reply)||reply.length<1||reply.length>2||reply.some(part=>typeof part!=='string'||!part.trim())||reply.join('\n\n').length>4000) {
+   await store.failApiSend(job.id,'INVALID_AUTHORIZED_REPLY');
+   return {authorized:false,state:'handoff',reply:[],errorCode:'INVALID_AUTHORIZED_REPLY'};
+  }
+  try {
+   const hint=await store.recipientHint(job.id);
+   const to=/^\d{10,20}$/.test(hint.authorizedContactId)?hint.authorizedContactId:await kapso.resolveWaId(hint.contactId);
+   const wamid=await kapso.sendText({phoneNumberId:hint.phoneNumberId,to,text:reply.join('\n\n')});
+   return store.confirmApiSend(job.id,wamid);
+  } catch {
+   return store.failApiSend(job.id,'DELIVERY_FAILED');
+  }
+ });
  app.post<{Params:{id:string}}>('/internal/turns/:id/dispatched',async request=>{await store.dispatched(request.params.id);return {recorded:true,status:'awaiting_provider_receipt'};});
  app.post<{Params:{id:string}}>('/internal/n8n/jobs/:id/complete',async request=>{
   const body=json(request);if(body.jobId!==request.params.id) throw new ServiceError('JOB_MISMATCH',409); return engine.complete(body);

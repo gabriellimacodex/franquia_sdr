@@ -146,20 +146,22 @@ async function handler(request, env) {
     vars.sapore_turn_id = turn.id || '';
     if (turn.state === 'pending') return route('poll');
     if (['unknown', 'handoff'].includes(turn.state)) return route('handoff', turn.handoffReason || turn.state);
+    // Fase 2: API already sent via Kapso Messages. Never route to Send Text again.
+    if (turn.state === 'sent') {
+      vars.sapore_dispatch_status = 'confirmed';
+      vars.sapore_reply_text = '';
+      return route('wait');
+    }
     if (turn.state !== 'ready') return route('wait');
-    const authorization = await json(`${base}/internal/turns/${encodeURIComponent(turn.id)}/authorize-send`, env.KAPSO_FUNCTION_TOKEN, 'POST', {
+    const delivery = await json(`${base}/internal/turns/${encodeURIComponent(turn.id)}/deliver`, env.KAPSO_FUNCTION_TOKEN, 'POST', {
       executionId: native.id, controlFingerprint, contextVersion: turn.contextVersion,
     });
-    if (!authorization.authorized) return ['unknown', 'handoff'].includes(authorization.state)
-      ? route('handoff', authorization.state) : route('wait');
-    const reply = authorization.reply;
-    if (!Array.isArray(reply) || reply.length < 1 || reply.length > 2 ||
-      reply.some(part => typeof part !== 'string' || !part.trim()) || reply.join('\n\n').length > 4000) {
-      return route('handoff', 'invalid_authorized_reply');
-    }
-    vars.sapore_reply_text = reply.join('\n\n');
-    vars.sapore_attempt_id = authorization.attemptId || turn.id;
-    return route('send');
+    if (!delivery.authorized) return ['unknown', 'handoff'].includes(delivery.state)
+      ? route('handoff', delivery.errorCode || delivery.state) : route('wait');
+    vars.sapore_dispatch_status = 'confirmed';
+    vars.sapore_attempt_id = delivery.attemptId || turn.id;
+    vars.sapore_reply_text = '';
+    return route('wait');
   } catch (error) {
     const message = String(error && error.message || error);
     if (/^upstream_\d+$/.test(message)) return route('handoff', message);
