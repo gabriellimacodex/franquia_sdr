@@ -1,0 +1,2160 @@
+TAP version 13
+# (node:7076) [FSTDEP023] FastifyDeprecation: disableRequestLogging option is deprecated. Use the logController option with disableRequestLogging or isLogDisabled override instead. The disableRequestLogging top-level option will be removed in `fastify@6`.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: HTTP authentication rejects missing/wrong internal tokens, forged webhooks and nonmembers
+ok 1 - HTTP authentication rejects missing/wrong internal tokens, forged webhooks and nonmembers
+  ---
+  duration_ms: 2812.15575
+  type: 'test'
+  ...
+# Subtest: audio rejects invalid or untrusted metadata before downloading
+ok 2 - audio rejects invalid or untrusted metadata before downloading
+  ---
+  duration_ms: 16.554083
+  type: 'test'
+  ...
+# Subtest: signed audio download receives no API credentials; transcription gets only the OpenAI credential
+ok 3 - signed audio download receives no API credentials; transcription gets only the OpenAI credential
+  ---
+  duration_ms: 3.35775
+  type: 'test'
+  ...
+# Subtest: audio enforces actual stream size even when metadata understates it
+ok 4 - audio enforces actual stream size even when metadata understates it
+  ---
+  duration_ms: 2.384833
+  type: 'test'
+  ...
+# Subtest: audio without a transcription credential performs no external calls
+ok 5 - audio without a transcription credential performs no external calls
+  ---
+  duration_ms: 0.093917
+  type: 'test'
+  ...
+# Subtest: the exact QA response distinguishes the current candidate declaration from brand figures
+ok 6 - the exact QA response distinguishes the current candidate declaration from brand figures
+  ---
+  duration_ms: 3.514166
+  type: 'test'
+  ...
+# Subtest: the exception requires unique canonical user evidence in the exact scope and trigger
+ok 7 - the exception requires unique canonical user evidence in the exact scope and trigger
+  ---
+  duration_ms: 1.16825
+  type: 'test'
+  ...
+# Subtest: a matching candidate amount never licenses a brand price or coverage claim
+ok 8 - a matching candidate amount never licenses a brand price or coverage claim
+  ---
+  duration_ms: 1.958959
+  type: 'test'
+  ...
+# Subtest: third-party, credit, hypothetical and contradicted capital remain ineligible
+ok 9 - third-party, credit, hypothetical and contradicted capital remain ineligible
+  ---
+  duration_ms: 0.558584
+  type: 'test'
+  ...
+# Subtest: candidate evidence cannot inject an approved source or authorize unrelated commercial numbers
+ok 10 - candidate evidence cannot inject an approved source or authorize unrelated commercial numbers
+  ---
+  duration_ms: 0.862792
+  type: 'test'
+  ...
+# Subtest: a reserve question cannot lend its candidate amount to a preceding brand claim
+ok 11 - a reserve question cannot lend its candidate amount to a preceding brand claim
+  ---
+  duration_ms: 0.305834
+  type: 'test'
+  ...
+# Subtest: amount equality is exact and an allowed occurrence never masks another claim
+ok 12 - amount equality is exact and an allowed occurrence never masks another claim
+  ---
+  duration_ms: 3.258834
+  type: 'test'
+  ...
+# Subtest: laboratory continue commits one exact Unicode bubble and settles without exposing private context
+ok 13 - laboratory continue commits one exact Unicode bubble and settles without exposing private context
+  ---
+  duration_ms: 2461.864167
+  type: 'test'
+  ...
+# Subtest: laboratory nurture completes the job without silently handing the conversation to a human
+ok 14 - laboratory nurture completes the job without silently handing the conversation to a human
+  ---
+  duration_ms: 933.09475
+  type: 'test'
+  ...
+# Subtest: laboratory handoff settles the model cost but pauses locally without assignment or paid briefing
+ok 15 - laboratory handoff settles the model cost but pauses locally without assignment or paid briefing
+  ---
+  duration_ms: 955.662459
+  type: 'test'
+  ...
+# Subtest: laboratory stop commits the terminal job and stopped conversation without continuing collection
+ok 16 - laboratory stop commits the terminal job and stopped conversation without continuing collection
+  ---
+  duration_ms: 800.622917
+  type: 'test'
+  ...
+# Subtest: laboratory guard failure settles usage and publishes only the safe fallback with private rejection evidence
+ok 17 - laboratory guard failure settles usage and publishes only the safe fallback with private rejection evidence
+  ---
+  duration_ms: 925.990458
+  type: 'test'
+  ...
+# Subtest: WhatsApp completion remains ready without laboratory message insertion, delivery or budget settlement
+ok 18 - WhatsApp completion remains ready without laboratory message insertion, delivery or budget settlement
+  ---
+  duration_ms: 590.014375
+  type: 'test'
+  ...
+# Subtest: laboratory completion persists both bounded bubbles in one scoped insert without changing identity or replay
+ok 19 - laboratory completion persists both bounded bubbles in one scoped insert without changing identity or replay
+  ---
+  duration_ms: 2644.726209
+  type: 'test'
+  ...
+# Subtest: accepted laboratory completion writes the terminal state once and preserves locks and budget settlement
+ok 20 - accepted laboratory completion writes the terminal state once and preserves locks and budget settlement
+  ---
+  duration_ms: 807.177708
+  type: 'test'
+  ...
+# {"queries":9,"transactions":1,"simulatedMs":1650,"providerCalls":1}
+# Two-bubble completion: 1650 ms versus the r7 2250 ms at a simulated 150 ms per database round trip; not E2E.
+# Subtest: an accepted empty reply performs no message insert and still settles the completed laboratory job
+ok 21 - an accepted empty reply performs no message insert and still settles the completed laboratory job
+  ---
+  duration_ms: 996.564292
+  type: 'test'
+  ...
+# Subtest: a collision on the second bubble rolls back memory, terminal state, first bubble and completion event
+ok 22 - a collision on the second bubble rolls back memory, terminal state, first bubble and completion event
+  ---
+  duration_ms: 812.946542
+  type: 'test'
+  ...
+# Subtest: settlement failure after the completion event rolls back the full response without releasing its reservation
+ok 23 - settlement failure after the completion event rolls back the full response without releasing its reservation
+  ---
+  duration_ms: 906.899667
+  type: 'test'
+  ...
+# Subtest: one scoped command preserves the five-read callback snapshot and native Date values
+ok 24 - one scoped command preserves the five-read callback snapshot and native Date values
+  ---
+  duration_ms: 2644.667125
+  type: 'test'
+  ...
+# Subtest: an absent job returns JOB_NOT_FOUND without exposing another snapshot
+ok 25 - an absent job returns JOB_NOT_FOUND without exposing another snapshot
+  ---
+  duration_ms: 784.134375
+  type: 'test'
+  ...
+# Subtest: the port rejects an absent or different transaction scope even for a privileged connection
+ok 26 - the port rejects an absent or different transaction scope even for a privileged connection
+  ---
+  duration_ms: 947.135708
+  type: 'test'
+  ...
+# Subtest: stale context is rejected before decoding snapshot, lead memory or message contents
+ok 27 - stale context is rejected before decoding snapshot, lead memory or message contents
+  ---
+  duration_ms: 820.79975
+  type: 'test'
+  ...
+# Subtest: job state, candidate revision, conversation epoch/ownership and deadline preserve the callback eligibility predicate
+ok 28 - job state, candidate revision, conversation epoch/ownership and deadline preserve the callback eligibility predicate
+  ---
+  duration_ms: 911.565708
+  type: 'test'
+  ...
+# Subtest: the actual SQL plan materializes dependent row locks in job, conversation, candidate order after scoped
+ok 29 - the actual SQL plan materializes dependent row locks in job, conversation, candidate order after scoped
+  ---
+  duration_ms: 593.671417
+  type: 'test'
+  ...
+# Subtest: candidate-wide history is retained while colliding foreign-tenant IDs never enter the snapshot
+ok 30 - candidate-wide history is retained while colliding foreign-tenant IDs never enter the snapshot
+  ---
+  duration_ms: 1476.119458
+  type: 'test'
+  ...
+# Subtest: deadline equality is eligible and the application clock is read after the locked command returns
+ok 31 - deadline equality is eligible and the application clock is read after the locked command returns
+  ---
+  duration_ms: 747.124625
+  type: 'test'
+  ...
+# Subtest: invalid commands are rejected before I/O and adapter failures never disclose their details
+ok 32 - invalid commands are rejected before I/O and adapter failures never disclose their details
+  ---
+  duration_ms: 0.679625
+  type: 'test'
+  ...
+# Subtest: scope setup uses one round trip while preserving the transaction lock and local settings
+ok 33 - scope setup uses one round trip while preserving the transaction lock and local settings
+  ---
+  duration_ms: 1174.789541
+  type: 'test'
+  ...
+# Subtest: deployment mounts the trusted database CA in both services and binds API only to loopback
+ok 34 - deployment mounts the trusted database CA in both services and binds API only to loopback
+  ---
+  duration_ms: 4.1915
+  type: 'test'
+  ...
+# Subtest: the expanded total laboratory allowance preserves the same durable gate in both services
+ok 35 - the expanded total laboratory allowance preserves the same durable gate in both services
+  ---
+  duration_ms: 1.457958
+  type: 'test'
+  ...
+# Subtest: memory preserves the declared interval and origin without letting the model confirm it
+ok 36 - memory preserves the declared interval and origin without letting the model confirm it
+  ---
+  duration_ms: 2.575375
+  type: 'test'
+  ...
+# Subtest: explicit control requests precede qualification without confusing negation or Pará
+ok 37 - explicit control requests precede qualification without confusing negation or Pará
+  ---
+  duration_ms: 1.152208
+  type: 'test'
+  ...
+# Subtest: retrieval selects only active approved sources belonging to this brand at the current time
+ok 38 - retrieval selects only active approved sources belonging to this brand at the current time
+  ---
+  duration_ms: 1.528166
+  type: 'test'
+  ...
+# Subtest: communication guard rejects unsupported commercial promises and fabricated completed actions
+ok 39 - communication guard rejects unsupported commercial promises and fabricated completed actions
+  ---
+  duration_ms: 2.636
+  type: 'test'
+  ...
+# Subtest: fictional qualification scenarios use declared capital, timing and territory policies
+ok 40 - fictional qualification scenarios use declared capital, timing and territory policies
+  ---
+  duration_ms: 0.329958
+  type: 'test'
+  ...
+# Subtest: qualification keeps unknown separate and never elevates a declaration to confirmed capital
+ok 41 - qualification keeps unknown separate and never elevates a declaration to confirmed capital
+  ---
+  duration_ms: 0.256208
+  type: 'test'
+  ...
+# Subtest: evidence must be a real user quote from the same tenant, brand and lead; replay is idempotent
+ok 42 - evidence must be a real user quote from the same tenant, brand and lead; replay is idempotent
+  ---
+  duration_ms: 0.522333
+  type: 'test'
+  ...
+# Subtest: conflicting proposals retain confirmed facts until an operator explicitly replaces them
+ok 43 - conflicting proposals retain confirmed facts until an operator explicitly replaces them
+  ---
+  duration_ms: 0.247792
+  type: 'test'
+  ...
+# Subtest: different capital origins remain separate declarations without becoming a conflict or a sum
+ok 44 - different capital origins remain separate declarations without becoming a conflict or a sum
+  ---
+  duration_ms: 0.188792
+  type: 'test'
+  ...
+# Subtest: strict output contracts and context isolation preserve the stopped state on unsafe output
+ok 45 - strict output contracts and context isolation preserve the stopped state on unsafe output
+  ---
+  duration_ms: 0.267958
+  type: 'test'
+  ...
+# Subtest: completion grounds the QA capital recap in the canonical trigger and persists its declared facts
+ok 46 - completion grounds the QA capital recap in the canonical trigger and persists its declared facts
+  ---
+  duration_ms: 1287.008541
+  type: 'test'
+  ...
+# Subtest: laboratory completion uses the grouped snapshot in its existing commit and settles one reply once
+ok 47 - laboratory completion uses the grouped snapshot in its existing commit and settles one reply once
+  ---
+  duration_ms: 1852.051041
+  type: 'test'
+  ...
+# Subtest: laboratory dispatch sends the exact reserved body only after the fused preparation commits, keeping ACK separate
+ok 48 - laboratory dispatch sends the exact reserved body only after the fused preparation commits, keeping ACK separate
+  ---
+  duration_ms: 1761.668916
+  type: 'test'
+  ...
+# Subtest: a callback before ACK preserves only the new partial timing, settles once and is not reopened
+ok 49 - a callback before ACK preserves only the new partial timing, settles once and is not reopened
+  ---
+  duration_ms: 674.44675
+  type: 'test'
+  ...
+# Subtest: a normal ACK records the complete fused preparation phase without inventing legacy sub-phase timings
+ok 50 - a normal ACK records the complete fused preparation phase without inventing legacy sub-phase timings
+  ---
+  duration_ms: 942.3435
+  type: 'test'
+  ...
+# Subtest: a pinned v2 job renders structured finance and persists only declared capital, independent of active version
+ok 51 - a pinned v2 job renders structured finance and persists only declared capital, independent of active version
+  ---
+  duration_ms: 1889.38325
+  type: 'test'
+  ...
+# Subtest: callbacks cannot select or downgrade the output contract of the immutable job version
+ok 52 - callbacks cannot select or downgrade the output contract of the immutable job version
+  ---
+  duration_ms: 1826.560708
+  type: 'test'
+  ...
+# Subtest: a forged v2 monetary proposal is blocked before either facts or unsafe messages are persisted
+ok 53 - a forged v2 monetary proposal is blocked before either facts or unsafe messages are persisted
+  ---
+  duration_ms: 994.529958
+  type: 'test'
+  ...
+# Subtest: laboratory correction persists conflict and publishes an honest reply atomically
+ok 54 - laboratory correction persists conflict and publishes an honest reply atomically
+  ---
+  duration_ms: 1273.716583
+  type: 'test'
+  ...
+# Subtest: a correction preserves the first-bubble operating and decision answer, memory and replay safety
+ok 55 - a correction preserves the first-bubble operating and decision answer, memory and replay safety
+  ---
+  duration_ms: 974.431208
+  type: 'test'
+  ...
+# Subtest: a future-use promise is removed before persistence while conflict, roles and replay remain intact
+ok 56 - a future-use promise is removed before persistence while conflict, roles and replay remain intact
+  ---
+  duration_ms: 1020.932458
+  type: 'test'
+  ...
+# Subtest: question repair commits one useful reply, preserves the model failure privately and settles only once
+ok 57 - question repair commits one useful reply, preserves the model failure privately and settles only once
+  ---
+  duration_ms: 1426.986625
+  type: 'test'
+  ...
+# Subtest: a settlement failure rolls back the reply, repair audit, memory and terminal job together
+ok 58 - a settlement failure rolls back the reply, repair audit, memory and terminal job together
+  ---
+  duration_ms: 963.194833
+  type: 'test'
+  ...
+# Subtest: stale revision, epoch, human ownership and deadline reject the callback before any repair or settlement
+ok 59 - stale revision, epoch, human ownership and deadline reject the callback before any repair or settlement
+  ---
+  duration_ms: 3630.967958
+  type: 'test'
+  ...
+# Subtest: callback accepts bounded optional n8n timing and discards invalid telemetry without rejecting the result
+ok 60 - callback accepts bounded optional n8n timing and discards invalid telemetry without rejecting the result
+  ---
+  duration_ms: 2.501334
+  type: 'test'
+  ...
+# Subtest: completion records separate duration-only metrics in its existing event without extra queries or replay writes
+ok 61 - completion records separate duration-only metrics in its existing event without extra queries or replay writes
+  ---
+  duration_ms: 1321.518708
+  type: 'test'
+  ...
+# Subtest: worker timing reuses existing writes and reaches the event without entering the model payload
+ok 62 - worker timing reuses existing writes and reaches the event without entering the model payload
+  ---
+  duration_ms: 747.813291
+  type: 'test'
+  ...
+# Subtest: callback winning the ACK race keeps only measured preparation and never reopens the completed job
+ok 63 - callback winning the ACK race keeps only measured preparation and never reopens the completed job
+  ---
+  duration_ms: 902.491625
+  type: 'test'
+  ...
+# Subtest: structured model completion persists evidence and replay/stale completion cannot change memory
+ok 64 - structured model completion persists evidence and replay/stale completion cannot change memory
+  ---
+  duration_ms: 1388.786917
+  type: 'test'
+  ...
+# Subtest: guard rejection records only violation codes while accepted events omit private decision content
+ok 65 - guard rejection records only violation codes while accepted events omit private decision content
+  ---
+  duration_ms: 1339.318792
+  type: 'test'
+  ...
+# Subtest: rejected laboratory bubbles are reviewable privately but never exposed in tester session detail
+ok 66 - rejected laboratory bubbles are reviewable privately but never exposed in tester session detail
+  ---
+  duration_ms: 750.409125
+  type: 'test'
+  ...
+# Subtest: a financial proposal cannot replace a fact outside the current candidate memory
+ok 67 - a financial proposal cannot replace a fact outside the current candidate memory
+  ---
+  duration_ms: 20.835458
+  type: 'test'
+  ...
+# Subtest: an investment reference must be uniquely approved, current, cited and in the exact scope
+ok 68 - an investment reference must be uniquely approved, current, cited and in the exact scope
+  ---
+  duration_ms: 2.487375
+  type: 'test'
+  ...
+# Subtest: capital rendering requires unique canonical current user evidence in the exact conversation
+ok 69 - capital rendering requires unique canonical current user evidence in the exact conversation
+  ---
+  duration_ms: 1.298209
+  type: 'test'
+  ...
+# Subtest: stop, handoff and already-paused state cannot acquire financial collection through rendering
+ok 70 - stop, handoff and already-paused state cannot acquire financial collection through rendering
+  ---
+  duration_ms: 10.699417
+  type: 'test'
+  ...
+# Subtest: free prose cannot turn the candidate declaration into investment and giro coverage without repeating its number
+ok 71 - free prose cannot turn the candidate declaration into investment and giro coverage without repeating its number
+  ---
+  duration_ms: 0.274791
+  type: 'test'
+  ...
+# Subtest: changing nextAction cannot bypass the canonical capital branch and publish coverage claims
+ok 72 - changing nextAction cannot bypass the canonical capital branch and publish coverage claims
+  ---
+  duration_ms: 0.515167
+  type: 'test'
+  ...
+# Subtest: every financial follow-up stays within two bounded bubbles and one question without model prose
+ok 73 - every financial follow-up stays within two bounded bubbles and one question without model prose
+  ---
+  duration_ms: 2.619333
+  type: 'test'
+  ...
+# Subtest: compatible capital corrections preserve declared conflict and never overwrite the confirmed predecessor
+ok 74 - compatible capital corrections preserve declared conflict and never overwrite the confirmed predecessor
+  ---
+  duration_ms: 4.244042
+  type: 'test'
+  ...
+# Subtest: duplicate eligible source IDs with different investment claims fail closed regardless of order
+ok 75 - duplicate eligible source IDs with different investment claims fail closed regardless of order
+  ---
+  duration_ms: 1.160042
+  type: 'test'
+  ...
+# Subtest: structured finance renders candidate money separately from the literal approved brand reference
+ok 76 - structured finance renders candidate money separately from the literal approved brand reference
+  ---
+  duration_ms: 20.741708
+  type: 'test'
+  ...
+# Subtest: the recap reference must quote the canonical current declaration, not unrelated or forged evidence
+ok 77 - the recap reference must quote the canonical current declaration, not unrelated or forged evidence
+  ---
+  duration_ms: 3.234291
+  type: 'test'
+  ...
+# Subtest: all v2 monetary proposals require the same validated value, owner, origin and evidence even without a recap
+ok 78 - all v2 monetary proposals require the same validated value, owner, origin and evidence even without a recap
+  ---
+  duration_ms: 72.82325
+  type: 'test'
+  ...
+# Subtest: rendering never bypasses promise and total-question guards even for an approved source
+ok 79 - rendering never bypasses promise and total-question guards even for an approved source
+  ---
+  duration_ms: 6.541041
+  type: 'test'
+  ...
+# Subtest: v2 output schema is an explicit strict nullable extension of the legacy contract
+ok 80 - v2 output schema is an explicit strict nullable extension of the legacy contract
+  ---
+  duration_ms: 0.396458
+  type: 'test'
+  ...
+# Subtest: financial v2 requires a new explicit snapshot while legacy hashes and model remain unchanged
+ok 81 - financial v2 requires a new explicit snapshot while legacy hashes and model remain unchanged
+  ---
+  duration_ms: 16.256917
+  type: 'test'
+  ...
+# Subtest: Kapso session stays closed until native control behavior has been verified
+ok 82 - Kapso session stays closed until native control behavior has been verified
+  ---
+  duration_ms: 31.397084
+  type: 'test'
+  ...
+# Subtest: a native handoff prevents job creation and send authorization
+ok 83 - a native handoff prevents job creation and send authorization
+  ---
+  duration_ms: 3.218209
+  type: 'test'
+  ...
+# Subtest: a ready reply is sent only after fresh native state and backend authorization
+ok 84 - a ready reply is sent only after fresh native state and backend authorization
+  ---
+  duration_ms: 4.304958
+  type: 'test'
+  ...
+# Subtest: a pending turn polls without reusing an old reply or authorizing a send
+ok 85 - a pending turn polls without reusing an old reply or authorizing a send
+  ---
+  duration_ms: 1.440708
+  type: 'test'
+  ...
+# Subtest: unknown delivery and escalated turns go to native handoff without another send
+ok 86 - unknown delivery and escalated turns go to native handoff without another send
+  ---
+  duration_ms: 2.649334
+  type: 'test'
+  ...
+# Subtest: the native graph stays draft with no triggers and routes every wait through the guard
+ok 87 - the native graph stays draft with no triggers and routes every wait through the guard
+  ---
+  duration_ms: 0.585791
+  type: 'test'
+  ...
+# Subtest: a temporary native waiting status never records stop or authorizes a send
+ok 88 - a temporary native waiting status never records stop or authorizes a send
+  ---
+  duration_ms: 0.9845
+  type: 'test'
+  ...
+# Subtest: after native send, the dispatch adapter records uncertainty once and never sends
+ok 89 - after native send, the dispatch adapter records uncertainty once and never sends
+  ---
+  duration_ms: 1.355875
+  type: 'test'
+  ...
+# Subtest: handoff records an idempotent control event without blocking the native Handoff node on failure
+ok 90 - handoff records an idempotent control event without blocking the native Handoff node on failure
+  ---
+  duration_ms: 1.237
+  type: 'test'
+  ...
+# Subtest: n8n draft requires real credential references, immediate authenticated acknowledgement, and no WhatsApp sender
+ok 91 - n8n draft requires real credential references, immediate authenticated acknowledgement, and no WhatsApp sender
+  ---
+  duration_ms: 1.7995
+  type: 'test'
+  ...
+# Subtest: n8n prepares strict supplied schema and pins callback; refuses incomplete or refused responses
+ok 92 - n8n prepares strict supplied schema and pins callback; refuses incomplete or refused responses
+  ---
+  duration_ms: 6.89325
+  type: 'test'
+  ...
+# Subtest: n8n accepts laboratory job identifiers produced by LabSessions
+ok 93 - n8n accepts laboratory job identifiers produced by LabSessions
+  ---
+  duration_ms: 1.103667
+  type: 'test'
+  ...
+# Subtest: n8n caps paid model output for the laboratory budget gate
+ok 94 - n8n caps paid model output for the laboratory budget gate
+  ---
+  duration_ms: 1.708667
+  type: 'test'
+  ...
+# Subtest: only the configured explicit human resume event reconciles backend resume
+ok 95 - only the configured explicit human resume event reconciles backend resume
+  ---
+  duration_ms: 2.993833
+  type: 'test'
+  ...
+# Subtest: ordinary timeout/user-input resumes and running transitions do not change the native control fingerprint
+ok 96 - ordinary timeout/user-input resumes and running transitions do not change the native control fingerprint
+  ---
+  duration_ms: 7.559833
+  type: 'test'
+  ...
+# Subtest: post-send checkpoint checks the previous unknown attempt before processing a newer inbound message
+ok 97 - post-send checkpoint checks the previous unknown attempt before processing a newer inbound message
+  ---
+  duration_ms: 2.102167
+  type: 'test'
+  ...
+# Subtest: a new verified human resume releases the old unknown reference but never replays the old inbound turn
+ok 98 - a new verified human resume releases the old unknown reference but never replays the old inbound turn
+  ---
+  duration_ms: 6.548792
+  type: 'test'
+  ...
+# Subtest: equal native timestamps prefer Handoff over Resume regardless of lexicographic event IDs
+ok 99 - equal native timestamps prefer Handoff over Resume regardless of lexicographic event IDs
+  ---
+  duration_ms: 2.902625
+  type: 'test'
+  ...
+# Subtest: explicit validAt includes validFrom equality in both canonical and indexed source filters
+ok 100 - explicit validAt includes validFrom equality in both canonical and indexed source filters
+  ---
+  duration_ms: 1569.962417
+  type: 'test'
+  ...
+# Subtest: explicit validAt excludes validUntil equality and includes the preceding millisecond
+ok 101 - explicit validAt excludes validUntil equality and includes the preceding millisecond
+  ---
+  duration_ms: 547.713792
+  type: 'test'
+  ...
+# Subtest: invalid explicit clock fails closed before any query
+ok 102 - invalid explicit clock fails closed before any query
+  ---
+  duration_ms: 0.386292
+  type: 'test'
+  ...
+# Subtest: omitting validAt preserves the legacy two SQL statements and seven ranking parameters
+ok 103 - omitting validAt preserves the legacy two SQL statements and seven ranking parameters
+  ---
+  duration_ms: 0.314208
+  type: 'test'
+  ...
+# Subtest: explicit time is finite before I/O and normalizes offset/submillisecond precision to the same JS/SQL instant
+ok 104 - explicit time is finite before I/O and normalizes offset/submillisecond precision to the same JS/SQL instant
+  ---
+  duration_ms: 0.19325
+  type: 'test'
+  ...
+# Subtest: knowledge retrieval scopes tenant, brand and version and rechecks canonical source approval
+ok 105 - knowledge retrieval scopes tenant, brand and version and rechecks canonical source approval
+  ---
+  duration_ms: 1500.973458
+  type: 'test'
+  ...
+# Subtest: a Sapore session cannot retrieve Borelli knowledge even under a matching query
+ok 106 - a Sapore session cannot retrieve Borelli knowledge even under a matching query
+  ---
+  duration_ms: 588.712292
+  type: 'test'
+  ...
+# Subtest: hybrid retrieval uses pgvector cosine ranking and returns at most five distinct sources
+ok 107 - hybrid retrieval uses pgvector cosine ranking and returns at most five distinct sources
+  ---
+  duration_ms: 1618.457542
+  type: 'test'
+  ...
+# Subtest: embedding adapter validates the exact model and dimension using a mocked server response
+ok 108 - embedding adapter validates the exact model and dimension using a mocked server response
+  ---
+  duration_ms: 20.931792
+  type: 'test'
+  ...
+# Subtest: indexing chunks only approved immutable snapshot content and is idempotent
+ok 109 - indexing chunks only approved immutable snapshot content and is idempotent
+  ---
+  duration_ms: 699.7165
+  type: 'test'
+  ...
+# Subtest: retrieval emits bounded excerpts and discards indexed content absent from the approved snapshot
+ok 110 - retrieval emits bounded excerpts and discards indexed content absent from the approved snapshot
+  ---
+  duration_ms: 569.40775
+  type: 'test'
+  ...
+# Subtest: laboratory refuses paid dispatch without a configured budget and explains the pause
+ok 111 - laboratory refuses paid dispatch without a configured budget and explains the pause
+  ---
+  duration_ms: 2050.707292
+  type: 'test'
+  ...
+# Subtest: one reservation permits one dispatch, survives engine restart and blocks overspending
+ok 112 - one reservation permits one dispatch, survives engine restart and blocks overspending
+  ---
+  duration_ms: 778.308584
+  type: 'test'
+  ...
+# Subtest: accepted single-attempt completion settles measured usage exactly once
+ok 113 - accepted single-attempt completion settles measured usage exactly once
+  ---
+  duration_ms: 557.500959
+  type: 'test'
+  ...
+# Subtest: laboratory never uses the embedding model even when a direct OpenAI key exists
+ok 114 - laboratory never uses the embedding model even when a direct OpenAI key exists
+  ---
+  duration_ms: 1233.623916
+  type: 'test'
+  ...
+# Subtest: laboratory rejects untranscribed audio locally without Kapso or transcription spending
+ok 115 - laboratory rejects untranscribed audio locally without Kapso or transcription spending
+  ---
+  duration_ms: 683.037125
+  type: 'test'
+  ...
+# Subtest: request input bound cannot enter the larger-context price tier
+ok 116 - request input bound cannot enter the larger-context price tier
+  ---
+  duration_ms: 504.128625
+  type: 'test'
+  ...
+# Subtest: the pilot budget cannot be multiplied across another tenant
+ok 117 - the pilot budget cannot be multiplied across another tenant
+  ---
+  duration_ms: 628.059834
+  type: 'test'
+  ...
+# Subtest: budget configuration requires a positive cap and gate as a pair
+ok 118 - budget configuration requires a positive cap and gate as a pair
+  ---
+  duration_ms: 1.859792
+  type: 'test'
+  ...
+# Subtest: ambiguous retries across gates keep every full reservation after a valid completion
+ok 119 - ambiguous retries across gates keep every full reservation after a valid completion
+  ---
+  duration_ms: 590.884375
+  type: 'test'
+  ...
+# Subtest: missing, inconsistent and stale provider usage never releases reserved budget
+ok 120 - missing, inconsistent and stale provider usage never releases reserved budget
+  ---
+  duration_ms: 638.337625
+  type: 'test'
+  ...
+# Subtest: simultaneous distinct jobs share the same finite gate balance
+ok 121 - simultaneous distinct jobs share the same finite gate balance
+  ---
+  duration_ms: 1348.333458
+  type: 'test'
+  ...
+# Subtest: laboratory-only configuration needs no Kapso secrets and cannot enable WhatsApp
+ok 122 - laboratory-only configuration needs no Kapso secrets and cannot enable WhatsApp
+  ---
+  duration_ms: 1.362375
+  type: 'test'
+  ...
+# (node:7410) [FSTDEP023] FastifyDeprecation: disableRequestLogging option is deprecated. Use the logController option with disableRequestLogging or isLogDisabled override instead. The disableRequestLogging top-level option will be removed in `fastify@6`.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: admin evaluates the exact current draft without publishing it or changing ordinary sessions
+ok 123 - admin evaluates the exact current draft without publishing it or changing ordinary sessions
+  ---
+  duration_ms: 2067.893125
+  type: 'test'
+  ...
+# (node:7410) [FSTDEP023] FastifyDeprecation: disableRequestLogging option is deprecated. Use the logController option with disableRequestLogging or isLogDisabled override instead. The disableRequestLogging top-level option will be removed in `fastify@6`.
+# Subtest: the evaluation-only route is unavailable outside laboratory execution mode
+ok 124 - the evaluation-only route is unavailable outside laboratory execution mode
+  ---
+  duration_ms: 569.016791
+  type: 'test'
+  ...
+# Subtest: evaluation request id cannot be rebound to a different draft version
+ok 125 - evaluation request id cannot be rebound to a different draft version
+  ---
+  duration_ms: 659.248542
+  type: 'test'
+  ...
+# Subtest: downgraded admin cannot send another message to an evaluation session
+ok 126 - downgraded admin cannot send another message to an evaluation session
+  ---
+  duration_ms: 1181.414833
+  type: 'test'
+  ...
+# Subtest: normal creation cannot replay an evaluation request as an ordinary session
+ok 127 - normal creation cannot replay an evaluation request as an ordinary session
+  ---
+  duration_ms: 634.433875
+  type: 'test'
+  ...
+# (node:7410) [FSTDEP023] FastifyDeprecation: disableRequestLogging option is deprecated. Use the logController option with disableRequestLogging or isLogDisabled override instead. The disableRequestLogging top-level option will be removed in `fastify@6`.
+# Subtest: evaluation API reports malformed contracts as 400, consistent with normal sessions
+ok 128 - evaluation API reports malformed contracts as 400, consistent with normal sessions
+  ---
+  duration_ms: 495.443583
+  type: 'test'
+  ...
+# Subtest: evaluation creation trusts active scoped membership, not a caller-provided admin role
+ok 129 - evaluation creation trusts active scoped membership, not a caller-provided admin role
+  ---
+  duration_ms: 611.401792
+  type: 'test'
+  ...
+# Subtest: evaluation rejects wrong hashes, obsolete drafts and extra version input on the normal route
+ok 130 - evaluation rejects wrong hashes, obsolete drafts and extra version input on the normal route
+  ---
+  duration_ms: 587.759166
+  type: 'test'
+  ...
+# Subtest: explicit laboratory sends are immediately eligible while WhatsApp retains its debounce
+ok 131 - explicit laboratory sends are immediately eligible while WhatsApp retains its debounce
+  ---
+  duration_ms: 1893.114833
+  type: 'test'
+  ...
+# Subtest: laboratory polling reads owned history and public job fields in one domain query
+ok 132 - laboratory polling reads owned history and public job fields in one domain query
+  ---
+  duration_ms: 673.483833
+  type: 'test'
+  ...
+# Subtest: send returns the public greeting snapshot using one extra query in the same transaction
+ok 133 - send returns the public greeting snapshot using one extra query in the same transaction
+  ---
+  duration_ms: 1609.068542
+  type: 'test'
+  ...
+# Subtest: a failed snapshot read rolls back the send and a retry can commit it once
+ok 134 - a failed snapshot read rolls back the send and a retry can commit it once
+  ---
+  duration_ms: 637.891875
+  type: 'test'
+  ...
+# Subtest: send snapshots keep ownership, scope, request conflicts and invalid-input failures closed
+ok 135 - send snapshots keep ownership, scope, request conflicts and invalid-input failures closed
+  ---
+  duration_ms: 568.92075
+  type: 'test'
+  ...
+# Subtest: control sends return the persisted paused snapshot and replay cannot duplicate control side effects
+ok 136 - control sends return the persisted paused snapshot and replay cannot duplicate control side effects
+  ---
+  duration_ms: 677.453417
+  type: 'test'
+  ...
+# Subtest: replaying a send preserves its job id and returns current history without duplicating messages
+ok 137 - replaying a send preserves its job id and returns current history without duplicating messages
+  ---
+  duration_ms: 544.728125
+  type: 'test'
+  ...
+# (node:7543) [FSTDEP023] FastifyDeprecation: disableRequestLogging option is deprecated. Use the logController option with disableRequestLogging or isLogDisabled override instead. The disableRequestLogging top-level option will be removed in `fastify@6`.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: laboratory sessions are private, idempotent and create independent candidates
+ok 138 - laboratory sessions are private, idempotent and create independent candidates
+  ---
+  duration_ms: 1643.800958
+  type: 'test'
+  ...
+# Subtest: human request pauses the lab, invalidates pending replies and never queues a Kapso assignment
+ok 139 - human request pauses the lab, invalidates pending replies and never queues a Kapso assignment
+  ---
+  duration_ms: 574.974083
+  type: 'test'
+  ...
+# Subtest: WhatsApp worker cannot claim laboratory jobs; validated replies persist once without delivery records
+ok 140 - WhatsApp worker cannot claim laboratory jobs; validated replies persist once without delivery records
+  ---
+  duration_ms: 629.921416
+  type: 'test'
+  ...
+# (node:7543) [FSTDEP023] FastifyDeprecation: disableRequestLogging option is deprecated. Use the logController option with disableRequestLogging or isLogDisabled override instead. The disableRequestLogging top-level option will be removed in `fastify@6`.
+# Subtest: laboratory text creates one pinned job and repeated requests do not duplicate messages
+ok 141 - laboratory text creates one pinned job and repeated requests do not duplicate messages
+  ---
+  duration_ms: 612.5375
+  type: 'test'
+  ...
+# Subtest: tester detail exposes the response deadline without leaking worker lease data
+ok 142 - tester detail exposes the response deadline without leaking worker lease data
+  ---
+  duration_ms: 538.90225
+  type: 'test'
+  ...
+# (node:7543) [FSTDEP023] FastifyDeprecation: disableRequestLogging option is deprecated. Use the logController option with disableRequestLogging or isLogDisabled override instead. The disableRequestLogging top-level option will be removed in `fastify@6`.
+# Subtest: tester membership cannot inspect other conversations through legacy reviewer endpoints
+ok 143 - tester membership cannot inspect other conversations through legacy reviewer endpoints
+  ---
+  duration_ms: 1238.684667
+  type: 'test'
+  ...
+# Subtest: reviewer observability exposes scoped operational metrics without prompts, secrets or job context
+ok 144 - reviewer observability exposes scoped operational metrics without prompts, secrets or job context
+  ---
+  duration_ms: 657.225333
+  type: 'test'
+  ...
+# Subtest: controlled timeout exposes correlation and latency without creating a delivery
+ok 145 - controlled timeout exposes correlation and latency without creating a delivery
+  ---
+  duration_ms: 828.135834
+  type: 'test'
+  ...
+# Subtest: laboratory timeout never dispatches an unapproved briefing model call
+ok 146 - laboratory timeout never dispatches an unapproved briefing model call
+  ---
+  duration_ms: 660.323292
+  type: 'test'
+  ...
+# Subtest: a superseded laboratory job records terminal latency without creating a delivery
+ok 147 - a superseded laboratory job records terminal latency without creating a delivery
+  ---
+  duration_ms: 682.811708
+  type: 'test'
+  ...
+# (node:7543) [FSTDEP023] FastifyDeprecation: disableRequestLogging option is deprecated. Use the logController option with disableRequestLogging or isLogDisabled override instead. The disableRequestLogging top-level option will be removed in `fastify@6`.
+# (node:7543) [FSTDEP023] FastifyDeprecation: disableRequestLogging option is deprecated. Use the logController option with disableRequestLogging or isLogDisabled override instead. The disableRequestLogging top-level option will be removed in `fastify@6`.
+# Subtest: a reauthenticated user resumes the same laboratory history after an API restart
+ok 148 - a reauthenticated user resumes the same laboratory history after an API restart
+  ---
+  duration_ms: 973.8615
+  type: 'test'
+  ...
+# Subtest: one scoped transaction commits the legacy-identical canonical body and its exact UTF-8 reservation
+ok 149 - one scoped transaction commits the legacy-identical canonical body and its exact UTF-8 reservation
+  ---
+  duration_ms: 1482.93025
+  type: 'test'
+  ...
+# Subtest: a stale claimed reference is ignored before business decoding and creates no reservation or context
+ok 150 - a stale claimed reference is ignored before business decoding and creates no reservation or context
+  ---
+  duration_ms: 608.895792
+  type: 'test'
+  ...
+# Subtest: repeated preparation of the same attempt returns no body and preserves the original context/reservation
+ok 151 - repeated preparation of the same attempt returns no body and preserves the original context/reservation
+  ---
+  duration_ms: 843.401916
+  type: 'test'
+  ...
+# Subtest: missing budget configuration commits the same single human pause as the legacy path without reserving
+ok 152 - missing budget configuration commits the same single human pause as the legacy path without reserving
+  ---
+  duration_ms: 592.727291
+  type: 'test'
+  ...
+# Subtest: concurrent distinct jobs share the finite ledger balance and cannot authorize overspending
+ok 153 - concurrent distinct jobs share the finite ledger balance and cannot authorize overspending
+  ---
+  duration_ms: 991.326042
+  type: 'test'
+  ...
+# Subtest: the pilot gate cannot be reused by another tenant
+ok 154 - the pilot gate cannot be reused by another tenant
+  ---
+  duration_ms: 715.966333
+  type: 'test'
+  ...
+# Subtest: an oversized canonical payload pauses without entering the larger-context price tier
+ok 155 - an oversized canonical payload pauses without entering the larger-context price tier
+  ---
+  duration_ms: 693.468875
+  type: 'test'
+  ...
+# Subtest: untranscribed laboratory audio is answered locally before snapshot decoding, retrieval or budget
+ok 156 - untranscribed laboratory audio is answered locally before snapshot decoding, retrieval or budget
+  ---
+  duration_ms: 716.163625
+  type: 'test'
+  ...
+# Subtest: an unsupported direct trigger outside the 24-message context remains a free capability response
+ok 157 - an unsupported direct trigger outside the 24-message context remains a free capability response
+  ---
+  duration_ms: 825.296041
+  type: 'test'
+  ...
+# Subtest: expiry after context preparation rolls back context and never commits a reservation or body
+ok 158 - expiry after context preparation rolls back context and never commits a reservation or body
+  ---
+  duration_ms: 550.311084
+  type: 'test'
+  ...
+# Subtest: the reservation statement itself checks the database wall clock and rolls back on expiry
+ok 159 - the reservation statement itself checks the database wall clock and rolls back on expiry
+  ---
+  duration_ms: 665.704833
+  type: 'test'
+  ...
+# Subtest: a ready result cannot escape the transaction commit barrier
+ok 160 - a ready result cannot escape the transaction commit barrier
+  ---
+  duration_ms: 474.647792
+  type: 'test'
+  ...
+# Subtest: failures after context, reservation, pause, capability or before commit roll back the complete local operation
+ok 161 - failures after context, reservation, pause, capability or before commit roll back the complete local operation
+  ---
+  duration_ms: 3643.963084
+  type: 'test'
+  ...
+# Subtest: an unpublished financial-v2 draft retains its exact pinned payload/schema/hash without changing the active version
+ok 162 - an unpublished financial-v2 draft retains its exact pinned payload/schema/hash without changing the active version
+  ---
+  duration_ms: 555.938625
+  type: 'test'
+  ...
+# Subtest: monotonic preparation timing is private, partial and separate from the validity clock
+ok 163 - monotonic preparation timing is private, partial and separate from the validity clock
+  ---
+  duration_ms: 599.820959
+  type: 'test'
+  ...
+# Subtest: the private input rejects overrides/WhatsApp without I/O and cannot read another scope or channel
+ok 164 - the private input rejects overrides/WhatsApp without I/O and cannot read another scope or channel
+  ---
+  duration_ms: 825.603083
+  type: 'test'
+  ...
+# Subtest: corrupt snapshot/hash/model/evidence ownership fails closed while stale and audio paths precede business decoding
+ok 165 - corrupt snapshot/hash/model/evidence ownership fails closed while stale and audio paths precede business decoding
+  ---
+  duration_ms: 527.376209
+  type: 'test'
+  ...
+# Subtest: candidate-wide history retains roles/timestamps but audio fallback uses only the current conversation last 24 candidate messages
+ok 166 - candidate-wide history retains roles/timestamps but audio fallback uses only the current conversation last 24 candidate messages
+  ---
+  duration_ms: 727.979542
+  type: 'test'
+  ...
+# Subtest: laboratory preparation reads its history once in one scoped transaction
+ok 167 - laboratory preparation reads its history once in one scoped transaction
+  ---
+  duration_ms: 1587.09925
+  type: 'test'
+  ...
+# Subtest: completion reads the job once under its mutation lock and preserves missing-job and replay contracts
+ok 168 - completion reads the job once under its mutation lock and preserves missing-job and replay contracts
+  ---
+  duration_ms: 640.13925
+  type: 'test'
+  ...
+# Subtest: completion batches existing memory instead of one round trip per fact
+ok 169 - completion batches existing memory instead of one round trip per fact
+  ---
+  duration_ms: 864.973084
+  type: 'test'
+  ...
+# Subtest: worker channel enumeration returns complete channel contracts in one database query
+ok 170 - worker channel enumeration returns complete channel contracts in one database query
+  ---
+  duration_ms: 570.459667
+  type: 'test'
+  ...
+# Subtest: dispatch shares one scoped preflight for audio and trigger type without skipping either check
+ok 171 - dispatch shares one scoped preflight for audio and trigger type without skipping either check
+  ---
+  duration_ms: 2383.506083
+  type: 'test'
+  ...
+# Subtest: an isolated first Sapore laboratory greeting completes atomically without worker, model or budget
+ok 172 - an isolated first Sapore laboratory greeting completes atomically without worker, model or budget
+  ---
+  duration_ms: 782.261416
+  type: 'test'
+  ...
+# Subtest: greeting shortcut excludes substantive input, continuations, prior memory, stop and other scopes/channels
+ok 173 - greeting shortcut excludes substantive input, continuations, prior memory, stop and other scopes/channels
+  ---
+  duration_ms: 854.672792
+  type: 'test'
+  ...
+# (node:7579) [FSTDEP023] FastifyDeprecation: disableRequestLogging option is deprecated. Use the logController option with disableRequestLogging or isLogDisabled override instead. The disableRequestLogging top-level option will be removed in `fastify@6`.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: offline harness exercises authenticated send, asynchronous model callback, atomic completion and committed detail
+ok 174 - offline harness exercises authenticated send, asynchronous model callback, atomic completion and committed detail
+  ---
+  duration_ms: 1380.226375
+  type: 'test'
+  ...
+# Subtest: invalid artificial delays are rejected instead of silently producing misleading timing results
+ok 175 - invalid artificial delays are rejected instead of silently producing misleading timing results
+  ---
+  duration_ms: 0.33575
+  type: 'test'
+  ...
+# Subtest: a pending-conflict notice cannot be followed by a promise to use the disputed city
+ok 176 - a pending-conflict notice cannot be followed by a promise to use the disputed city
+  ---
+  duration_ms: 13.926583
+  type: 'test'
+  ...
+# Subtest: a negated promise stays intact without hiding a positive adoption in the next sentence
+ok 177 - a negated promise stays intact without hiding a positive adoption in the next sentence
+  ---
+  duration_ms: 0.440792
+  type: 'test'
+  ...
+# Subtest: an explicit human-approval condition is not a promise to use the pending fact now
+ok 178 - an explicit human-approval condition is not a promise to use the pending fact now
+  ---
+  duration_ms: 0.272042
+  type: 'test'
+  ...
+# Subtest: future consideration is scoped to the disputed value, not other planning or a name prefix
+ok 179 - future consideration is scoped to the disputed value, not other planning or a name prefix
+  ---
+  duration_ms: 0.357292
+  type: 'test'
+  ...
+# Subtest: equivalent future-adoption verbs cannot make the conflicting value current
+ok 180 - equivalent future-adoption verbs cannot make the conflicting value current
+  ---
+  duration_ms: 0.271
+  type: 'test'
+  ...
+# Subtest: stop preserves its control intent but cannot promise to adopt a pending correction
+ok 181 - stop preserves its control intent but cannot promise to adopt a pending correction
+  ---
+  duration_ms: 0.125916
+  type: 'test'
+  ...
+# Subtest: a future promise about the new city is scoped to an unresolved city conflict
+ok 182 - a future promise about the new city is scoped to an unresolved city conflict
+  ---
+  duration_ms: 0.12475
+  type: 'test'
+  ...
+# Subtest: future-adoption repair preserves repeated-conflict controls and their independent answer
+ok 183 - future-adoption repair preserves repeated-conflict controls and their independent answer
+  ---
+  duration_ms: 0.749959
+  type: 'test'
+  ...
+# Subtest: future-adoption repair keeps a bounded answer with its amount and negation intact
+ok 184 - future-adoption repair keeps a bounded answer with its amount and negation intact
+  ---
+  duration_ms: 0.462666
+  type: 'test'
+  ...
+# Subtest: an explicit city referent before the disputed value cannot bypass future-adoption repair
+ok 185 - an explicit city referent before the disputed value cannot bypass future-adoption repair
+  ---
+  duration_ms: 0.148125
+  type: 'test'
+  ...
+# Subtest: a complete trailing human-approval condition preserves the promise and independent answer
+ok 186 - a complete trailing human-approval condition preserves the promise and independent answer
+  ---
+  duration_ms: 0.154334
+  type: 'test'
+  ...
+# Subtest: a human-approval preface cannot exempt an immediate-use contradiction in the same sentence
+ok 187 - a human-approval preface cannot exempt an immediate-use contradiction in the same sentence
+  ---
+  duration_ms: 0.104417
+  type: 'test'
+  ...
+# Subtest: a new conflict preserves an independent answer in the first bubble before the follow-up
+ok 188 - a new conflict preserves an independent answer in the first bubble before the follow-up
+  ---
+  duration_ms: 0.14275
+  type: 'test'
+  ...
+# Subtest: overflow preserves the complete first answer within two bounded bubbles instead of cutting it
+ok 189 - overflow preserves the complete first answer within two bounded bubbles instead of cutting it
+  ---
+  duration_ms: 0.185208
+  type: 'test'
+  ...
+# Subtest: a separate correction notice keeps both original bubbles when they fit together
+ok 190 - a separate correction notice keeps both original bubbles when they fit together
+  ---
+  duration_ms: 0.116292
+  type: 'test'
+  ...
+# Subtest: a mixed first bubble loses only the applied-correction sentence, not the independent answer
+ok 191 - a mixed first bubble loses only the applied-correction sentence, not the independent answer
+  ---
+  duration_ms: 0.103708
+  type: 'test'
+  ...
+# Subtest: reconciling a repaired new-conflict reply again does not duplicate the notice or lose content
+ok 192 - reconciling a repaired new-conflict reply again does not duplicate the notice or lose content
+  ---
+  duration_ms: 0.118042
+  type: 'test'
+  ...
+# Subtest: an existing canonical notice in the later bubble is emitted once without displacing the first answer
+ok 193 - an existing canonical notice in the later bubble is emitted once without displacing the first answer
+  ---
+  duration_ms: 0.122041
+  type: 'test'
+  ...
+# Subtest: sentence repair preserves a negation and a quoted amount with thousands and decimal separators
+ok 194 - sentence repair preserves a negation and a quoted amount with thousands and decimal separators
+  ---
+  duration_ms: 0.099208
+  type: 'test'
+  ...
+# Subtest: a dependent applied-change confirmation cannot survive the removal of the preceding claim
+ok 195 - a dependent applied-change confirmation cannot survive the removal of the preceding claim
+  ---
+  duration_ms: 0.109666
+  type: 'test'
+  ...
+# Subtest: a negated application statement stays intact while a following positive application is removed
+ok 196 - a negated application statement stays intact while a following positive application is removed
+  ---
+  duration_ms: 0.078333
+  type: 'test'
+  ...
+# Subtest: a claim inseparable from the answer keeps the conservative fallback instead of extracting a clause
+ok 197 - a claim inseparable from the answer keeps the conservative fallback instead of extracting a clause
+  ---
+  duration_ms: 0.062708
+  type: 'test'
+  ...
+# Subtest: a newly conflicting correction gets an honest acknowledgement without discarding the independent answer
+ok 198 - a newly conflicting correction gets an honest acknowledgement without discarding the independent answer
+  ---
+  duration_ms: 0.07925
+  type: 'test'
+  ...
+# Subtest: known applied-correction claims are replaced in any bubble, including later turns
+ok 199 - known applied-correction claims are replaced in any bubble, including later turns
+  ---
+  duration_ms: 0.157083
+  type: 'test'
+  ...
+# Subtest: control decisions and a safe correction acknowledgement are not rewritten
+ok 200 - control decisions and a safe correction acknowledgement are not rewritten
+  ---
+  duration_ms: 0.092583
+  type: 'test'
+  ...
+# Subtest: a negated correction claim preserves its independent question without hiding a positive claim nearby
+ok 201 - a negated correction claim preserves its independent question without hiding a positive claim nearby
+  ---
+  duration_ms: 0.065958
+  type: 'test'
+  ...
+# Subtest: handoff keeps its control intent but cannot claim that a pending correction was already applied
+ok 202 - handoff keeps its control intent but cannot claim that a pending correction was already applied
+  ---
+  duration_ms: 0.061333
+  type: 'test'
+  ...
+# Subtest: migration ledger blocks Supabase API roles while preserving owner access and unrelated grants
+ok 203 - migration ledger blocks Supabase API roles while preserving owner access and unrelated grants
+  ---
+  duration_ms: 1237.224791
+  type: 'test'
+  ...
+# Subtest: ledger bootstrap supports an unprivileged owner without API roles and removes legacy column grants
+ok 204 - ledger bootstrap supports an unprivileged owner without API roles and removes legacy column grants
+  ---
+  duration_ms: 525.637542
+  type: 'test'
+  ...
+# Subtest: migration upgrade grants laboratory runtime access, preserves publisher access and remains private on rerun
+ok 205 - migration upgrade grants laboratory runtime access, preserves publisher access and remains private on rerun
+  ---
+  duration_ms: 1137.427333
+  type: 'test'
+  ...
+# Subtest: initial migrations succeed without creating or granting a runtime role
+ok 206 - initial migrations succeed without creating or granting a runtime role
+  ---
+  duration_ms: 841.3585
+  type: 'test'
+  ...
+# Subtest: laboratory RLS caches tenant and brand settings once per statement
+ok 207 - laboratory RLS caches tenant and brand settings once per statement
+  ---
+  duration_ms: 588.030209
+  type: 'test'
+  ...
+# Subtest: migration upgrade rejects elevated runtime roles without adding grants or committing migration 003
+ok 208 - migration upgrade rejects elevated runtime roles without adding grants or committing migration 003
+  ---
+  duration_ms: 793.79225
+  type: 'test'
+  ...
+# Subtest: migration upgrade rejects a runtime that can assume another role
+ok 209 - migration upgrade rejects a runtime that can assume another role
+  ---
+  duration_ms: 434.198334
+  type: 'test'
+  ...
+# Subtest: migration upgrade rejects a runtime that owns product tables
+ok 210 - migration upgrade rejects a runtime that owns product tables
+  ---
+  duration_ms: 567.888917
+  type: 'test'
+  ...
+# Subtest: laboratory continuation preserves native user and assistant turns with evidence metadata exactly once
+ok 211 - laboratory continuation preserves native user and assistant turns with evidence metadata exactly once
+  ---
+  duration_ms: 2.398875
+  type: 'test'
+  ...
+# Subtest: laboratory history rejects malformed items and cannot promote user content into instructions
+ok 212 - laboratory history rejects malformed items and cannot promote user content into instructions
+  ---
+  duration_ms: 4.240291
+  type: 'test'
+  ...
+# Subtest: history framing fits the existing reservation and leaves briefing and WhatsApp requests unchanged
+ok 213 - history framing fits the existing reservation and leaves briefing and WhatsApp requests unchanged
+  ---
+  duration_ms: 4.085708
+  type: 'test'
+  ...
+# Subtest: n8n forwards financial v2 schema and decision unchanged for structured and null financial replies
+ok 214 - n8n forwards financial v2 schema and decision unchanged for structured and null financial replies
+  ---
+  duration_ms: 4.511375
+  type: 'test'
+  ...
+# Subtest: n8n preserves the legacy v1 schema and result without adding the financial v2 field
+ok 215 - n8n preserves the legacy v1 schema and result without adding the financial v2 field
+  ---
+  duration_ms: 1.963709
+  type: 'test'
+  ...
+# Subtest: conversation callback reports only local model HTTP round-trip duration without changing the request
+ok 216 - conversation callback reports only local model HTTP round-trip duration without changing the request
+  ---
+  duration_ms: 4.054041
+  type: 'test'
+  ...
+# Subtest: timing metadata is optional and drops missing, malformed or out-of-bounds local clock samples
+ok 217 - timing metadata is optional and drops missing, malformed or out-of-bounds local clock samples
+  ---
+  duration_ms: 12.073125
+  type: 'test'
+  ...
+# Subtest: briefing callbacks stay unchanged and timing does not bypass model response validation
+ok 218 - briefing callbacks stay unchanged and timing does not bypass model response validation
+  ---
+  duration_ms: 5.819416
+  type: 'test'
+  ...
+# Subtest: runtime role gate rejects superusers and accepts only a non-bypassing runtime role
+ok 219 - runtime role gate rejects superusers and accepts only a non-bypassing runtime role
+  ---
+  duration_ms: 1132.436125
+  type: 'test'
+  ...
+# Subtest: retention also removes orphaned evidence copied into recent completed job snapshots
+ok 220 - retention also removes orphaned evidence copied into recent completed job snapshots
+  ---
+  duration_ms: 536.232334
+  type: 'test'
+  ...
+# Subtest: explicit runtime grants enforce RLS and still allow the scoped retention sweep
+ok 221 - explicit runtime grants enforce RLS and still allow the scoped retention sweep
+  ---
+  duration_ms: 676.141333
+  type: 'test'
+  ...
+# Subtest: explicit retention removes expired data and derived snapshots without erasing recent facts or approved brand versions
+ok 222 - explicit retention removes expired data and derived snapshots without erasing recent facts or approved brand versions
+  ---
+  duration_ms: 483.824875
+  type: 'test'
+  ...
+# Subtest: retention is dry-run by default and rejects policies longer than 30 days
+ok 223 - retention is dry-run by default and rejects policies longer than 30 days
+  ---
+  duration_ms: 554.437208
+  type: 'test'
+  ...
+# Subtest: all facts are batched into one query while preserving scope, status and evidence
+ok 224 - all facts are batched into one query while preserving scope, status and evidence
+  ---
+  duration_ms: 893.924166
+  type: 'test'
+  ...
+# Subtest: relations share one batch query, keep candidate-prefixed identity and never overwrite existing evidence
+ok 225 - relations share one batch query, keep candidate-prefixed identity and never overwrite existing evidence
+  ---
+  duration_ms: 564.493792
+  type: 'test'
+  ...
+# Subtest: unchanged facts keep updated_at while missing projections are restored and real changes persist
+ok 226 - unchanged facts keep updated_at while missing projections are restored and real changes persist
+  ---
+  duration_ms: 487.765042
+  type: 'test'
+  ...
+# Subtest: duplicate projection IDs preserve the old loops: last fact wins and first relation wins
+ok 227 - duplicate projection IDs preserve the old loops: last fact wins and first relation wins
+  ---
+  duration_ms: 920.273
+  type: 'test'
+  ...
+# Subtest: empty memory needs no query and a failed batch rolls back with the caller transaction
+ok 228 - empty memory needs no query and a failed batch rolls back with the caller transaction
+  ---
+  duration_ms: 542.649125
+  type: 'test'
+  ...
+# Subtest: Postgres migration executes with pgvector, immutable snapshots and database-enforced brand isolation
+ok 229 - Postgres migration executes with pgvector, immutable snapshots and database-enforced brand isolation
+  ---
+  duration_ms: 1278.902834
+  type: 'test'
+  ...
+# Subtest: laboratory dispatch fuses preflight/preparation/reservation and measures the phase through commit
+ok 230 - laboratory dispatch fuses preflight/preparation/reservation and measures the phase through commit
+  ---
+  duration_ms: 1283.867667
+  type: 'test'
+  ...
+# Subtest: combined preflight keeps the trigger check outside the 24-message audio window
+ok 231 - combined preflight keeps the trigger check outside the 24-message audio window
+  ---
+  duration_ms: 506.971792
+  type: 'test'
+  ...
+# Subtest: combined preflight ignores other conversations, noncandidate audio and existing transcripts
+ok 232 - combined preflight ignores other conversations, noncandidate audio and existing transcripts
+  ---
+  duration_ms: 1084.574959
+  type: 'test'
+  ...
+# Subtest: combined preflight isolates colliding message and conversation ids across tenants and brands
+ok 233 - combined preflight isolates colliding message and conversation ids across tenants and brands
+  ---
+  duration_ms: 538.54525
+  type: 'test'
+  ...
+# Subtest: Sprint 2 preflight accepts a closed laboratory configuration and emits no secrets
+ok 234 - Sprint 2 preflight accepts a closed laboratory configuration and emits no secrets
+  ---
+  duration_ms: 1.614167
+  type: 'test'
+  ...
+# Subtest: Sprint 2 preflight rejects reused internal tokens
+ok 235 - Sprint 2 preflight rejects reused internal tokens
+  ---
+  duration_ms: 0.30075
+  type: 'test'
+  ...
+# Subtest: Sprint 2 preflight rejects an insecure Supabase origin
+ok 236 - Sprint 2 preflight rejects an insecure Supabase origin
+  ---
+  duration_ms: 0.128292
+  type: 'test'
+  ...
+# Subtest: Sprint 2 preflight rejects a Supabase service-role key
+ok 237 - Sprint 2 preflight rejects a Supabase service-role key
+  ---
+  duration_ms: 0.138708
+  type: 'test'
+  ...
+# Subtest: Sprint 2 preflight rejects a Supabase secret key
+ok 238 - Sprint 2 preflight rejects a Supabase secret key
+  ---
+  duration_ms: 0.099333
+  type: 'test'
+  ...
+# Subtest: preparation batches three reads while preserving the 24-message context and timestamp order
+ok 239 - preparation batches three reads while preserving the 24-message context and timestamp order
+  ---
+  duration_ms: 1280.355417
+  type: 'test'
+  ...
+# Subtest: grouped preparation cannot mix colliding version, candidate or message ids across scope
+ok 240 - grouped preparation cannot mix colliding version, candidate or message ids across scope
+  ---
+  duration_ms: 503.718166
+  type: 'test'
+  ...
+# Subtest: invalid or missing preparation inputs leave the previous context untouched
+ok 241 - invalid or missing preparation inputs leave the previous context untouched
+  ---
+  duration_ms: 890.68775
+  type: 'test'
+  ...
+# Subtest: private schema provisioning removes API grants and scoped defaults without touching other applications or runtime grants
+ok 242 - private schema provisioning removes API grants and scoped defaults without touching other applications or runtime grants
+  ---
+  duration_ms: 1192.498791
+  type: 'test'
+  ...
+# Subtest: laboratory keeps the city clarification literal and removes only the isolated extra qualification question
+ok 243 - laboratory keeps the city clarification literal and removes only the isolated extra qualification question
+  ---
+  duration_ms: 3.704833
+  type: 'test'
+  ...
+# Subtest: a pure extra question is the only removable content; answers, quotes, URLs and compound questions remain rejected
+ok 244 - a pure extra question is the only removable content; answers, quotes, URLs and compound questions remain rejected
+  ---
+  duration_ms: 1.213167
+  type: 'test'
+  ...
+# Subtest: additional violations and any new memory extraction keep the original fallback
+ok 245 - additional violations and any new memory extraction keep the original fallback
+  ---
+  duration_ms: 0.667375
+  type: 'test'
+  ...
+# Subtest: an independently answered sourced price is preserved verbatim in the retained bubble
+ok 246 - an independently answered sourced price is preserved verbatim in the retained bubble
+  ---
+  duration_ms: 0.610666
+  type: 'test'
+  ...
+# Subtest: the full contract guard runs twice and the repaired decision is idempotent
+ok 247 - the full contract guard runs twice and the repaired decision is idempotent
+  ---
+  duration_ms: 0.21175
+  type: 'test'
+  ...
+# Subtest: control, non-laboratory and non-continue decisions take precedence over repair
+ok 248 - control, non-laboratory and non-continue decisions take precedence over repair
+  ---
+  duration_ms: 0.417875
+  type: 'test'
+  ...
+# Subtest: financial-v2 revalidation cannot bypass a newly revealed structured-capital requirement
+ok 249 - financial-v2 revalidation cannot bypass a newly revealed structured-capital requirement
+  ---
+  duration_ms: 1.004959
+  type: 'test'
+  ...
+# Subtest: database restart preserves identity/history/pending work and recovers an expired processing lease
+ok 250 - database restart preserves identity/history/pending work and recovers an expired processing lease
+  ---
+  duration_ms: 1772.096291
+  type: 'test'
+  ...
+# Subtest: runtime provisioning supports a CREATEROLE administrator without superuser privileges and can be repeated
+ok 251 - runtime provisioning supports a CREATEROLE administrator without superuser privileges and can be repeated
+  ---
+  duration_ms: 1188.440667
+  type: 'test'
+  ...
+# Subtest: runtime provisioning rejects existing elevated roles without changing their attributes or grants
+ok 252 - runtime provisioning rejects existing elevated roles without changing their attributes or grants
+  ---
+  duration_ms: 557.493375
+  type: 'test'
+  ...
+# Subtest: webhook validates the original bytes, rejecting edited JSON and missing signatures
+ok 253 - webhook validates the original bytes, rejecting edited JSON and missing signatures
+  ---
+  duration_ms: 1.033833
+  type: 'test'
+  ...
+# Subtest: Sprint 2 acceptance matrix has 15 fictional no-send scenarios and every required failure boundary
+ok 254 - Sprint 2 acceptance matrix has 15 fictional no-send scenarios and every required failure boundary
+  ---
+  duration_ms: 0.45675
+  type: 'test'
+  ...
+# Subtest: Sprint 2 acceptance matrix follows the 15 numbered scenarios in the approved order
+ok 255 - Sprint 2 acceptance matrix follows the 15 numbered scenarios in the approved order
+  ---
+  duration_ms: 0.502375
+  type: 'test'
+  ...
+# Subtest: the typed campaign preserves all thirty approved cases and their exact thirty-three inputs
+ok 256 - the typed campaign preserves all thirty approved cases and their exact thirty-three inputs
+  ---
+  duration_ms: 5.296708
+  type: 'test'
+  ...
+# Subtest: each two-turn case requires a fresh session and an audited terminal first turn before its dependent turn
+ok 257 - each two-turn case requires a fresh session and an audited terminal first turn before its dependent turn
+  ---
+  duration_ms: 6.440791
+  type: 'test'
+  ...
+# Subtest: snapshot evidence cannot switch actor, reset the gate, expand the cap or authorize an exhausted campaign
+ok 258 - snapshot evidence cannot switch actor, reset the gate, expand the cap or authorize an exhausted campaign
+  ---
+  duration_ms: 3.928208
+  type: 'test'
+  ...
+# Subtest: budget and rolling daily checks remain provisional, use the existing gate and never infer an extra-spend minimum
+ok 259 - budget and rolling daily checks remain provisional, use the existing gate and never infer an extra-spend minimum
+  ---
+  duration_ms: 3.327083
+  type: 'test'
+  ...
+# Subtest: saved plans validate only with canonical IDs, pinned target, pending results and consistent phase counts
+ok 260 - saved plans validate only with canonical IDs, pinned target, pending results and consistent phase counts
+  ---
+  duration_ms: 16.837375
+  type: 'test'
+  ...
+# Subtest: planning rejects duplicate, incomplete, reordered or rewritten approved cases instead of accepting hard-coded counts
+ok 261 - planning rejects duplicate, incomplete, reordered or rewritten approved cases instead of accepting hard-coded counts
+  ---
+  duration_ms: 0.316125
+  type: 'test'
+  ...
+# Subtest: default planning creates sixty candidate executions and three separate published M6 sessions with seventy-two pending turns
+ok 262 - default planning creates sixty candidate executions and three separate published M6 sessions with seventy-two pending turns
+  ---
+  duration_ms: 3.01025
+  type: 'test'
+  ...
+# Subtest: first next durably records one intent before returning the exact first planned input
+ok 263 - first next durably records one intent before returning the exact first planned input
+  ---
+  duration_ms: 7.629208
+  type: 'test'
+  ...
+# Subtest: dispatch action expires at the earlier job deadline even when preflight evidence remains valid
+ok 264 - dispatch action expires at the earlier job deadline even when preflight evidence remains valid
+  ---
+  duration_ms: 2.929292
+  type: 'test'
+  ...
+# Subtest: a resumed journal must remain a canonical prefix and cannot silently skip or relabel previous turns
+ok 265 - a resumed journal must remain a canonical prefix and cannot silently skip or relabel previous turns
+  ---
+  duration_ms: 35.791417
+  type: 'test'
+  ...
+# Subtest: terminal audit cannot hide missing jobs, excess cost or reuse a prior turn job and reservation
+ok 266 - terminal audit cannot hide missing jobs, excess cost or reuse a prior turn job and reservation
+  ---
+  duration_ms: 27.759
+  type: 'test'
+  ...
+# Subtest: lost commit acknowledgment or expired preflight cannot cause an automatic resend after restart
+ok 267 - lost commit acknowledgment or expired preflight cannot cause an automatic resend after restart
+  ---
+  duration_ms: 7.827625
+  type: 'test'
+  ...
+# Subtest: a later turn cannot reuse a request ID or claim a previous case session as fresh
+ok 268 - a later turn cannot reuse a request ID or claim a previous case session as fresh
+  ---
+  duration_ms: 21.077875
+  type: 'test'
+  ...
+# Subtest: all sixty-six candidate turns precede separately published M6 and finishing sequence leaves acceptance pending
+ok 269 - all sixty-six candidate turns precede separately published M6 and finishing sequence leaves acceptance pending
+  ---
+  duration_ms: 472.385167
+  type: 'test'
+  ...
+# Subtest: receipt replay is idempotent and conflicting IDs, job identity or intent pins cannot overwrite evidence
+ok 270 - receipt replay is idempotent and conflicting IDs, job identity or intent pins cannot overwrite evidence
+  ---
+  duration_ms: 28.516708
+  type: 'test'
+  ...
+# Subtest: critical, failed and ambiguous outcomes halt immediately and a late success never erases a timeout
+ok 271 - critical, failed and ambiguous outcomes halt immediately and a late success never erases a timeout
+  ---
+  duration_ms: 43.124958
+  type: 'test'
+  ...
+# Subtest: an accepted job is not completion; only a matching terminal audited receipt advances T2 in the same session
+ok 272 - an accepted job is not completion; only a matching terminal audited receipt advances T2 in the same session
+  ---
+  duration_ms: 8.555042
+  type: 'test'
+  ...
+# Subtest: each dispatch requires fresh injected authority, exact pins, safe scope, budget reservation and daily capacity
+ok 273 - each dispatch requires fresh injected authority, exact pins, safe scope, budget reservation and daily capacity
+  ---
+  duration_ms: 40.92525
+  type: 'test'
+  ...
+# Subtest: concurrent controllers and resumed processes never issue a second dispatch while the intent is unresolved
+ok 274 - concurrent controllers and resumed processes never issue a second dispatch while the intent is unresolved
+  ---
+  duration_ms: 38.799042
+  type: 'test'
+  ...
+# Subtest: D27 executes actual free human pause and rejects subsequent send without provider or delivery
+ok 275 - D27 executes actual free human pause and rejects subsequent send without provider or delivery
+  ---
+  duration_ms: 952.831042
+  type: 'test'
+  ...
+# Subtest: D28 repaired stop is also valid through the pinned financial guard, with no collection proposals
+ok 276 - D28 repaired stop is also valid through the pinned financial guard, with no collection proposals
+  ---
+  duration_ms: 690.015417
+  type: 'test'
+  ...
+# Subtest: D30 injects real completion and settlement faults and verifies full rollback with reservation retained
+ok 277 - D30 injects real completion and settlement faults and verifies full rollback with reservation retained
+  ---
+  duration_ms: 1510.487041
+  type: 'test'
+  ...
+# Subtest: D29 measures replay and stale out-of-order callbacks without duplicating reply, fact or ledger
+ok 278 - D29 measures replay and stale out-of-order callbacks without duplicating reply, fact or ledger
+  ---
+  duration_ms: 766.241791
+  type: 'test'
+  ...
+# Subtest: D28 measures stop versus explicit negations and preserves stop after memory repair
+ok 279 - D28 measures stop versus explicit negations and preserves stop after memory repair
+  ---
+  duration_ms: 918.66375
+  type: 'test'
+  ...
+# Subtest: D10 measures immutable callback model/config/contract checks for v2 and legacy jobs
+ok 280 - D10 measures immutable callback model/config/contract checks for v2 and legacy jobs
+  ---
+  duration_ms: 1103.205125
+  type: 'test'
+  ...
+# Subtest: D01 runs real financial rendering and declared fact merge
+ok 281 - D01 runs real financial rendering and declared fact merge
+  ---
+  duration_ms: 43.09875
+  type: 'test'
+  ...
+# Subtest: D02 rejects a fabricated capital quotation
+ok 282 - D02 rejects a fabricated capital quotation
+  ---
+  duration_ms: 1.002625
+  type: 'test'
+  ...
+# Subtest: D03 rejects attribution to a different message ID
+ok 283 - D03 rejects attribution to a different message ID
+  ---
+  duration_ms: 0.548458
+  type: 'test'
+  ...
+# Subtest: D04 rejects a canonical message belonging to another tenant
+ok 284 - D04 rejects a canonical message belonging to another tenant
+  ---
+  duration_ms: 1.249667
+  type: 'test'
+  ...
+# Subtest: D05 rejects a canonical message belonging to another brand
+ok 285 - D05 rejects a canonical message belonging to another brand
+  ---
+  duration_ms: 0.496167
+  type: 'test'
+  ...
+# Subtest: D06 rejects a canonical message belonging to another candidate
+ok 286 - D06 rejects a canonical message belonging to another candidate
+  ---
+  duration_ms: 0.697625
+  type: 'test'
+  ...
+# Subtest: D07 rejects a canonical message from another conversation
+ok 287 - D07 rejects a canonical message from another conversation
+  ---
+  duration_ms: 0.793584
+  type: 'test'
+  ...
+# Subtest: D08 rejects assistant-authored capital as candidate evidence
+ok 288 - D08 rejects assistant-authored capital as candidate evidence
+  ---
+  duration_ms: 0.347416
+  type: 'test'
+  ...
+# Subtest: D09 rejects a monetary declaration available only in an old turn
+ok 289 - D09 rejects a monetary declaration available only in an old turn
+  ---
+  duration_ms: 0.353708
+  type: 'test'
+  ...
+# Subtest: D11 excludes an expired source in real retrieval and rejects its reference
+ok 290 - D11 excludes an expired source in real retrieval and rejects its reference
+  ---
+  duration_ms: 1155.258334
+  type: 'test'
+  ...
+# Subtest: D12 excludes an inactive canonical source despite a stale active index
+ok 291 - D12 excludes an inactive canonical source despite a stale active index
+  ---
+  duration_ms: 642.613458
+  type: 'test'
+  ...
+# Subtest: D13 excludes an unapproved canonical source despite an approved index
+ok 292 - D13 excludes an unapproved canonical source despite an approved index
+  ---
+  duration_ms: 744.149292
+  type: 'test'
+  ...
+# Subtest: D14 rejects a foreign-scope commercial source in retrieval and guard
+ok 293 - D14 rejects a foreign-scope commercial source in retrieval and guard
+  ---
+  duration_ms: 1586.299125
+  type: 'test'
+  ...
+# Subtest: D15 rejects duplicated approved source identifiers
+ok 294 - D15 rejects duplicated approved source identifiers
+  ---
+  duration_ms: 1.392667
+  type: 'test'
+  ...
+# Subtest: D16 rejects converting candidate capital into a brand price in prose
+ok 295 - D16 rejects converting candidate capital into a brand price in prose
+  ---
+  duration_ms: 1.726334
+  type: 'test'
+  ...
+# Subtest: D17 rejects an unsupported working-capital coverage claim
+ok 296 - D17 rejects an unsupported working-capital coverage claim
+  ---
+  duration_ms: 1.016875
+  type: 'test'
+  ...
+# Subtest: D18 rejects converting credit or third-party money into own available capital
+ok 297 - D18 rejects converting credit or third-party money into own available capital
+  ---
+  duration_ms: 0.647375
+  type: 'test'
+  ...
+# Subtest: D19 rejects changing or summing a correctly quoted monetary value
+ok 298 - D19 rejects changing or summing a correctly quoted monetary value
+  ---
+  duration_ms: 0.975
+  type: 'test'
+  ...
+# Subtest: D20 merges compatible capital correction as a conflict without replacing history
+ok 299 - D20 merges compatible capital correction as a conflict without replacing history
+  ---
+  duration_ms: 2.657417
+  type: 'test'
+  ...
+# Subtest: D21 rejects replacement of an incompatible or foreign-candidate fact
+ok 300 - D21 rejects replacement of an incompatible or foreign-candidate fact
+  ---
+  duration_ms: 0.691
+  type: 'test'
+  ...
+# Subtest: D22 repairs adoption of the disputed city using fresh scoped memory and preserves controls
+ok 301 - D22 repairs adoption of the disputed city using fresh scoped memory and preserves controls
+  ---
+  duration_ms: 26.970709
+  type: 'test'
+  ...
+# Subtest: D22 stop reaches the real financial guard without collection and retains its control after repair
+ok 302 - D22 stop reaches the real financial guard without collection and retains its control after repair
+  ---
+  duration_ms: 2.707167
+  type: 'test'
+  ...
+# Subtest: D23 preserves an honest negation without laundering the following positive adoption
+ok 303 - D23 preserves an honest negation without laundering the following positive adoption
+  ---
+  duration_ms: 0.778959
+  type: 'test'
+  ...
+# Subtest: D24 preserves complete human approval conditions before and after adoption without confirming memory
+ok 304 - D24 preserves complete human approval conditions before and after adoption without confirming memory
+  ---
+  duration_ms: 0.895417
+  type: 'test'
+  ...
+# Subtest: D25 does not let a conditional preface exempt a contradictory immediate adoption
+ok 305 - D25 does not let a conditional preface exempt a contradictory immediate adoption
+  ---
+  duration_ms: 0.457209
+  type: 'test'
+  ...
+# Subtest: D26 preserves the complete numerical negation within two bounded bubbles and records whole omission
+ok 306 - D26 preserves the complete numerical negation within two bounded bubbles and records whole omission
+  ---
+  duration_ms: 0.823334
+  type: 'test'
+  ...
+# Subtest: deterministic evidence refuses an incomplete or duplicate catalog before executing it
+ok 307 - deterministic evidence refuses an incomplete or duplicate catalog before executing it
+  ---
+  duration_ms: 1.7675
+  type: 'test'
+  ...
+# Subtest: missing evidence and metadata spoofing cannot be recorded as passing observations
+ok 308 - missing evidence and metadata spoofing cannot be recorded as passing observations
+  ---
+  duration_ms: 13.024834
+  type: 'test'
+  ...
+# Subtest: a caller cannot reduce repetitions or inject extra suite options
+ok 309 - a caller cannot reduce repetitions or inject extra suite options
+  ---
+  duration_ms: 0.289375
+  type: 'test'
+  ...
+# Subtest: runner measures two isolated repetitions and records failures without fabricating approval
+ok 310 - runner measures two isolated repetitions and records failures without fabricating approval
+  ---
+  duration_ms: 4.099125
+  type: 'test'
+  ...
+# (node:7692) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: a committed intent survives closing and reopening the local journal with the exact fixed plan
+ok 311 - a committed intent survives closing and reopening the local journal with the exact fixed plan
+  ---
+  duration_ms: 99.435209
+  type: 'test'
+  ...
+# Subtest: durability settings stay enabled and a real SQLite write failure rolls back without leaking its details through the bridge
+ok 312 - durability settings stay enabled and a real SQLite write failure rolls back without leaking its details through the bridge
+  ---
+  duration_ms: 85.6715
+  type: 'test'
+  ...
+# Subtest: rejecting a foreign SQLite format does not rewrite its journal mode or file bytes
+ok 313 - rejecting a foreign SQLite format does not rewrite its journal mode or file bytes
+  ---
+  duration_ms: 6.900625
+  type: 'test'
+  ...
+# Subtest: two real processes racing the same revision get one durable winner and reopening survives SIGKILL after acknowledgment
+ok 314 - two real processes racing the same revision get one durable winner and reopening survives SIGKILL after acknowledgment
+  ---
+  duration_ms: 343.753625
+  type: 'test'
+  ...
+# Subtest: a failed format check cannot leave an open connection that later returns an empty successful state
+ok 315 - a failed format check cannot leave an open connection that later returns an empty successful state
+  ---
+  duration_ms: 5.623084
+  type: 'test'
+  ...
+# Subtest: reopening never initializes a missing or foreign database, and corrupt stored state is an error rather than null
+ok 316 - reopening never initializes a missing or foreign database, and corrupt stored state is an error rather than null
+  ---
+  duration_ms: 36.617875
+  type: 'test'
+  ...
+# Subtest: storage requires an explicit dedicated private directory and rejects permissive paths and symlink files
+ok 317 - storage requires an explicit dedicated private directory and rejects permissive paths and symlink files
+  ---
+  duration_ms: 34.834958
+  type: 'test'
+  ...
+# Subtest: only append-only canonical transitions are stored: no reset, pin change, deleted receipt or mutated intent
+ok 318 - only append-only canonical transitions are stored: no reset, pin change, deleted receipt or mutated intent
+  ---
+  duration_ms: 133.571167
+  type: 'test'
+  ...
+# Subtest: CAS compares the durable revision and appends a new receipt without replacing the earlier revision
+ok 319 - CAS compares the durable revision and appends a new receipt without replacing the earlier revision
+  ---
+  duration_ms: 57.4825
+  type: 'test'
+  ...
+# Subtest: thirty real first-turn preparations are measured offline without pretending to know later model context or cost
+ok 320 - thirty real first-turn preparations are measured offline without pretending to know later model context or cost
+  ---
+  duration_ms: 1781.208958
+  type: 'test'
+  ...
+# Subtest: offline measurement rejects hash, scope, model and URL mismatches without accepting runtime credentials
+ok 321 - offline measurement rejects hash, scope, model and URL mismatches without accepting runtime credentials
+  ---
+  duration_ms: 0.771
+  type: 'test'
+  ...
+# Subtest: terminal observation binds a recorded intent to real private rows without approving the campaign
+ok 322 - terminal observation binds a recorded intent to real private rows without approving the campaign
+  ---
+  duration_ms: 1111.067208
+  type: 'test'
+  ...
+# Subtest: only a canonical recorded intent may reach SQL; caller receipts or invented targets are not authority
+ok 323 - only a canonical recorded intent may reach SQL; caller receipts or invented targets are not authority
+  ---
+  duration_ms: 926.339708
+  type: 'test'
+  ...
+# Subtest: the adapter requires read-only scoped SQL and current database admin ownership, not a saved preflight claim
+ok 324 - the adapter requires read-only scoped SQL and current database admin ownership, not a saved preflight claim
+  ---
+  duration_ms: 935.298542
+  type: 'test'
+  ...
+# Subtest: request text, job identity, pinned version/hash and evaluation provenance must agree independently of the journal
+ok 325 - request text, job identity, pinned version/hash and evaluation provenance must agree independently of the journal
+  ---
+  duration_ms: 963.931375
+  type: 'test'
+  ...
+# Subtest: unfinished jobs and memory advanced or inconsistent after completion cannot become terminal proof
+ok 326 - unfinished jobs and memory advanced or inconsistent after completion cannot become terminal proof
+  ---
+  duration_ms: 821.209375
+  type: 'test'
+  ...
+# Subtest: missing settlement, repeated attempts and inconsistent usage/cost remain ambiguous despite a passed receipt
+ok 327 - missing settlement, repeated attempts and inconsistent usage/cost remain ambiguous despite a passed receipt
+  ---
+  duration_ms: 768.057667
+  type: 'test'
+  ...
+# Subtest: response messages and guard events must corroborate the stored result and terminal control state
+ok 328 - response messages and guard events must corroborate the stored result and terminal control state
+  ---
+  duration_ms: 549.384292
+  type: 'test'
+  ...
+# Subtest: a journal cannot relabel one request as two campaign turns
+ok 329 - a journal cannot relabel one request as two campaign turns
+  ---
+  duration_ms: 535.039542
+  type: 'test'
+  ...
+# Subtest: M6 requires a normal session and a real matching publication record, without deriving human acceptance
+ok 330 - M6 requires a normal session and a real matching publication record, without deriving human acceptance
+  ---
+  duration_ms: 586.302917
+  type: 'test'
+  ...
+# Subtest: legitimate handoff and guard rejection remain distinct raw observations, never automatic acceptance
+ok 331 - legitimate handoff and guard rejection remain distinct raw observations, never automatic acceptance
+  ---
+  duration_ms: 878.164958
+  type: 'test'
+  ...
+# Subtest: SQL and journal failures are sanitized and never become empty successful evidence
+ok 332 - SQL and journal failures are sanitized and never become empty successful evidence
+  ---
+  duration_ms: 376.459708
+  type: 'test'
+  ...
+# Subtest: colliding private IDs from another tenant or brand cannot enter the single SQL observation
+ok 333 - colliding private IDs from another tenant or brand cannot enter the single SQL observation
+  ---
+  duration_ms: 415.514667
+  type: 'test'
+  ...
+# Subtest: stale or failed jobs and expired unresolved work never masquerade as ordinary pending observations
+ok 334 - stale or failed jobs and expired unresolved work never masquerade as ordinary pending observations
+  ---
+  duration_ms: 421.037542
+  type: 'test'
+  ...
+# Subtest: repeated webhook/workflow input persists one message and one job; new input invalidates previous output
+ok 335 - repeated webhook/workflow input persists one message and one job; new input invalidates previous output
+  ---
+  duration_ms: 1173.098458
+  type: 'test'
+  ...
+# Subtest: native handoff invalidates pending turn, resume does not resurrect it, stop is irreversible by generic resume
+ok 336 - native handoff invalidates pending turn, resume does not resurrect it, stop is irreversible by generic resume
+  ---
+  duration_ms: 1145.554166
+  type: 'test'
+  ...
+# Subtest: single-use send permit fails after tester revocation and never permits blind retry
+ok 337 - single-use send permit fails after tester revocation and never permits blind retry
+  ---
+  duration_ms: 614.98825
+  type: 'test'
+  ...
+# Subtest: known agent WAMID does not create a human handoff, unknown outbound does
+ok 338 - known agent WAMID does not create a human handoff, unknown outbound does
+  ---
+  duration_ms: 900.355416
+  type: 'test'
+  ...
+# Subtest: service window and 30-day retention block old-message replay
+ok 339 - service window and 30-day retention block old-message replay
+  ---
+  duration_ms: 538.641292
+  type: 'test'
+  ...
+# Subtest: webhook-first conversation binds the verified native execution once without replacing an existing owner
+ok 340 - webhook-first conversation binds the verified native execution once without replacing an existing owner
+  ---
+  duration_ms: 463.096417
+  type: 'test'
+  ...
+# (node:7707) [FSTDEP023] FastifyDeprecation: disableRequestLogging option is deprecated. Use the logController option with disableRequestLogging or isLogDisabled override instead. The disableRequestLogging top-level option will be removed in `fastify@6`.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: resume endpoint persists only the native verified control timestamp, never caller-supplied timing
+ok 341 - resume endpoint persists only the native verified control timestamp, never caller-supplied timing
+  ---
+  duration_ms: 668.322458
+  type: 'test'
+  ...
+# Subtest: saving scoped drafts stores immutable snapshots and never activates the channel
+ok 342 - saving scoped drafts stores immutable snapshots and never activates the channel
+  ---
+  duration_ms: 1182.2855
+  type: 'test'
+  ...
+# Subtest: restoring a historical snapshot creates a draft and cannot mutate or silently activate history
+ok 343 - restoring a historical snapshot creates a draft and cannot mutate or silently activate history
+  ---
+  duration_ms: 914.305167
+  type: 'test'
+  ...
+# Subtest: publication gates the exact approved hash, rejects synthetic quality and invalidates changed content
+ok 344 - publication gates the exact approved hash, rejects synthetic quality and invalidates changed content
+  ---
+  duration_ms: 566.064
+  type: 'test'
+  ...
+# Subtest: each quality threshold and trusted-recorder authorization independently blocks publication
+ok 345 - each quality threshold and trusted-recorder authorization independently blocks publication
+  ---
+  duration_ms: 518.083292
+  type: 'test'
+  ...
+# Subtest: saving a draft indexes its approved snapshot sources before validation can run
+ok 346 - saving a draft indexes its approved snapshot sources before validation can run
+  ---
+  duration_ms: 515.924459
+  type: 'test'
+  ...
+# Subtest: publishing invalidates only undispatched work from the previous scoped version and rejects its late facts
+ok 347 - publishing invalidates only undispatched work from the previous scoped version and rejects its late facts
+  ---
+  duration_ms: 562.65125
+  type: 'test'
+  ...
+# Subtest: the lab reports latest validation status by content hash even after an older publication
+ok 348 - the lab reports latest validation status by content hash even after an older publication
+  ---
+  duration_ms: 488.031416
+  type: 'test'
+  ...
+# Subtest: signed v2 batches ingest canonical allowlisted identity exactly once without creating jobs
+ok 349 - signed v2 batches ingest canonical allowlisted identity exactly once without creating jobs
+  ---
+  duration_ms: 1134.18075
+  type: 'test'
+  ...
+# Subtest: unapproved contacts retain no content; failures do not mark a webhook received
+ok 350 - unapproved contacts retain no content; failures do not mark a webhook received
+  ---
+  duration_ms: 548.535833
+  type: 'test'
+  ...
+# Subtest: project handoff applies only to its known native execution; resume cannot arrive via an arbitrary webhook
+ok 351 - project handoff applies only to its known native execution; resume cannot arrive via an arbitrary webhook
+  ---
+  duration_ms: 495.082958
+  type: 'test'
+  ...
+# Subtest: matching text and cloud_api origin cannot falsely confirm delivery; a known WAMID advances monotonically
+ok 352 - matching text and cloud_api origin cannot falsely confirm delivery; a known WAMID advances monotonically
+  ---
+  duration_ms: 560.262458
+  type: 'test'
+  ...
+# Subtest: buffered inbound messages use one canonical lookup and one ingestion per conversation
+ok 353 - buffered inbound messages use one canonical lookup and one ingestion per conversation
+  ---
+  duration_ms: 467.951875
+  type: 'test'
+  ...
+# Subtest: independent inbound conversations resolve contacts concurrently with a limit of four
+ok 354 - independent inbound conversations resolve contacts concurrently with a limit of four
+  ---
+  duration_ms: 470.14075
+  type: 'test'
+  ...
+# Subtest: a delayed handoff older than the verified native resume cannot pause the conversation again
+ok 355 - a delayed handoff older than the verified native resume cannot pause the conversation again
+  ---
+  duration_ms: 397.4435
+  type: 'test'
+  ...
+1..355
+# tests 355
+# suites 0
+# pass 355
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 50140.229917

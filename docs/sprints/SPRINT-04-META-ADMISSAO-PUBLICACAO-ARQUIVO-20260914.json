@@ -1,0 +1,30 @@
+{
+  "archivedAt": "2026-09-14T04:34:47.942Z",
+  "files": [
+    {
+      "source": "/tmp/sapore-s4-admission-runtime-3C62TY/manifest.json",
+      "destination": "/Users/gabriellima/Documents/FRANQUIAS/sapore-sdr/docs/sprints/SPRINT-04-META-ADMISSAO-PUBLICACAO-PACOTE-20260914.json",
+      "sha256": "fb15e6233977b0fa1bb37137222e6e62dc3da7214f69c1c0341568653d250bbb"
+    },
+    {
+      "source": "/tmp/sapore-s4-admission-verify-kAJKEs/verification.json",
+      "destination": "/Users/gabriellima/Documents/FRANQUIAS/sapore-sdr/docs/sprints/SPRINT-04-META-ADMISSAO-PUBLICACAO-PACOTE-VERIFICACAO-20260914.json",
+      "sha256": "3de87e2ad24c216178cb75fa464c432274ba1263a64f2b99bb493fe5d937cdc2"
+    },
+    {
+      "source": "/tmp/sapore-s4-admission-verify-kAJKEs/tests.tap",
+      "destination": "/Users/gabriellima/Documents/FRANQUIAS/sapore-sdr/docs/sprints/SPRINT-04-META-ADMISSAO-PUBLICACAO-PACOTE-20260914.tap",
+      "sha256": "d90613fbc400045107010c90971111cf4949948f4c61af43fe4b8877a17a9741"
+    },
+    {
+      "source": "/tmp/sapore-s4-admission-verify-kAJKEs/candidate-content-check.json",
+      "destination": "/Users/gabriellima/Documents/FRANQUIAS/sapore-sdr/docs/sprints/SPRINT-04-META-ADMISSAO-PUBLICACAO-PACOTE-CONTEUDO-20260914.json",
+      "sha256": "ebc234adde913313081f9270cceb6a33b978e49ca0d8fbc90f3239f3b4d5a30d"
+    },
+    {
+      "source": "/tmp/sapore-s4-admission-verify-kAJKEs/build.stdout.log",
+      "destination": "/Users/gabriellima/Documents/FRANQUIAS/sapore-sdr/docs/sprints/SPRINT-04-META-ADMISSAO-PUBLICACAO-PACOTE-TYPES-20260914.log",
+      "sha256": "303a68e293bcd3e8bd4355467b5e210732638adeeda497402fb54d81030113d9"
+    }
+  ]
+}

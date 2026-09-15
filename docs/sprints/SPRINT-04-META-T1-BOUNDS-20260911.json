@@ -1,0 +1,359 @@
+{
+  "localBaseContentHash": "a1a330f07cd0efc5bf2193c57e7a7c12c09b4c8518c524d0b36d4c6e026c1325",
+  "result": {
+    "success": true,
+    "data": {
+      "kind": "offline-first-turn-preparation",
+      "readyToExecute": false,
+      "contentHash": "c655e440fef8dddf5dd855a42d1299a59044b2c598e986bf5a4b1b7c1d9cb959",
+      "model": "gpt-5.4-2026-03-05",
+      "localVersionId": "1a314451-be24-420b-92d1-041b5ca7c521",
+      "remoteVersionVerified": false,
+      "observedAt": "2026-09-11T23:03:27.303Z",
+      "samples": [
+        {
+          "caseId": "C01",
+          "payloadBytes": 12100,
+          "payloadSha256": "4f8a24dba83bda673813067e1bab9a1e936a74da0efe09fe0cc554960719bef3",
+          "inputTokenBound": 16196,
+          "reservedMicroUsd": 58490,
+          "sourceIds": [
+            "sapore-investimento-homologacao-v1"
+          ],
+          "outputSchemaHash": "aafec0a7b9eee2fffb8b5161c20259695def1e2aa607288556d93f4765017e2e"
+        },
+        {
+          "caseId": "C02",
+          "payloadBytes": 12057,
+          "payloadSha256": "dd877c8645411aa84bcf2bdadc8e7f1764c3deaa2258410174fcc2b4e6a6696d",
+          "inputTokenBound": 16153,
+          "reservedMicroUsd": 58383,
+          "sourceIds": [
+            "sapore-investimento-homologacao-v1"
+          ],
+          "outputSchemaHash": "aafec0a7b9eee2fffb8b5161c20259695def1e2aa607288556d93f4765017e2e"
+        },
+        {
+          "caseId": "C03",
+          "payloadBytes": 12090,
+          "payloadSha256": "d4502f2a5ca0d83000391209e14f619ff3767e4b2fc2d2822813f0ca1afd4d3b",
+          "inputTokenBound": 16186,
+          "reservedMicroUsd": 58465,
+          "sourceIds": [
+            "sapore-investimento-homologacao-v1"
+          ],
+          "outputSchemaHash": "aafec0a7b9eee2fffb8b5161c20259695def1e2aa607288556d93f4765017e2e"
+        },
+        {
+          "caseId": "C04",
+          "payloadBytes": 11997,
+          "payloadSha256": "6c67cafd864c74f27c39d15353eda9bf155418f8281de92053959a1129b569b9",
+          "inputTokenBound": 16093,
+          "reservedMicroUsd": 58233,
+          "sourceIds": [
+            "sapore-investimento-homologacao-v1"
+          ],
+          "outputSchemaHash": "aafec0a7b9eee2fffb8b5161c20259695def1e2aa607288556d93f4765017e2e"
+        },
+        {
+          "caseId": "C05",
+          "payloadBytes": 12021,
+          "payloadSha256": "400227263e584968774f9510677870e22456fe8c38a13e17b84c2205ff3ca02e",
+          "inputTokenBound": 16117,
+          "reservedMicroUsd": 58293,
+          "sourceIds": [
+            "sapore-investimento-homologacao-v1"
+          ],
+          "outputSchemaHash": "aafec0a7b9eee2fffb8b5161c20259695def1e2aa607288556d93f4765017e2e"
+        },
+        {
+          "caseId": "C06",
+          "payloadBytes": 12004,
+          "payloadSha256": "5dabb4ca38a146829f655e5f032aba095eb05753c0ec1b7dedca00b5ba088535",
+          "inputTokenBound": 16100,
+          "reservedMicroUsd": 58250,
+          "sourceIds": [
+            "sapore-investimento-homologacao-v1"
+          ],
+          "outputSchemaHash": "aafec0a7b9eee2fffb8b5161c20259695def1e2aa607288556d93f4765017e2e"
+        },
+        {
+          "caseId": "C07",
+          "payloadBytes": 12021,
+          "payloadSha256": "d5537e2438ed027af5b8364732dc7457fee7d31ea477eab4f3ee40bce849b82c",
+          "inputTokenBound": 16117,
+          "reservedMicroUsd": 58293,
+          "sourceIds": [
+            "sapore-investimento-homologacao-v1"
+          ],
+          "outputSchemaHash": "aafec0a7b9eee2fffb8b5161c20259695def1e2aa607288556d93f4765017e2e"
+        },
+        {
+          "caseId": "C08",
+          "payloadBytes": 12007,
+          "payloadSha256": "16fbaa19c7c127b45d41da6adfee6c554a19bdcd4da21b5dda2dff6ab5943741",
+          "inputTokenBound": 16103,
+          "reservedMicroUsd": 58258,
+          "sourceIds": [
+            "sapore-investimento-homologacao-v1"
+          ],
+          "outputSchemaHash": "aafec0a7b9eee2fffb8b5161c20259695def1e2aa607288556d93f4765017e2e"
+        },
+        {
+          "caseId": "C09",
+          "payloadBytes": 12021,
+          "payloadSha256": "eb2b761da179c4e564f0646ef01a0ec1c23f766fe8bf59be46643af8d2f6de65",
+          "inputTokenBound": 16117,
+          "reservedMicroUsd": 58293,
+          "sourceIds": [
+            "sapore-investimento-homologacao-v1"
+          ],
+          "outputSchemaHash": "aafec0a7b9eee2fffb8b5161c20259695def1e2aa607288556d93f4765017e2e"
+        },
+        {
+          "caseId": "C10",
+          "payloadBytes": 11999,
+          "payloadSha256": "beb2ad8ec687e1987e4d6341a111f848abf9c1862a3b1240c30f5f7c7bb915cd",
+          "inputTokenBound": 16095,
+          "reservedMicroUsd": 58238,
+          "sourceIds": [
+            "sapore-investimento-homologacao-v1"
+          ],
+          "outputSchemaHash": "aafec0a7b9eee2fffb8b5161c20259695def1e2aa607288556d93f4765017e2e"
+        },
+        {
+          "caseId": "C11",
+          "payloadBytes": 12020,
+          "payloadSha256": "af64741c06907e040d6fd3538c74612157b05b2c285620f02f385f5a8d09bdfc",
+          "inputTokenBound": 16116,
+          "reservedMicroUsd": 58290,
+          "sourceIds": [
+            "sapore-investimento-homologacao-v1"
+          ],
+          "outputSchemaHash": "aafec0a7b9eee2fffb8b5161c20259695def1e2aa607288556d93f4765017e2e"
+        },
+        {
+          "caseId": "C12",
+          "payloadBytes": 11997,
+          "payloadSha256": "c5b3745b3f7e52eca10de36ec6b450bf9e6939b466eb1ec6dc6d24d33533c906",
+          "inputTokenBound": 16093,
+          "reservedMicroUsd": 58233,
+          "sourceIds": [
+            "sapore-investimento-homologacao-v1"
+          ],
+          "outputSchemaHash": "aafec0a7b9eee2fffb8b5161c20259695def1e2aa607288556d93f4765017e2e"
+        },
+        {
+          "caseId": "C13",
+          "payloadBytes": 11988,
+          "payloadSha256": "7d36088b81ee21499078985d78d4f23cc7a9229f5938f62d984a466f9ca6b0f5",
+          "inputTokenBound": 16084,
+          "reservedMicroUsd": 58210,
+          "sourceIds": [
+            "sapore-investimento-homologacao-v1"
+          ],
+          "outputSchemaHash": "aafec0a7b9eee2fffb8b5161c20259695def1e2aa607288556d93f4765017e2e"
+        },
+        {
+          "caseId": "C14",
+          "payloadBytes": 12024,
+          "payloadSha256": "ffd328344bccc051c549b23ba9cd873466959dce1926fc6ce32005c09f850880",
+          "inputTokenBound": 16120,
+          "reservedMicroUsd": 58300,
+          "sourceIds": [
+            "sapore-investimento-homologacao-v1"
+          ],
+          "outputSchemaHash": "aafec0a7b9eee2fffb8b5161c20259695def1e2aa607288556d93f4765017e2e"
+        },
+        {
+          "caseId": "C15",
+          "payloadBytes": 12000,
+          "payloadSha256": "35e4e6ab0fa6ef1851cb4ccf350653b17d37499205a8c3d2a62fb3d5d4b20e79",
+          "inputTokenBound": 16096,
+          "reservedMicroUsd": 58240,
+          "sourceIds": [
+            "sapore-investimento-homologacao-v1"
+          ],
+          "outputSchemaHash": "aafec0a7b9eee2fffb8b5161c20259695def1e2aa607288556d93f4765017e2e"
+        },
+        {
+          "caseId": "C16",
+          "payloadBytes": 12043,
+          "payloadSha256": "5047addc8627fe14537566cf123bdcae32065331147719a0f4be731c461413ea",
+          "inputTokenBound": 16139,
+          "reservedMicroUsd": 58348,
+          "sourceIds": [
+            "sapore-investimento-homologacao-v1"
+          ],
+          "outputSchemaHash": "aafec0a7b9eee2fffb8b5161c20259695def1e2aa607288556d93f4765017e2e"
+        },
+        {
+          "caseId": "C17",
+          "payloadBytes": 12003,
+          "payloadSha256": "4a67611d95a890b3104c02fa1e0a7c849e539ae79830dc7766f84f99b5249b5f",
+          "inputTokenBound": 16099,
+          "reservedMicroUsd": 58248,
+          "sourceIds": [
+            "sapore-investimento-homologacao-v1"
+          ],
+          "outputSchemaHash": "aafec0a7b9eee2fffb8b5161c20259695def1e2aa607288556d93f4765017e2e"
+        },
+        {
+          "caseId": "C18",
+          "payloadBytes": 12037,
+          "payloadSha256": "50272c49f2c84a1a5b0dfc6e7e633b0f49c1879fc15a26dc1113269316049422",
+          "inputTokenBound": 16133,
+          "reservedMicroUsd": 58333,
+          "sourceIds": [
+            "sapore-investimento-homologacao-v1"
+          ],
+          "outputSchemaHash": "aafec0a7b9eee2fffb8b5161c20259695def1e2aa607288556d93f4765017e2e"
+        },
+        {
+          "caseId": "C19",
+          "payloadBytes": 12038,
+          "payloadSha256": "7bddfb9a396051020143c33603f1d6b8d6da7dd5018621262621b3790e72b347",
+          "inputTokenBound": 16134,
+          "reservedMicroUsd": 58335,
+          "sourceIds": [
+            "sapore-investimento-homologacao-v1"
+          ],
+          "outputSchemaHash": "aafec0a7b9eee2fffb8b5161c20259695def1e2aa607288556d93f4765017e2e"
+        },
+        {
+          "caseId": "C20",
+          "payloadBytes": 12030,
+          "payloadSha256": "abc949d16fcf1f63f5f6ed9c6678c7d45d3681d271bb4cad0b9548ec65fc5cfd",
+          "inputTokenBound": 16126,
+          "reservedMicroUsd": 58315,
+          "sourceIds": [
+            "sapore-investimento-homologacao-v1"
+          ],
+          "outputSchemaHash": "aafec0a7b9eee2fffb8b5161c20259695def1e2aa607288556d93f4765017e2e"
+        },
+        {
+          "caseId": "C21",
+          "payloadBytes": 12013,
+          "payloadSha256": "f7c3d3e92288df7d57de60fcaa95fbdd976da992c3f183d3e73859c8607913cf",
+          "inputTokenBound": 16109,
+          "reservedMicroUsd": 58273,
+          "sourceIds": [
+            "sapore-investimento-homologacao-v1"
+          ],
+          "outputSchemaHash": "aafec0a7b9eee2fffb8b5161c20259695def1e2aa607288556d93f4765017e2e"
+        },
+        {
+          "caseId": "C22",
+          "payloadBytes": 11990,
+          "payloadSha256": "8f55fb73d0fd8396c3d12031ccab0eadc643b3f1a3d030c8f993e2bca1bb9d45",
+          "inputTokenBound": 16086,
+          "reservedMicroUsd": 58215,
+          "sourceIds": [
+            "sapore-investimento-homologacao-v1"
+          ],
+          "outputSchemaHash": "aafec0a7b9eee2fffb8b5161c20259695def1e2aa607288556d93f4765017e2e"
+        },
+        {
+          "caseId": "C23",
+          "payloadBytes": 12009,
+          "payloadSha256": "4548c050d6068e4736c9b18c8861c806f45a29effcb0471464fc159139e017b3",
+          "inputTokenBound": 16105,
+          "reservedMicroUsd": 58263,
+          "sourceIds": [
+            "sapore-investimento-homologacao-v1"
+          ],
+          "outputSchemaHash": "aafec0a7b9eee2fffb8b5161c20259695def1e2aa607288556d93f4765017e2e"
+        },
+        {
+          "caseId": "C24",
+          "payloadBytes": 12066,
+          "payloadSha256": "64aa77210a4bbe8a8bb51c6ca49793b4636f8c676f510f3dfabdcd7c96d5ad5e",
+          "inputTokenBound": 16162,
+          "reservedMicroUsd": 58405,
+          "sourceIds": [
+            "sapore-investimento-homologacao-v1"
+          ],
+          "outputSchemaHash": "aafec0a7b9eee2fffb8b5161c20259695def1e2aa607288556d93f4765017e2e"
+        },
+        {
+          "caseId": "C25",
+          "payloadBytes": 11971,
+          "payloadSha256": "5db66ab2580e6013936df75576d9f7a2a72d31277eabea5623a851713cf48ff7",
+          "inputTokenBound": 16067,
+          "reservedMicroUsd": 58168,
+          "sourceIds": [
+            "sapore-investimento-homologacao-v1"
+          ],
+          "outputSchemaHash": "aafec0a7b9eee2fffb8b5161c20259695def1e2aa607288556d93f4765017e2e"
+        },
+        {
+          "caseId": "C26",
+          "payloadBytes": 12078,
+          "payloadSha256": "50184a3f56b0da31a0f1d6c328f58e5b538cc36d8c7c56ae586126ddddbebbbb",
+          "inputTokenBound": 16174,
+          "reservedMicroUsd": 58435,
+          "sourceIds": [
+            "sapore-investimento-homologacao-v1"
+          ],
+          "outputSchemaHash": "aafec0a7b9eee2fffb8b5161c20259695def1e2aa607288556d93f4765017e2e"
+        },
+        {
+          "caseId": "C27",
+          "payloadBytes": 11997,
+          "payloadSha256": "b7c05cb1a455d574630954a98c77b9a86e93af940ef0187d3be276ab1399d4ca",
+          "inputTokenBound": 16093,
+          "reservedMicroUsd": 58233,
+          "sourceIds": [
+            "sapore-investimento-homologacao-v1"
+          ],
+          "outputSchemaHash": "aafec0a7b9eee2fffb8b5161c20259695def1e2aa607288556d93f4765017e2e"
+        },
+        {
+          "caseId": "C28",
+          "payloadBytes": 11980,
+          "payloadSha256": "35a38af4cc2b20624e0875298772243c741bd8206c5c567859a06863465289e7",
+          "inputTokenBound": 16076,
+          "reservedMicroUsd": 58190,
+          "sourceIds": [
+            "sapore-investimento-homologacao-v1"
+          ],
+          "outputSchemaHash": "aafec0a7b9eee2fffb8b5161c20259695def1e2aa607288556d93f4765017e2e"
+        },
+        {
+          "caseId": "C29",
+          "payloadBytes": 11986,
+          "payloadSha256": "9e9eee1a3db19233784286ab7d0cb73cfe7d6d141daa5931390d8a1347e339cd",
+          "inputTokenBound": 16082,
+          "reservedMicroUsd": 58205,
+          "sourceIds": [
+            "sapore-investimento-homologacao-v1"
+          ],
+          "outputSchemaHash": "aafec0a7b9eee2fffb8b5161c20259695def1e2aa607288556d93f4765017e2e"
+        },
+        {
+          "caseId": "C30",
+          "payloadBytes": 12033,
+          "payloadSha256": "bfe80fa0c226f470bebe5c6911ee7c6d728b3d875652e5585ae2455b766620ed",
+          "inputTokenBound": 16129,
+          "reservedMicroUsd": 58323,
+          "sourceIds": [
+            "sapore-investimento-homologacao-v1"
+          ],
+          "outputSchemaHash": "aafec0a7b9eee2fffb8b5161c20259695def1e2aa607288556d93f4765017e2e"
+        }
+      ],
+      "unknownSecondTurnCases": [
+        "C01",
+        "C02",
+        "C03"
+      ],
+      "modelCalls": 0,
+      "reservationsCreated": 0,
+      "publicationsCreated": 0,
+      "validationReportsCreated": 0,
+      "activeFixtureJobs": 0,
+      "campaignCostMicroUsd": null,
+      "additionalMoneyRequiredMicroUsd": null
+    }
+  }
+}

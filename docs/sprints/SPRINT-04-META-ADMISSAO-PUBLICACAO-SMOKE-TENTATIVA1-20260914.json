@@ -1,0 +1,11 @@
+{
+  "phase": "smoke-helper-inspection-before-http",
+  "result": {
+    "chunk_id": "0a8f2a",
+    "wall_time_seconds": 0.329273542,
+    "exit_code": 1,
+    "original_token_count": 176,
+    "output": "file:///private/tmp/sapore-s4-r10-smoke.mjs:7\n  if (r.error || r.status !== 0) throw new Error(`SSH check failed: ${r.error?.message ?? r.stderr}`);\n                                       ^\n\nError: SSH check failed: template parsing error: template: :1:224: executing \"\" at <.State.Health>: map has no entry for key \"Health\"\n\n    at ssh (file:///private/tmp/sapore-s4-r10-smoke.mjs:7:40)\n    at file:///private/tmp/sapore-s4-r10-smoke.mjs:11:35\n    at ModuleJob.run (node:internal/modules/esm/module_job:430:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:661:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.13.1\n"
+  },
+  "cause": "Worker has no Health field; Go template direct lookup failed before HTTP checks. Corrected template to use optional index access; no runtime source change."
+}

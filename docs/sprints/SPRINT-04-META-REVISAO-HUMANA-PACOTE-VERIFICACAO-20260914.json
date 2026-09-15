@@ -1,0 +1,183 @@
+{
+  "kind": "sprint4-human-review-package-verification-v1",
+  "startedAt": "2026-09-14T03:40:53.666Z",
+  "artifacts": "/tmp/sapore-s4-review-verify-Ys11Z8",
+  "localNode": "v24.13.1",
+  "stages": [
+    {
+      "name": "packager",
+      "command": "/usr/local/bin/node",
+      "args": [
+        "/tmp/sapore-s4-review-package.mjs"
+      ],
+      "cwd": "/tmp",
+      "exitCode": 0,
+      "signal": null,
+      "durationMs": 139.130042,
+      "stdout": {
+        "path": "/tmp/sapore-s4-review-verify-Ys11Z8/packager.stdout.log",
+        "sha256": "ada74a91e9f5413eaa85a06dc5dabda7b40896eed2aaff22332db13341b2aa27"
+      },
+      "stderr": {
+        "path": "/tmp/sapore-s4-review-verify-Ys11Z8/packager.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "archive-list",
+      "command": "tar",
+      "args": [
+        "-tzf",
+        "/tmp/sapore-s4-review-4pHlVN/backend-human-review.tar.gz"
+      ],
+      "cwd": "/tmp",
+      "exitCode": 0,
+      "signal": null,
+      "durationMs": 6.830540999999926,
+      "stdout": {
+        "path": "/tmp/sapore-s4-review-verify-Ys11Z8/archive-list.stdout.log",
+        "sha256": "8e10fc3d57bca298818ec01712689f94e15adb8b7c8f96a2317c94966bf4c07d"
+      },
+      "stderr": {
+        "path": "/tmp/sapore-s4-review-verify-Ys11Z8/archive-list.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "build",
+      "command": "npm",
+      "args": [
+        "run",
+        "build"
+      ],
+      "cwd": "/tmp/sapore-s4-review-4pHlVN/sapore-sdr",
+      "exitCode": 0,
+      "signal": null,
+      "durationMs": 1897.196,
+      "stdout": {
+        "path": "/tmp/sapore-s4-review-verify-Ys11Z8/build.stdout.log",
+        "sha256": "303a68e293bcd3e8bd4355467b5e210732638adeeda497402fb54d81030113d9"
+      },
+      "stderr": {
+        "path": "/tmp/sapore-s4-review-verify-Ys11Z8/build.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "tests",
+      "command": "/usr/local/bin/node",
+      "args": [
+        "--import",
+        "tsx",
+        "--test",
+        "--test-concurrency=4",
+        "--test-reporter=tap",
+        "tests/api.test.ts",
+        "tests/audio.test.ts",
+        "tests/candidate-capital-guard.test.ts",
+        "tests/completion-controls.test.ts",
+        "tests/completion-round-trip.test.ts",
+        "tests/completion-snapshot.test.ts",
+        "tests/conversation-review-http.test.ts",
+        "tests/conversation-review-timeline.test.ts",
+        "tests/conversation-review.test.ts",
+        "tests/database-scope-latency.test.ts",
+        "tests/deployment.test.ts",
+        "tests/domain.test.ts",
+        "tests/engine-capital-guard.test.ts",
+        "tests/engine-completion-snapshot.test.ts",
+        "tests/engine-dispatch-coordinator.test.ts",
+        "tests/engine-financial-contract.test.ts",
+        "tests/engine-memory-reply.test.ts",
+        "tests/engine-question-reply.test.ts",
+        "tests/engine-timings.test.ts",
+        "tests/engine.test.ts",
+        "tests/financial-reply-security.test.ts",
+        "tests/financial-reply.test.ts",
+        "tests/financial-version.test.ts",
+        "tests/integrations.test.ts",
+        "tests/knowledge-valid-at.test.ts",
+        "tests/knowledge.test.ts",
+        "tests/lab-budget.test.ts",
+        "tests/lab-config.test.ts",
+        "tests/lab-dispatch-recovery.test.ts",
+        "tests/lab-evaluation-sessions.test.ts",
+        "tests/lab-queue-latency.test.ts",
+        "tests/lab-send-snapshot.test.ts",
+        "tests/lab-sessions.test.ts",
+        "tests/laboratory-dispatch.test.ts",
+        "tests/latency-engine.test.ts",
+        "tests/memory-reply.test.ts",
+        "tests/migration-ledger.test.ts",
+        "tests/migration-runner.test.ts",
+        "tests/n8n-conversation-history.test.ts",
+        "tests/n8n-financial-contract.test.ts",
+        "tests/n8n-timings.test.ts",
+        "tests/operations.test.ts",
+        "tests/persist-lead-memory.test.ts",
+        "tests/persistence.test.ts",
+        "tests/preflight-round-trip.test.ts",
+        "tests/preflight.test.ts",
+        "tests/prepare-read-batch.test.ts",
+        "tests/private-schema.test.ts",
+        "tests/question-reply.test.ts",
+        "tests/recovery.test.ts",
+        "tests/runtime-role.test.ts",
+        "tests/security.test.ts",
+        "tests/sprint2-acceptance.test.ts",
+        "tests/turns.test.ts",
+        "tests/versioning.test.ts",
+        "tests/webhooks.test.ts"
+      ],
+      "cwd": "/tmp/sapore-s4-review-4pHlVN/sapore-sdr",
+      "exitCode": 0,
+      "signal": null,
+      "durationMs": 61944.585417,
+      "stdout": {
+        "path": "/tmp/sapore-s4-review-verify-Ys11Z8/tests.tap",
+        "sha256": "e4d5b27d314d6e1a289dd214cafd7ff42c7c62d474685475c1359730d58a225c"
+      },
+      "stderr": {
+        "path": "/tmp/sapore-s4-review-verify-Ys11Z8/tests.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "terminal": true,
+  "package": {
+    "directory": "/tmp/sapore-s4-review-4pHlVN",
+    "root": "/tmp/sapore-s4-review-4pHlVN/sapore-sdr",
+    "archive": "/tmp/sapore-s4-review-4pHlVN/backend-human-review.tar.gz",
+    "archiveSha256": "ad2ecb976868480a6187985f90286e3c35aa3851f039e60918ed29d5a9cd8896",
+    "manifestPath": "/tmp/sapore-s4-review-4pHlVN/manifest.json",
+    "manifestSha256": "302fdf69985e10753c4add5e834f3cb67ec8728e32a247c8087523b583d9ecd4",
+    "fileCount": 129,
+    "changed": [
+      "src/conversation-review.spec.ts",
+      "src/conversation-review.ts",
+      "src/lab.ts",
+      "src/server.ts",
+      "tests/conversation-review-http.test.ts",
+      "tests/conversation-review-timeline.test.ts",
+      "tests/conversation-review.test.ts"
+    ]
+  },
+  "dependencies": {
+    "path": "/tmp/sapore-s4-review-verify-Ys11Z8/local-dependencies.json",
+    "sha256": "3f6e2a6e5836f5e5079d2b120de3fff78eed70dc564489b7c7e6224e6e1ea0bb"
+  },
+  "dependencyCount": 400,
+  "testFiles": 56,
+  "results": {
+    "tests": 301,
+    "passed": 301,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "durationMs": 61904.297209
+  },
+  "manifestStableAfterRun": true,
+  "status": "passed",
+  "finishedAt": "2026-09-14T03:41:57.731Z"
+}

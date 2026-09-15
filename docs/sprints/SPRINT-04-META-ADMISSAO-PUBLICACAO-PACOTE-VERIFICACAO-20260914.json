@@ -1,0 +1,281 @@
+{
+  "kind": "sprint4-admission-runtime-verification-v1",
+  "startedAt": "2026-09-14T04:31:39.047Z",
+  "artifacts": "/tmp/sapore-s4-admission-verify-kAJKEs",
+  "localNode": "v24.13.1",
+  "stages": [
+    {
+      "name": "packager",
+      "command": "/usr/local/bin/node",
+      "args": [
+        "/tmp/sapore-s4-admission-runtime-package.mjs"
+      ],
+      "cwd": "/tmp",
+      "startedAt": "2026-09-14T04:31:39.049Z",
+      "finishedAt": "2026-09-14T04:31:39.220Z",
+      "exitCode": 0,
+      "signal": null,
+      "durationMs": 171.047375,
+      "stdout": {
+        "path": "/tmp/sapore-s4-admission-verify-kAJKEs/packager.stdout.log",
+        "sha256": "50f237220c6d03c08135a8ed9c552d5b1bb94d9ebbc321697fd69e7e17efe6b5"
+      },
+      "stderr": {
+        "path": "/tmp/sapore-s4-admission-verify-kAJKEs/packager.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "r9-baseline-members",
+      "command": "tar",
+      "args": [
+        "-tzf",
+        "/tmp/sapore-s4-review-4pHlVN/backend-human-review.tar.gz"
+      ],
+      "cwd": "/tmp",
+      "startedAt": "2026-09-14T04:31:39.235Z",
+      "finishedAt": "2026-09-14T04:31:39.253Z",
+      "exitCode": 0,
+      "signal": null,
+      "durationMs": 18.44008299999996,
+      "stdout": {
+        "path": "/tmp/sapore-s4-admission-verify-kAJKEs/r9-baseline-members.stdout.log",
+        "sha256": "8e10fc3d57bca298818ec01712689f94e15adb8b7c8f96a2317c94966bf4c07d"
+      },
+      "stderr": {
+        "path": "/tmp/sapore-s4-admission-verify-kAJKEs/r9-baseline-members.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "r9-baseline-types",
+      "command": "tar",
+      "args": [
+        "-tvzf",
+        "/tmp/sapore-s4-review-4pHlVN/backend-human-review.tar.gz"
+      ],
+      "cwd": "/tmp",
+      "startedAt": "2026-09-14T04:31:39.255Z",
+      "finishedAt": "2026-09-14T04:31:39.295Z",
+      "exitCode": 0,
+      "signal": null,
+      "durationMs": 40.48924999999997,
+      "stdout": {
+        "path": "/tmp/sapore-s4-admission-verify-kAJKEs/r9-baseline-types.stdout.log",
+        "sha256": "8bb79e281004d80ef51d3321008fd5530e37178a4f10ad424b9ea0246ecf9efa"
+      },
+      "stderr": {
+        "path": "/tmp/sapore-s4-admission-verify-kAJKEs/r9-baseline-types.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "candidate-members",
+      "command": "tar",
+      "args": [
+        "-tzf",
+        "/tmp/sapore-s4-admission-runtime-3C62TY/backend-admission-runtime.tar.gz"
+      ],
+      "cwd": "/tmp",
+      "startedAt": "2026-09-14T04:31:41.324Z",
+      "finishedAt": "2026-09-14T04:31:41.335Z",
+      "exitCode": 0,
+      "signal": null,
+      "durationMs": 10.527000000000044,
+      "stdout": {
+        "path": "/tmp/sapore-s4-admission-verify-kAJKEs/candidate-members.stdout.log",
+        "sha256": "b59d9cc839af12a8b576e12c517e6480f404c83ca86642244e293a7deaddda67"
+      },
+      "stderr": {
+        "path": "/tmp/sapore-s4-admission-verify-kAJKEs/candidate-members.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "candidate-types",
+      "command": "tar",
+      "args": [
+        "-tvzf",
+        "/tmp/sapore-s4-admission-runtime-3C62TY/backend-admission-runtime.tar.gz"
+      ],
+      "cwd": "/tmp",
+      "startedAt": "2026-09-14T04:31:41.336Z",
+      "finishedAt": "2026-09-14T04:31:41.366Z",
+      "exitCode": 0,
+      "signal": null,
+      "durationMs": 30.45754199999965,
+      "stdout": {
+        "path": "/tmp/sapore-s4-admission-verify-kAJKEs/candidate-types.stdout.log",
+        "sha256": "5e229b8b1949c628225748d2e5add3a2fc0c2c214e829acc4d4e74e238328c6c"
+      },
+      "stderr": {
+        "path": "/tmp/sapore-s4-admission-verify-kAJKEs/candidate-types.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "build",
+      "command": "npm",
+      "args": [
+        "run",
+        "build"
+      ],
+      "cwd": "/tmp/sapore-s4-admission-runtime-3C62TY/sapore-sdr",
+      "startedAt": "2026-09-14T04:31:44.181Z",
+      "finishedAt": "2026-09-14T04:31:49.587Z",
+      "exitCode": 0,
+      "signal": null,
+      "durationMs": 5405.892833,
+      "stdout": {
+        "path": "/tmp/sapore-s4-admission-verify-kAJKEs/build.stdout.log",
+        "sha256": "303a68e293bcd3e8bd4355467b5e210732638adeeda497402fb54d81030113d9"
+      },
+      "stderr": {
+        "path": "/tmp/sapore-s4-admission-verify-kAJKEs/build.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "tests",
+      "command": "/usr/local/bin/node",
+      "args": [
+        "--import",
+        "tsx",
+        "--test",
+        "--test-concurrency=4",
+        "--test-reporter=tap",
+        "tests/api.test.ts",
+        "tests/audio.test.ts",
+        "tests/campaign-admission.test.ts",
+        "tests/candidate-capital-guard.test.ts",
+        "tests/completion-controls.test.ts",
+        "tests/completion-round-trip.test.ts",
+        "tests/completion-snapshot.test.ts",
+        "tests/conversation-review-http.test.ts",
+        "tests/conversation-review-timeline.test.ts",
+        "tests/conversation-review.test.ts",
+        "tests/database-scope-latency.test.ts",
+        "tests/deployment.test.ts",
+        "tests/domain.test.ts",
+        "tests/engine-capital-guard.test.ts",
+        "tests/engine-completion-snapshot.test.ts",
+        "tests/engine-dispatch-coordinator.test.ts",
+        "tests/engine-financial-contract.test.ts",
+        "tests/engine-memory-reply.test.ts",
+        "tests/engine-question-reply.test.ts",
+        "tests/engine-timings.test.ts",
+        "tests/engine.test.ts",
+        "tests/financial-reply-security.test.ts",
+        "tests/financial-reply.test.ts",
+        "tests/financial-version.test.ts",
+        "tests/integrations.test.ts",
+        "tests/knowledge-valid-at.test.ts",
+        "tests/knowledge.test.ts",
+        "tests/lab-budget.test.ts",
+        "tests/lab-config.test.ts",
+        "tests/lab-dispatch-recovery.test.ts",
+        "tests/lab-evaluation-sessions.test.ts",
+        "tests/lab-queue-latency.test.ts",
+        "tests/lab-send-snapshot.test.ts",
+        "tests/lab-sessions.test.ts",
+        "tests/laboratory-dispatch.test.ts",
+        "tests/latency-engine.test.ts",
+        "tests/memory-reply.test.ts",
+        "tests/migration-ledger.test.ts",
+        "tests/migration-runner.test.ts",
+        "tests/n8n-conversation-history.test.ts",
+        "tests/n8n-financial-contract.test.ts",
+        "tests/n8n-timings.test.ts",
+        "tests/operations.test.ts",
+        "tests/persist-lead-memory.test.ts",
+        "tests/persistence.test.ts",
+        "tests/preflight-round-trip.test.ts",
+        "tests/preflight.test.ts",
+        "tests/prepare-read-batch.test.ts",
+        "tests/private-schema.test.ts",
+        "tests/question-reply.test.ts",
+        "tests/recovery.test.ts",
+        "tests/runtime-role.test.ts",
+        "tests/security.test.ts",
+        "tests/sprint2-acceptance.test.ts",
+        "tests/turns.test.ts",
+        "tests/versioning.test.ts",
+        "tests/webhooks.test.ts"
+      ],
+      "cwd": "/tmp/sapore-s4-admission-runtime-3C62TY/sapore-sdr",
+      "startedAt": "2026-09-14T04:31:49.588Z",
+      "finishedAt": "2026-09-14T04:33:53.022Z",
+      "exitCode": 0,
+      "signal": null,
+      "durationMs": 123435.937792,
+      "stdout": {
+        "path": "/tmp/sapore-s4-admission-verify-kAJKEs/tests.tap",
+        "sha256": "d90613fbc400045107010c90971111cf4949948f4c61af43fe4b8877a17a9741"
+      },
+      "stderr": {
+        "path": "/tmp/sapore-s4-admission-verify-kAJKEs/tests.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "terminal": true,
+  "limitations": [
+    "local verification only; no image, deployment or model execution",
+    "node_modules reused from the existing workspace; no install performed",
+    "child environment allowlisted; no claim of OS network isolation"
+  ],
+  "package": {
+    "directory": "/tmp/sapore-s4-admission-runtime-3C62TY",
+    "root": "/tmp/sapore-s4-admission-runtime-3C62TY/sapore-sdr",
+    "archive": "/tmp/sapore-s4-admission-runtime-3C62TY/backend-admission-runtime.tar.gz",
+    "archiveSha256": "7f7f9610b5fda819625b4a6bd97f5f503c4f60d481840db17b8caad9c283e7c7",
+    "manifestPath": "/tmp/sapore-s4-admission-runtime-3C62TY/manifest.json",
+    "manifestSha256": "fb15e6233977b0fa1bb37137222e6e62dc3da7214f69c1c0341568653d250bbb",
+    "sumsPath": "/tmp/sapore-s4-admission-runtime-3C62TY/SOURCE-SHA256SUMS",
+    "sumsSha256": "5e4806e789a80156a156141c328105d57188758b0d66ededcca6dec05007655b",
+    "fileCount": 131,
+    "changed": [
+      "src/campaign-admission.spec.ts",
+      "src/lab-sessions.ts",
+      "src/laboratory-dispatch.spec.ts",
+      "src/laboratory-dispatch.ts",
+      "tests/campaign-admission.test.ts"
+    ],
+    "baselineDirectory": "/tmp/sapore-s4-review-4pHlVN",
+    "baselineArchive": "/tmp/sapore-s4-review-4pHlVN/backend-human-review.tar.gz",
+    "baselineManifestPath": "/tmp/sapore-s4-review-4pHlVN/manifest.json"
+  },
+  "baselineArchiveCheck": {
+    "path": "/tmp/sapore-s4-admission-verify-kAJKEs/r9-baseline-content-check.json",
+    "sha256": "738166788692f2d29c768b10a686f73b259755d546f738e00265ae93e94b8453"
+  },
+  "packageArchiveCheck": {
+    "path": "/tmp/sapore-s4-admission-verify-kAJKEs/candidate-content-check.json",
+    "sha256": "ebc234adde913313081f9270cceb6a33b978e49ca0d8fbc90f3239f3b4d5a30d"
+  },
+  "dependencies": {
+    "path": "/tmp/sapore-s4-admission-verify-kAJKEs/local-dependencies.json",
+    "sha256": "bb2a4d054ad48138d75f648d8b2fcff2506e6425150a6bf828cbc2d478baa2c4"
+  },
+  "dependencyCount": 412,
+  "privateCampaignToolingExcluded": true,
+  "secretPathsExcluded": true,
+  "testFiles": 57,
+  "results": {
+    "tests": 314,
+    "passed": 314,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "durationMs": 123385.376625
+  },
+  "manifestStableAfterRun": true,
+  "reviewedWorkspaceStableAfterRun": true,
+  "status": "passed",
+  "finishedAt": "2026-09-14T04:33:53.076Z",
+  "helpers": {
+    "path": "/tmp/sapore-s4-admission-verify-kAJKEs/helper-hashes.json",
+    "sha256": "cece8996baea040b2a1bfed4eb7c3a04df34c6c30cc4f763342f4af9d2c29992"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "observedAt": "2026-09-14T00:25:40.081Z",
+  "container": "sapore-s4-r8-regression-20260914",
+  "state": {
+    "Status": "exited",
+    "Running": false,
+    "Paused": false,
+    "Restarting": false,
+    "OOMKilled": false,
+    "Dead": false,
+    "Pid": 0,
+    "ExitCode": 0,
+    "Error": "",
+    "StartedAt": "2026-09-14T00:16:13.062081553Z",
+    "FinishedAt": "2026-09-14T00:23:48.021082627Z"
+  },
+  "image": "sapore-sdr:sprint4-ack-recovery-20260914-r8",
+  "imageId": "sha256:d41eb3acb91ce49810d93787bb9716d1381f4d08f9c418e54e2a4020f167a46a",
+  "tapSha256": "9e965cd4213b04e76e5a95ac7278b5245d5fa2bdcd11cac83c92fa055a353515",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "tests": 284,
+  "passed": 284,
+  "failed": 0,
+  "cancelled": 0,
+  "skipped": 0,
+  "durationMs": 454736.50571,
+  "network": "none",
+  "paidCalls": 0,
+  "note": "Observed terminal image regression, not an authenticated product or latency acceptance test."
+}

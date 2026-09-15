@@ -1,0 +1,166 @@
+{
+  "project": "xxvfuyydhfijhudtytsk",
+  "scope": {
+    "tenantId": "cognita-homologacao",
+    "brandId": "sapore"
+  },
+  "queryMode": "BEGIN TRANSACTION READ ONLY",
+  "audits": {
+    "beforeStop": {
+      "observed_at": "2026-09-14 04:44:44.359676+00",
+      "memberships": [
+        {
+          "role": "reviewer",
+          "active": true,
+          "user_id": "4b05a4f0-9d1b-43d5-a3e7-f223d67cb816",
+          "last_sign_in_at": "2026-09-10T21:52:36.865085+00:00"
+        },
+        {
+          "role": "admin",
+          "active": true,
+          "user_id": "fbe8eabe-1907-412a-acb2-d14891d4f9a0",
+          "last_sign_in_at": "2026-09-11T15:17:45.176382+00:00"
+        }
+      ],
+      "current_gate": {
+        "settled": 31,
+        "reservations": 31,
+        "accounted_micro_usd": 359814,
+        "remaining_micro_usd": 640186,
+        "unsettled_or_unknown": 0
+      },
+      "unsettled_all_gates": 0,
+      "active_or_unknown_jobs": 0,
+      "enabled_channels": 0,
+      "deliveries": 0,
+      "human_reviews": 0,
+      "financial_versions": 0,
+      "drafts": 0,
+      "validation_runs": 0,
+      "publications": 0,
+      "active_version": [
+        {
+          "hash": "a1a330f07cd0efc5bf2193c57e7a7c12c09b4c8518c524d0b36d4c6e026c1325",
+          "model": "gpt-5.4-2026-03-05",
+          "version_id": "sapore-v1-a1a330f07cd0",
+          "output_contract": null
+        }
+      ]
+    },
+    "afterStop": {
+      "observed_at": "2026-09-14 04:45:04.252797+00",
+      "memberships": [
+        {
+          "role": "reviewer",
+          "active": true,
+          "user_id": "4b05a4f0-9d1b-43d5-a3e7-f223d67cb816",
+          "last_sign_in_at": "2026-09-10T21:52:36.865085+00:00"
+        },
+        {
+          "role": "admin",
+          "active": true,
+          "user_id": "fbe8eabe-1907-412a-acb2-d14891d4f9a0",
+          "last_sign_in_at": "2026-09-11T15:17:45.176382+00:00"
+        }
+      ],
+      "current_gate": {
+        "settled": 31,
+        "reservations": 31,
+        "accounted_micro_usd": 359814,
+        "remaining_micro_usd": 640186,
+        "unsettled_or_unknown": 0
+      },
+      "unsettled_all_gates": 0,
+      "active_or_unknown_jobs": 0,
+      "enabled_channels": 0,
+      "deliveries": 0,
+      "human_reviews": 0,
+      "financial_versions": 0,
+      "drafts": 0,
+      "validation_runs": 0,
+      "publications": 0,
+      "active_version": [
+        {
+          "hash": "a1a330f07cd0efc5bf2193c57e7a7c12c09b4c8518c524d0b36d4c6e026c1325",
+          "model": "gpt-5.4-2026-03-05",
+          "version_id": "sapore-v1-a1a330f07cd0",
+          "output_contract": null
+        }
+      ]
+    },
+    "afterDeploy": {
+      "observed_at": "2026-09-14 04:46:20.034637+00",
+      "memberships": [
+        {
+          "role": "reviewer",
+          "active": true,
+          "user_id": "4b05a4f0-9d1b-43d5-a3e7-f223d67cb816",
+          "last_sign_in_at": "2026-09-10T21:52:36.865085+00:00"
+        },
+        {
+          "role": "admin",
+          "active": true,
+          "user_id": "fbe8eabe-1907-412a-acb2-d14891d4f9a0",
+          "last_sign_in_at": "2026-09-11T15:17:45.176382+00:00"
+        }
+      ],
+      "current_gate": {
+        "settled": 31,
+        "reservations": 31,
+        "accounted_micro_usd": 359814,
+        "remaining_micro_usd": 640186,
+        "unsettled_or_unknown": 0
+      },
+      "unsettled_all_gates": 0,
+      "active_or_unknown_jobs": 0,
+      "enabled_channels": 0,
+      "deliveries": 0,
+      "human_reviews": 0,
+      "financial_versions": 0,
+      "drafts": 0,
+      "validation_runs": 0,
+      "publications": 0,
+      "active_version": [
+        {
+          "hash": "a1a330f07cd0efc5bf2193c57e7a7c12c09b4c8518c524d0b36d4c6e026c1325",
+          "model": "gpt-5.4-2026-03-05",
+          "version_id": "sapore-v1-a1a330f07cd0",
+          "output_contract": null
+        }
+      ]
+    }
+  },
+  "stop": {
+    "initial": {
+      "chunk_id": "cee8bd",
+      "wall_time_seconds": 1.003573083,
+      "session_id": 54118,
+      "original_token_count": 18,
+      "output": "Flag --time has been deprecated, use --timeout instead\nsapore-sdr-api-1\n"
+    },
+    "terminal": {
+      "chunk_id": "e92c01",
+      "wall_time_seconds": 0.000174959,
+      "exit_code": 0,
+      "original_token_count": 5,
+      "output": "sapore-sdr-worker-1\n"
+    }
+  },
+  "activate": {
+    "chunk_id": "6653d3",
+    "wall_time_seconds": 0.936779875,
+    "exit_code": 0,
+    "original_token_count": 198,
+    "output": " Container sapore-sdr-worker-1 Recreate \n Container sapore-sdr-api-1 Recreate \n Container sapore-sdr-worker-1 Recreated \n Container sapore-sdr-api-1 Recreated \n Container sapore-sdr-api-1 Starting \n Container sapore-sdr-worker-1 Starting \n/sapore-sdr-api-1 7b33450ef41e63d0d6ca4face08cf90e27c8dbb010db25de6ba879e5725c4412 sha256:cff18e63267fd088a36079347c62d6e928d4be478d83b9cdf456109aa3bf395c sapore-sdr:sprint4-admission-20260914-r10 running 2026-09-14T04:45:14.719911522Z\n/sapore-sdr-worker-1 8942ce0e74ba4c30edd4762608544852916a2cd39a5f05e128acfbd24aabc154 sha256:cff18e63267fd088a36079347c62d6e928d4be478d83b9cdf456109aa3bf395c sapore-sdr:sprint4-admission-20260914-r10 running 2026-09-14T04:45:14.717204586Z\n Container sapore-sdr-worker-1 Started \n Container sapore-sdr-api-1 Started \n"
+  },
+  "preflight": {
+    "configurationMatchesApi": true,
+    "configurationMatchesWorker": true,
+    "gate": "sprint3-continuous-20260910",
+    "limit": "1000000",
+    "image": "sha256:cff18e63267fd088a36079347c62d6e928d4be478d83b9cdf456109aa3bf395c",
+    "rollbackImage": "sha256:3e2c5c7f43b79231fb24c2913e37abea82d40e17408858065f1d54ebe99b19ce",
+    "script": "/tmp/sapore-s4-r10-preflight.sh",
+    "exitCode": 0
+  }
+}

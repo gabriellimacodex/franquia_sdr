@@ -1,0 +1,928 @@
+TAP version 13
+# Subtest: login uses a bounded composition and an explicit readable brand headline
+ok 1 - login uses a bounded composition and an explicit readable brand headline
+  ---
+  duration_ms: 6.976417
+  type: 'test'
+  ...
+# Subtest: sidebar reserves viewport space for logout and scrolls only the page navigation
+ok 2 - sidebar reserves viewport space for logout and scrolls only the page navigation
+  ---
+  duration_ms: 1.24875
+  type: 'test'
+  ...
+# Subtest: sidebar logout closes navigation and requires demo login before returning
+ok 3 - sidebar logout closes navigation and requires demo login before returning
+  ---
+  duration_ms: 6.828
+  type: 'test'
+  ...
+# Subtest: access administration and full screen login are reachable without replacing the existing home
+ok 4 - access administration and full screen login are reachable without replacing the existing home
+  ---
+  duration_ms: 1.94875
+  type: 'test'
+  ...
+# Subtest: access screens expose login, recovery, invitation, permission preview and audit without sending email
+ok 5 - access screens expose login, recovery, invitation, permission preview and audit without sending email
+  ---
+  duration_ms: 1.11675
+  type: 'test'
+  ...
+# Subtest: login uses only the documented fictional credential, not invitation email addresses
+ok 6 - login uses only the documented fictional credential, not invitation email addresses
+  ---
+  duration_ms: 143.061667
+  type: 'test'
+  ...
+# Subtest: invitations normalize emails, reject duplicates and changes preserve the current administrator
+ok 7 - invitations normalize emails, reject duplicates and changes preserve the current administrator
+  ---
+  duration_ms: 1.466375
+  type: 'test'
+  ...
+# Subtest: demo profiles separate agent editing from publication and deny suspended users
+ok 8 - demo profiles separate agent editing from publication and deny suspended users
+  ---
+  duration_ms: 0.133166
+  type: 'test'
+  ...
+# Subtest: the dossier opens a dedicated action plan creation screen
+ok 9 - the dossier opens a dedicated action plan creation screen
+  ---
+  duration_ms: 6.929666
+  type: 'test'
+  ...
+# Subtest: a saved action plan appears in the dossier with progress context
+ok 10 - a saved action plan appears in the dossier with progress context
+  ---
+  duration_ms: 3.088417
+  type: 'test'
+  ...
+# Subtest: editing reopens the saved action plan values
+ok 11 - editing reopens the saved action plan values
+  ---
+  duration_ms: 3.668916
+  type: 'test'
+  ...
+# Subtest: the candidates page opens a dedicated candidate creation form
+ok 12 - the candidates page opens a dedicated candidate creation form
+  ---
+  duration_ms: 5.976959
+  type: 'test'
+  ...
+# Subtest: submitting the form adds the candidate to the local candidate list
+ok 13 - submitting the form adds the candidate to the local candidate list
+  ---
+  duration_ms: 2.538417
+  type: 'test'
+  ...
+# Subtest: the form actions stay in document flow without covering fields
+ok 14 - the form actions stay in document flow without covering fields
+  ---
+  duration_ms: 0.97375
+  type: 'test'
+  ...
+# Subtest: the dossier opens a dedicated evidence creation screen
+ok 15 - the dossier opens a dedicated evidence creation screen
+  ---
+  duration_ms: 4.158292
+  type: 'test'
+  ...
+# Subtest: a saved evidence appears in the dossier evidence matrix for review
+ok 16 - a saved evidence appears in the dossier evidence matrix for review
+  ---
+  duration_ms: 2.125083
+  type: 'test'
+  ...
+# Subtest: agenda editing contains keyboard focus and protects unsaved changes
+ok 17 - agenda editing contains keyboard focus and protects unsaved changes
+  ---
+  duration_ms: 4.117
+  type: 'test'
+  ...
+# Subtest: saving a next step rejects incomplete data and preserves other meeting notes
+ok 18 - saving a next step rejects incomplete data and preserves other meeting notes
+  ---
+  duration_ms: 48.437667
+  type: 'test'
+  ...
+# Subtest: meeting guidance follows status without inventing a result or consent
+ok 19 - meeting guidance follows status without inventing a result or consent
+  ---
+  duration_ms: 0.178917
+  type: 'test'
+  ...
+# Subtest: configuration provides traceable sources and three isolated fictitious candidates
+ok 20 - configuration provides traceable sources and three isolated fictitious candidates
+  ---
+  duration_ms: 49.261708
+  type: 'test'
+  ...
+# Subtest: unsaved incomplete or invalid sources cannot enter retrieved context
+ok 21 - unsaved incomplete or invalid sources cannot enter retrieved context
+  ---
+  duration_ms: 11.339292
+  type: 'test'
+  ...
+# Subtest: territory context follows the current allowed city fact, never stale candidate metadata
+ok 22 - territory context follows the current allowed city fact, never stale candidate metadata
+  ---
+  duration_ms: 0.638291
+  type: 'test'
+  ...
+# Subtest: publication requires a valid saved configuration and latest passing run of every scenario
+ok 23 - publication requires a valid saved configuration and latest passing run of every scenario
+  ---
+  duration_ms: 15.626417
+  type: 'test'
+  ...
+# Subtest: document instructions remain retrieved data and disabled sources are excluded without changing drafts
+ok 24 - document instructions remain retrieved data and disabled sources are excluded without changing drafts
+  ---
+  duration_ms: 17.752291
+  type: 'test'
+  ...
+# Subtest: isolation scenario rejects foreign facts while preserving the original memory
+ok 25 - isolation scenario rejects foreign facts while preserving the original memory
+  ---
+  duration_ms: 4.329667
+  type: 'test'
+  ...
+# Subtest: human request and active handoff halt automated tools even with tampered rules
+ok 26 - human request and active handoff halt automated tools even with tampered rules
+  ---
+  duration_ms: 1.509125
+  type: 'test'
+  ...
+# Subtest: territory expiration fixture respects configured sources and never grants availability
+ok 27 - territory expiration fixture respects configured sources and never grants availability
+  ---
+  duration_ms: 2.476708
+  type: 'test'
+  ...
+# Subtest: partner conflict keeps both claims unconfirmed and follows the configured review rule
+ok 28 - partner conflict keeps both claims unconfirmed and follows the configured review rule
+  ---
+  duration_ms: 1.165208
+  type: 'test'
+  ...
+# Subtest: investment correction proposes a traceable declaration, preserves history and honors write permissions
+ok 29 - investment correction proposes a traceable declaration, preserves history and honors write permissions
+  ---
+  duration_ms: 1.864875
+  type: 'test'
+  ...
+# Subtest: resume selects an unanswered permitted topic and records the exact configuration
+ok 30 - resume selects an unanswered permitted topic and records the exact configuration
+  ---
+  duration_ms: 0.796125
+  type: 'test'
+  ...
+# Subtest: human fact decisions preserve old declarations and append auditable events without mutation
+ok 31 - human fact decisions preserve old declarations and append auditable events without mutation
+  ---
+  duration_ms: 0.507292
+  type: 'test'
+  ...
+# Subtest: context isolates candidate data, applies field allowlist and excludes ineligible sources
+ok 32 - context isolates candidate data, applies field allowlist and excludes ineligible sources
+  ---
+  duration_ms: 0.494333
+  type: 'test'
+  ...
+# Subtest: knowledge catalog separates document references and structured queries with provenance
+ok 33 - knowledge catalog separates document references and structured queries with provenance
+  ---
+  duration_ms: 21.794959
+  type: 'test'
+  ...
+# Subtest: rules panel distinguishes locked controls from tool permissions and simulated effects
+ok 34 - rules panel distinguishes locked controls from tool permissions and simulated effects
+  ---
+  duration_ms: 5.206583
+  type: 'test'
+  ...
+# Subtest: memory explorer exposes allowlist, provenance, preserved revisions and scoped context
+ok 35 - memory explorer exposes allowlist, provenance, preserved revisions and scoped context
+  ---
+  duration_ms: 12.30175
+  type: 'test'
+  ...
+# Subtest: panels render actual candidate context and edits emit immutable versioned configuration
+ok 36 - panels render actual candidate context and edits emit immutable versioned configuration
+  ---
+  duration_ms: 487.84025
+  type: 'test'
+  ...
+# Subtest: commercial instructions remain editable independently of protected action rules
+ok 37 - commercial instructions remain editable independently of protected action rules
+  ---
+  duration_ms: 146.001583
+  type: 'test'
+  ...
+# Subtest: editing an approved source requires reapproval but enabling it does not revoke approval
+ok 38 - editing an approved source requires reapproval but enabling it does not revoke approval
+  ---
+  duration_ms: 132.96375
+  type: 'test'
+  ...
+# Subtest: agent builder offers six technical sections and an explicitly local laboratory
+ok 39 - agent builder offers six technical sections and an explicitly local laboratory
+  ---
+  duration_ms: 4.789333
+  type: 'test'
+  ...
+# Subtest: editing sandbox memory clears individual results without changing reference-suite evidence
+ok 40 - editing sandbox memory clears individual results without changing reference-suite evidence
+  ---
+  duration_ms: 0.85525
+  type: 'test'
+  ...
+# Subtest: publication checklist communicates pending status without relying on icons
+ok 41 - publication checklist communicates pending status without relying on icons
+  ---
+  duration_ms: 1.338208
+  type: 'test'
+  ...
+# Subtest: live agent test embeds the homologation chat and keeps evaluation notes separate
+ok 42 - live agent test embeds the homologation chat and keeps evaluation notes separate
+  ---
+  duration_ms: 3.276667
+  type: 'test'
+  ...
+# Subtest: live agent test is exposed as an independent demonstration page
+ok 43 - live agent test is exposed as an independent demonstration page
+  ---
+  duration_ms: 1.212792
+  type: 'test'
+  ...
+# Subtest: live agent test carries a scoped Sapore visual identity
+ok 44 - live agent test carries a scoped Sapore visual identity
+  ---
+  duration_ms: 4.431333
+  type: 'test'
+  ...
+# Subtest: memory diagnostics point to the policy and check comparison matches labels, not positions
+ok 45 - memory diagnostics point to the policy and check comparison matches labels, not positions
+  ---
+  duration_ms: 7.710542
+  type: 'test'
+  ...
+# Subtest: diagnostics link a denied write to its permission without recommending changes to successful guardrails
+ok 46 - diagnostics link a denied write to its permission without recommending changes to successful guardrails
+  ---
+  duration_ms: 1.3835
+  type: 'test'
+  ...
+# Subtest: interactive button labels keep readable contrast and type sizes
+ok 47 - interactive button labels keep readable contrast and type sizes
+  ---
+  duration_ms: 4.326583
+  type: 'test'
+  ...
+# Subtest: all dossiers share the reference header and summary card hierarchy
+ok 48 - all dossiers share the reference header and summary card hierarchy
+  ---
+  duration_ms: 26.129917
+  type: 'test'
+  ...
+# Subtest: rendered dossier isolates candidate identity, score and meeting history in every tab
+ok 49 - rendered dossier isolates candidate identity, score and meeting history in every tab
+  ---
+  duration_ms: 328.746834
+  type: 'test'
+  ...
+# Subtest: attention and conversation links preserve the candidate instead of defaulting to Mariana
+ok 50 - attention and conversation links preserve the candidate instead of defaulting to Mariana
+  ---
+  duration_ms: 1.133416
+  type: 'test'
+  ...
+# Subtest: candidate clicks carry their ID and dossier resolves the selected record without a default fallback
+ok 51 - candidate clicks carry their ID and dossier resolves the selected record without a default fallback
+  ---
+  duration_ms: 1.204375
+  type: 'test'
+  ...
+# Subtest: review loads the canonical whole conversation without briefing, with four unselected criteria and explicit limitations
+ok 52 - review loads the canonical whole conversation without briefing, with four unselected criteria and explicit limitations
+  ---
+  duration_ms: 415.800083
+  type: 'test'
+  ...
+# Subtest: saving requires four choices and notes, posts only the bound contract once and shows the persisted human record after reopening
+ok 53 - saving requires four choices and notes, posts only the bound contract once and shows the persisted human record after reopening
+  ---
+  duration_ms: 267.06925
+  type: 'test'
+  ...
+# Subtest: switching the selected job cancels stale reads and never displays or submits a late target from the prior job
+ok 54 - switching the selected job cancels stale reads and never displays or submits a late target from the prior job
+  ---
+  duration_ms: 87.744958
+  type: 'test'
+  ...
+# Subtest: changing conversation while a POST is pending discards late success and old form handlers
+ok 55 - changing conversation while a POST is pending discards late success and old form handlers
+  ---
+  duration_ms: 119.574709
+  type: 'test'
+  ...
+# Subtest: an ambiguous write freezes the original scores and retries only manually with the same idempotency key and payload
+ok 56 - an ambiguous write freezes the original scores and retries only manually with the same idempotency key and payload
+  ---
+  duration_ms: 73.924416
+  type: 'test'
+  ...
+# Subtest: malformed or cross-scope target/history payloads are rejected without rendering private content or enabling a write
+ok 57 - malformed or cross-scope target/history payloads are rejected without rendering private content or enabling a write
+  ---
+  duration_ms: 442.666292
+  type: 'test'
+  ...
+# Subtest: a successful HTTP response cannot confirm a different target or ratings, or a malformed review record
+ok 58 - a successful HTTP response cannot confirm a different target or ratings, or a malformed review record
+  ---
+  duration_ms: 206.011042
+  type: 'test'
+  ...
+# Subtest: the pre-turn memory projection renders attribution, uncertainty, corrections and evidence without private context
+ok 59 - the pre-turn memory projection renders attribution, uncertainty, corrections and evidence without private context
+  ---
+  duration_ms: 125.467416
+  type: 'test'
+  ...
+# Subtest: the actual Evaluate tab defaults to Sprint 4 and keeps the old briefing rubric as an explicit separate mode
+ok 60 - the actual Evaluate tab defaults to Sprint 4 and keeps the old briefing rubric as an explicit separate mode
+  ---
+  duration_ms: 630.600375
+  type: 'test'
+  ...
+# Subtest: a failed evidence read has an honest message and manual reload, without claiming past reviews do not exist
+ok 61 - a failed evidence read has an honest message and manual reload, without claiming past reviews do not exist
+  ---
+  duration_ms: 213.910583
+  type: 'test'
+  ...
+# Subtest: backend limitation codes are explained in Portuguese without losing their original identifiers
+ok 62 - backend limitation codes are explained in Portuguese without losing their original identifiers
+  ---
+  duration_ms: 48.389292
+  type: 'test'
+  ...
+# Subtest: review API errors explain changed and incomplete evidence without falsely claiming a review already exists
+ok 63 - review API errors explain changed and incomplete evidence without falsely claiming a review already exists
+  ---
+  duration_ms: 52.153167
+  type: 'test'
+  ...
+# Subtest: local diagnostics evaluate mappings and keep source-data errors blocked on retries
+ok 64 - local diagnostics evaluate mappings and keep source-data errors blocked on retries
+  ---
+  duration_ms: 32.842167
+  type: 'test'
+  ...
+# Subtest: CRM mappings reject missing required fields and duplicate destinations
+ok 65 - CRM mappings reject missing required fields and duplicate destinations
+  ---
+  duration_ms: 11.218833
+  type: 'test'
+  ...
+# Subtest: pending reviews open a dedicated operational decision center
+ok 66 - pending reviews open a dedicated operational decision center
+  ---
+  duration_ms: 12.356875
+  type: 'test'
+  ...
+# Subtest: territories open a full operational plaza record
+ok 67 - territories open a full operational plaza record
+  ---
+  duration_ms: 9.275708
+  type: 'test'
+  ...
+# Subtest: territory ranking lets operators select two or three plazas to compare
+ok 68 - territory ranking lets operators select two or three plazas to compare
+  ---
+  duration_ms: 3.9365
+  type: 'test'
+  ...
+# Subtest: comparison page explains the differences and recommends a plaza
+ok 69 - comparison page explains the differences and recommends a plaza
+  ---
+  duration_ms: 2.070333
+  type: 'test'
+  ...
+# Subtest: the dropdown is not clipped by the dossier card
+ok 70 - the dropdown is not clipped by the dossier card
+  ---
+  duration_ms: 43.768
+  type: 'test'
+  ...
+# Subtest: the dossier overflow button is wired to the current dossier flows
+ok 71 - the dossier overflow button is wired to the current dossier flows
+  ---
+  duration_ms: 19.81825
+  type: 'test'
+  ...
+# Subtest: dossier actions call the existing flows and distinguish a saved plan
+ok 72 - dossier actions call the existing flows and distinguish a saved plan
+  ---
+  duration_ms: 215.314125
+  type: 'test'
+  ...
+# Subtest: the dossier uses the available width without an oversized empty column
+ok 73 - the dossier uses the available width without an oversized empty column
+  ---
+  duration_ms: 4.604209
+  type: 'test'
+  ...
+# Subtest: the dossier tabs scroll inside the viewport instead of widening the page
+ok 74 - the dossier tabs scroll inside the viewport instead of widening the page
+  ---
+  duration_ms: 1.727917
+  type: 'test'
+  ...
+# Subtest: missing scores and full meeting dates do not use narrow numeric columns
+ok 75 - missing scores and full meeting dates do not use narrow numeric columns
+  ---
+  duration_ms: 5.286708
+  type: 'test'
+  ...
+# Subtest: the dossier summary exposes gaps, next action and operational facts
+ok 76 - the dossier summary exposes gaps, next action and operational facts
+  ---
+  duration_ms: 2.812792
+  type: 'test'
+  ...
+# Subtest: the dossier conversation tab exposes the complete interaction and reply composer
+ok 77 - the dossier conversation tab exposes the complete interaction and reply composer
+  ---
+  duration_ms: 1.443792
+  type: 'test'
+  ...
+# Subtest: the dossier evidence tab connects every finding to source and score dimension
+ok 78 - the dossier evidence tab connects every finding to source and score dimension
+  ---
+  duration_ms: 0.903959
+  type: 'test'
+  ...
+# Subtest: the dossier activity tab provides a filterable audit trail
+ok 79 - the dossier activity tab provides a filterable audit trail
+  ---
+  duration_ms: 1.51025
+  type: 'test'
+  ...
+# Subtest: the dossier privacy tab makes consent, retention, access and requests actionable
+ok 80 - the dossier privacy tab makes consent, retention, access and requests actionable
+  ---
+  duration_ms: 0.836667
+  type: 'test'
+  ...
+# Subtest: the pending product areas expose their interactive local workflows
+ok 81 - the pending product areas expose their interactive local workflows
+  ---
+  duration_ms: 2.93525
+  type: 'test'
+  ...
+# Subtest: overview opens a dedicated complete agenda using existing meeting records
+ok 82 - overview opens a dedicated complete agenda using existing meeting records
+  ---
+  duration_ms: 9.405542
+  type: 'test'
+  ...
+# Subtest: the commercial funnel opens a dedicated analysis page
+ok 83 - the commercial funnel opens a dedicated analysis page
+  ---
+  duration_ms: 3.930209
+  type: 'test'
+  ...
+# Subtest: the analysis explains stage performance, trends, sources and the next action
+ok 84 - the analysis explains stage performance, trends, sources and the next action
+  ---
+  duration_ms: 4.280792
+  type: 'test'
+  ...
+# Subtest: changing pages restores the reading position to the top
+ok 85 - changing pages restores the reading position to the top
+  ---
+  duration_ms: 3.193084
+  type: 'test'
+  ...
+# Subtest: help opens from the sidebar with its origin and a dedicated screen
+ok 86 - help opens from the sidebar with its origin and a dedicated screen
+  ---
+  duration_ms: 7.821084
+  type: 'test'
+  ...
+# Subtest: help search matches accents, article bodies and category together
+ok 87 - help search matches accents, article bodies and category together
+  ---
+  duration_ms: 55.658125
+  type: 'test'
+  ...
+# Subtest: integration identities use local official logos and neutral icons for unspecified providers
+ok 88 - integration identities use local official logos and neutral icons for unspecified providers
+  ---
+  duration_ms: 19.158667
+  type: 'test'
+  ...
+# Subtest: reviewed candidate score is reflected in shared meeting records
+ok 89 - reviewed candidate score is reflected in shared meeting records
+  ---
+  duration_ms: 5.642792
+  type: 'test'
+  ...
+# Subtest: meeting filters use actual dates, owner and city together
+ok 90 - meeting filters use actual dates, owner and city together
+  ---
+  duration_ms: 267.614875
+  type: 'test'
+  ...
+# Subtest: dashboard, agenda and meetings receive the same session records
+ok 91 - dashboard, agenda and meetings receive the same session records
+  ---
+  duration_ms: 16.407667
+  type: 'test'
+  ...
+# Subtest: invalid or duplicate appointments are rejected without changing records
+ok 92 - invalid or duplicate appointments are rejected without changing records
+  ---
+  duration_ms: 9.277458
+  type: 'test'
+  ...
+# Subtest: creating a meeting preserves candidate context, chosen date and existing records
+ok 93 - creating a meeting preserves candidate context, chosen date and existing records
+  ---
+  duration_ms: 0.549209
+  type: 'test'
+  ...
+# Subtest: the prototype contains the complete cross-screen meeting workflow
+ok 94 - the prototype contains the complete cross-screen meeting workflow
+  ---
+  duration_ms: 4.682459
+  type: 'test'
+  ...
+# Subtest: the header bell opens a dedicated notification center
+ok 95 - the header bell opens a dedicated notification center
+  ---
+  duration_ms: 4.087917
+  type: 'test'
+  ...
+# Subtest: notifications can be filtered, read and opened in their operational context
+ok 96 - notifications can be filtered, read and opened in their operational context
+  ---
+  duration_ms: 1.74125
+  type: 'test'
+  ...
+# Subtest: optional D1 rejects an absent binding and passes a provided binding unchanged
+ok 97 - optional D1 rejects an absent binding and passes a provided binding unchanged
+  ---
+  duration_ms: 45.111458
+  type: 'test'
+  ...
+# Subtest: tester entry explains fresh memory and offers free conversation without technical controls
+ok 98 - tester entry explains fresh memory and offers free conversation without technical controls
+  ---
+  duration_ms: 374.797042
+  type: 'test'
+  ...
+# Subtest: laboratory polling is fast only for a live job and backs off when idle, hidden or expired
+ok 99 - laboratory polling is fast only for a live job and backs off when idle, hidden or expired
+  ---
+  duration_ms: 130.884333
+  type: 'test'
+  ...
+# Subtest: laboratory pause errors describe the action without claiming an evaluation was saved
+ok 100 - laboratory pause errors describe the action without claiming an evaluation was saved
+  ---
+  duration_ms: 78.458583
+  type: 'test'
+  ...
+# Subtest: a selected seed version does not claim the WhatsApp channel is active
+ok 101 - a selected seed version does not claim the WhatsApp channel is active
+  ---
+  duration_ms: 197.609708
+  type: 'test'
+  ...
+# Subtest: reviewer trace renders scope, correlation, attempts, retrieval and token usage
+ok 102 - reviewer trace renders scope, correlation, attempts, retrieval and token usage
+  ---
+  duration_ms: 89.014042
+  type: 'test'
+  ...
+# Subtest: pilot configuration never exposes a Supabase service-role or unrelated secret
+ok 103 - pilot configuration never exposes a Supabase service-role or unrelated secret
+  ---
+  duration_ms: 2.914666
+  type: 'test'
+  ...
+# Subtest: memory rendering preserves ranges, missing upper bounds and explicit false values
+ok 104 - memory rendering preserves ranges, missing upper bounds and explicit false values
+  ---
+  duration_ms: 8.157917
+  type: 'test'
+  ...
+# Subtest: signing out before a read starts prevents an authenticated request from escaping
+ok 105 - signing out before a read starts prevents an authenticated request from escaping
+  ---
+  duration_ms: 0.447417
+  type: 'test'
+  ...
+# Subtest: signing out discards a conversation response that was still being decoded
+ok 106 - signing out discards a conversation response that was still being decoded
+  ---
+  duration_ms: 0.445542
+  type: 'test'
+  ...
+# Subtest: parallel authenticated reads rotate an expired session once and never put tokens in URLs
+ok 107 - parallel authenticated reads rotate an expired session once and never put tokens in URLs
+  ---
+  duration_ms: 0.697375
+  type: 'test'
+  ...
+# Subtest: authentication rejects malformed JSON sessions and invalid lifetimes without saving or forwarding them
+ok 108 - authentication rejects malformed JSON sessions and invalid lifetimes without saving or forwarding them
+  ---
+  duration_ms: 1.933
+  type: 'test'
+  ...
+# Subtest: password recovery sends only the invited email to the approved published return URL
+ok 109 - password recovery sends only the invited email to the approved published return URL
+  ---
+  duration_ms: 0.297792
+  type: 'test'
+  ...
+# Subtest: password recovery accepts only an explicit recovery fragment without persisting a session
+ok 110 - password recovery accepts only an explicit recovery fragment without persisting a session
+  ---
+  duration_ms: 0.153875
+  type: 'test'
+  ...
+# Subtest: completing recovery updates the password and revokes the temporary recovery session
+ok 111 - completing recovery updates the password and revokes the temporary recovery session
+  ---
+  duration_ms: 0.233834
+  type: 'test'
+  ...
+# Subtest: published laboratory exposes request and completion steps for password recovery
+ok 112 - published laboratory exposes request and completion steps for password recovery
+  ---
+  duration_ms: 1.021875
+  type: 'test'
+  ...
+# Subtest: the prototype exposes the essential Borelli expansion workflows
+ok 113 - the prototype exposes the essential Borelli expansion workflows
+  ---
+  duration_ms: 5.566625
+  type: 'test'
+  ...
+# Subtest: qualification lab makes the test scope and human review visible
+ok 114 - qualification lab makes the test scope and human review visible
+  ---
+  duration_ms: 4.135292
+  type: 'test'
+  ...
+# Subtest: qualification lab is reachable from the demonstration navigation
+ok 115 - qualification lab is reachable from the demonstration navigation
+  ---
+  duration_ms: 1.265875
+  type: 'test'
+  ...
+# Subtest: server-renders the Borelli expansion prototype
+ok 116 - server-renders the Borelli expansion prototype
+  ---
+  duration_ms: 115.624125
+  type: 'test'
+  ...
+# Subtest: keeps metadata and sensitive values suitable for the front-end prototype
+ok 117 - keeps metadata and sensitive values suitable for the front-end prototype
+  ---
+  duration_ms: 43.11525
+  type: 'test'
+  ...
+# Subtest: More opens accessible room options linked to the real side tabs
+ok 118 - More opens accessible room options linked to the real side tabs
+  ---
+  duration_ms: 3.731917
+  type: 'test'
+  ...
+# Subtest: score proposals require an integer range, confidence and rationale
+ok 119 - score proposals require an integer range, confidence and rationale
+  ---
+  duration_ms: 34.031167
+  type: 'test'
+  ...
+# Subtest: territory map uses real geography while keeping the operational workflow accessible
+ok 120 - territory map uses real geography while keeping the operational workflow accessible
+  ---
+  duration_ms: 12.643125
+  type: 'test'
+  ...
+# Subtest: territory map opens focused on the monitored plazas
+ok 121 - territory map opens focused on the monitored plazas
+  ---
+  duration_ms: 1.304708
+  type: 'test'
+  ...
+# Subtest: each monitored plaza stays identifiable without hover
+ok 122 - each monitored plaza stays identifiable without hover
+  ---
+  duration_ms: 1.96525
+  type: 'test'
+  ...
+# Subtest: a state with multiple plazas opens a plaza chooser
+ok 123 - a state with multiple plazas opens a plaza chooser
+  ---
+  duration_ms: 1.421375
+  type: 'test'
+  ...
+# Subtest: territory filters update the map instead of acting as decoration
+ok 124 - territory filters update the map instead of acting as decoration
+  ---
+  duration_ms: 2.36325
+  type: 'test'
+  ...
+# Subtest: map stops an active Leaflet transition before it unmounts
+ok 125 - map stops an active Leaflet transition before it unmounts
+  ---
+  duration_ms: 0.735375
+  type: 'test'
+  ...
+# Subtest: returning to a live chat wakes the hidden timer without an extra read before the response
+ok 126 - returning to a live chat wakes the hidden timer without an extra read before the response
+  ---
+  duration_ms: 270.210125
+  type: 'test'
+  ...
+# Subtest: rapid visibility changes preserve the active cadence and never overlap a slow read
+ok 127 - rapid visibility changes preserve the active cadence and never overlap a slow read
+  ---
+  duration_ms: 46.945125
+  type: 'test'
+  ...
+# Subtest: returning to the tab cannot bypass a failed read cooldown or lose the draft
+ok 128 - returning to the tab cannot bypass a failed read cooldown or lose the draft
+  ---
+  duration_ms: 141.32475
+  type: 'test'
+  ...
+# Subtest: a hidden POST seed retains its full delay and a cancelled wake cannot read after unmount
+ok 129 - a hidden POST seed retains its full delay and a cancelled wake cannot read after unmount
+  ---
+  duration_ms: 72.579833
+  type: 'test'
+  ...
+# Subtest: a job expiring while hidden cannot wake the active cadence on return
+ok 130 - a job expiring while hidden cannot wake the active cadence on return
+  ---
+  duration_ms: 24.764
+  type: 'test'
+  ...
+# Subtest: active polling shows a ready response earlier by counting GET latency within its cadence
+ok 131 - active polling shows a ready response earlier by counting GET latency within its cadence
+  ---
+  duration_ms: 24.970334
+  type: 'test'
+  ...
+# Subtest: a slow active GET never overlaps another and retains at least 500ms before the next read
+ok 132 - a slow active GET never overlaps another and retains at least 500ms before the next read
+  ---
+  duration_ms: 24.59775
+  type: 'test'
+  ...
+# Subtest: fast active responses still make at most 24 polling reads per minute
+ok 133 - fast active responses still make at most 24 polling reads per minute
+  ---
+  duration_ms: 63.661959
+  type: 'test'
+  ...
+# Subtest: an active POST snapshot keeps its full initial polling delay after a slow send
+ok 134 - an active POST snapshot keeps its full initial polling delay after a slow send
+  ---
+  duration_ms: 36.225333
+  type: 'test'
+  ...
+# Subtest: becoming hidden during an active read preserves the full 30s background backoff
+ok 135 - becoming hidden during an active read preserves the full 30s background backoff
+  ---
+  duration_ms: 64.368708
+  type: 'test'
+  ...
+# Subtest: a failed active read including rate limiting keeps the full error backoff and draft
+ok 136 - a failed active read including rate limiting keeps the full error backoff and draft
+  ---
+  duration_ms: 44.043125
+  type: 'test'
+  ...
+# Subtest: slow idle, completed and expired snapshots do not have latency subtracted from their 15s delay
+ok 137 - slow idle, completed and expired snapshots do not have latency subtracted from their 15s delay
+  ---
+  duration_ms: 68.374917
+  type: 'test'
+  ...
+# Subtest: switching sessions aborts a slow poll and rejects its late state without losing the new draft
+ok 138 - switching sessions aborts a slow poll and rejects its late state without losing the new draft
+  ---
+  duration_ms: 19.757292
+  type: 'test'
+  ...
+# Subtest: the compensated active poll applies a human pause to chat and sidebar while preserving the draft
+ok 139 - the compensated active poll applies a human pause to chat and sidebar while preserving the draft
+  ---
+  duration_ms: 23.6975
+  type: 'test'
+  ...
+# Subtest: send uses the authorized snapshot without a redundant list or detail GET
+ok 140 - send uses the authorized snapshot without a redundant list or detail GET
+  ---
+  duration_ms: 107.325708
+  type: 'test'
+  ...
+# Subtest: legacy send response falls back to only its own detail while preserving request id
+ok 141 - legacy send response falls back to only its own detail while preserving request id
+  ---
+  duration_ms: 41.25875
+  type: 'test'
+  ...
+# Subtest: workspace applies a send snapshot immediately without reloading sessions or details
+ok 142 - workspace applies a send snapshot immediately without reloading sessions or details
+  ---
+  duration_ms: 106.767541
+  type: 'test'
+  ...
+# Subtest: Enter sends once; Shift+Enter and IME composition keep editing
+ok 143 - Enter sends once; Shift+Enter and IME composition keep editing
+  ---
+  duration_ms: 43.771333
+  type: 'test'
+  ...
+# Subtest: pending send is visible immediately and a failure preserves draft and idempotent retry
+ok 144 - pending send is visible immediately and a failure preserves draft and idempotent retry
+  ---
+  duration_ms: 118.378333
+  type: 'test'
+  ...
+# Subtest: opening the selected session is a no-op and switching sessions preserves each draft
+ok 145 - opening the selected session is a no-op and switching sessions preserves each draft
+  ---
+  duration_ms: 39.683709
+  type: 'test'
+  ...
+# Subtest: chat scroll follows opening and own sends but does not pull a reader away from history
+ok 146 - chat scroll follows opening and own sends but does not pull a reader away from history
+  ---
+  duration_ms: 26.665541
+  type: 'test'
+  ...
+# Subtest: tester layout bounds the viewport, scrolls only history and keeps a compact nonshrinking composer
+ok 147 - tester layout bounds the viewport, scrolls only history and keeps a compact nonshrinking composer
+  ---
+  duration_ms: 1.855166
+  type: 'test'
+  ...
+# Subtest: same-scenario tests retain their distinct visible identifiers on mobile
+ok 148 - same-scenario tests retain their distinct visible identifiers on mobile
+  ---
+  duration_ms: 18.007375
+  type: 'test'
+  ...
+# Subtest: a superseded polling response cannot replace the send snapshot or reopen a paused composer
+ok 149 - a superseded polling response cannot replace the send snapshot or reopen a paused composer
+  ---
+  duration_ms: 47.6305
+  type: 'test'
+  ...
+# Subtest: polling a paused session updates only its sidebar status without reloading the list or losing the draft
+ok 150 - polling a paused session updates only its sidebar status without reloading the list or losing the draft
+  ---
+  duration_ms: 56.3515
+  type: 'test'
+  ...
+# Subtest: retry after an ambiguous network failure never duplicates an already confirmed message
+ok 151 - retry after an ambiguous network failure never duplicates an already confirmed message
+  ---
+  duration_ms: 150.963167
+  type: 'test'
+  ...
+# Subtest: the header and sidebar profile controls open a dedicated user page
+ok 152 - the header and sidebar profile controls open a dedicated user page
+  ---
+  duration_ms: 6.74425
+  type: 'test'
+  ...
+# Subtest: the user page exposes editable profile, preferences, access and account transparency
+ok 153 - the user page exposes editable profile, preferences, access and account transparency
+  ---
+  duration_ms: 3.516666
+  type: 'test'
+  ...
+1..153
+# tests 153
+# suites 0
+# pass 153
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 4269.115208

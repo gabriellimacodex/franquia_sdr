@@ -1,0 +1,13 @@
+# Authorized continuous laboratory gate, 10 September 2026 (America/Sao_Paulo).
+# Total allowance raised to US$1.00 within the authorized total R$10 ceiling.
+# Existing usage remains charged to this same gate; this is not a fresh allowance.
+# This ID is stable across deploys/restarts. A new ID would grant a new allowance.
+services:
+  api:
+    environment:
+      LAB_BUDGET_GATE_ID: sprint3-continuous-20260910
+      LAB_BUDGET_LIMIT_MICRO_USD: "1000000"
+  worker:
+    environment:
+      LAB_BUDGET_GATE_ID: sprint3-continuous-20260910
+      LAB_BUDGET_LIMIT_MICRO_USD: "1000000"

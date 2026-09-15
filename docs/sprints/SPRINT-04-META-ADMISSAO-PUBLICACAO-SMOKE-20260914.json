@@ -1,0 +1,111 @@
+{
+  "observedAt": "2026-09-14T04:46:14.373Z",
+  "expectedImage": "sha256:cff18e63267fd088a36079347c62d6e928d4be478d83b9cdf456109aa3bf395c",
+  "services": [
+    {
+      "id": "7b33450ef41e63d0d6ca4face08cf90e27c8dbb010db25de6ba879e5725c4412",
+      "name": "/sapore-sdr-api-1",
+      "image": "sha256:cff18e63267fd088a36079347c62d6e928d4be478d83b9cdf456109aa3bf395c",
+      "tag": "sapore-sdr:sprint4-admission-20260914-r10",
+      "running": true,
+      "startedAt": "2026-09-14T04:45:14.719911522Z",
+      "restartCount": 0,
+      "health": "healthy",
+      "flags": {
+        "EXECUTION_MODE": "laboratory",
+        "CHANNEL_ENABLED": "false",
+        "NATIVE_CONTROL_VERIFIED": "false",
+        "RETENTION_ENABLED": "false",
+        "LAB_BUDGET_GATE_ID": "sprint3-continuous-20260910",
+        "LAB_BUDGET_LIMIT_MICRO_USD": "1000000"
+      },
+      "passed": true
+    },
+    {
+      "id": "8942ce0e74ba4c30edd4762608544852916a2cd39a5f05e128acfbd24aabc154",
+      "name": "/sapore-sdr-worker-1",
+      "image": "sha256:cff18e63267fd088a36079347c62d6e928d4be478d83b9cdf456109aa3bf395c",
+      "tag": "sapore-sdr:sprint4-admission-20260914-r10",
+      "running": true,
+      "startedAt": "2026-09-14T04:45:14.717204586Z",
+      "restartCount": 0,
+      "health": null,
+      "flags": {
+        "EXECUTION_MODE": "laboratory",
+        "CHANNEL_ENABLED": "false",
+        "NATIVE_CONTROL_VERIFIED": "false",
+        "RETENTION_ENABLED": "false",
+        "LAB_BUDGET_GATE_ID": "sprint3-continuous-20260910",
+        "LAB_BUDGET_LIMIT_MICRO_USD": "1000000"
+      },
+      "passed": true
+    }
+  ],
+  "checks": [
+    {
+      "path": "/health",
+      "method": "GET",
+      "authorization": "absent",
+      "status": 200,
+      "body": {
+        "status": "ok",
+        "environment": "homologation",
+        "outboundEnabled": false
+      },
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/ready",
+      "method": "GET",
+      "authorization": "absent",
+      "status": 200,
+      "body": {
+        "status": "ready"
+      },
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/v1/me",
+      "method": "GET",
+      "authorization": "absent",
+      "status": 401,
+      "body": {
+        "error": {
+          "code": "AUTHENTICATION_REQUIRED"
+        }
+      },
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/v1/lab/sessions",
+      "method": "GET",
+      "authorization": "absent",
+      "status": 401,
+      "body": {
+        "error": {
+          "code": "AUTHENTICATION_REQUIRED"
+        }
+      },
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/v1/conversations/00000000-0000-4000-8000-000000000000/reviews",
+      "method": "GET",
+      "authorization": "absent",
+      "status": 401,
+      "body": {
+        "error": {
+          "code": "AUTHENTICATION_REQUIRED"
+        }
+      },
+      "passed": true,
+      "error": null
+    }
+  ],
+  "passed": true,
+  "scope": "Operational availability and anonymous denial only; no authenticated or paid campaign acceptance"
+}

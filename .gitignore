@@ -1,0 +1,12 @@
+node_modules/
+.env
+.env.*
+!.env.example
+.local/
+.kapso/
+coverage/
+*.log
+backups/
+dist/
+*.tgz
+.DS_Store

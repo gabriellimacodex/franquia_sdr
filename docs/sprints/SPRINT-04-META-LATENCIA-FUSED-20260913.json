@@ -1,0 +1,24 @@
+{
+  "kind": "offline-simulation",
+  "date": "2026-09-13",
+  "endpoint": "authenticated-committed-detail-not-render",
+  "runtime": "local-fused-laboratory-dispatch-plus-grouped-completion-not-published",
+  "engineSha256": "347b4682fee701e38553cf6c21159857844fd3d903259b7f84e77999eeb35b2e",
+  "dispatchSha256": "db6dbe6cf78f5b64a947e49e2568dfdab8f0a7f8140666414f61e3e8613b44f5",
+  "options": { "authMs": 0, "ackMs": 0, "workerIntervalMs": 1000, "pollIntervalMs": 2500, "pollFloorMs": 500 },
+  "samples": [
+    { "rttMs": 136.984, "providerMs": 3000, "observedDetailMs": 9682.489875, "callbackCommittedMs": 9257.263583, "authCalls": 3, "polls": 2, "queries": 50, "transactions": 9, "wireExchanges": 69, "byActor": { "worker": 33, "send": 13, "detail": 10, "callback": 13 }, "milestonesMs": { "sendReturned": 2408.301583, "claimed": 3109.473791, "providerStarted": 4387.570041, "dispatchReturned": 4947.337875, "providerReturned": 7389.979375 } },
+    { "rttMs": 136.984, "providerMs": 5500, "observedDetailMs": 12605.234417, "callbackCommittedMs": 12183.872708, "authCalls": 4, "polls": 3, "queries": 61, "transactions": 12, "wireExchanges": 86, "byActor": { "worker": 45, "send": 13, "detail": 15, "callback": 13 }, "milestonesMs": { "sendReturned": 2386.783583, "claimed": 3087.064208, "providerStarted": 4363.055292, "dispatchReturned": 4924.90825, "providerReturned": 9865.703 } },
+    { "rttMs": 10, "providerMs": 3000, "observedDetailMs": 5278.467875, "callbackCommittedMs": 4432.710459, "authCalls": 3, "polls": 2, "queries": 57, "transactions": 11, "wireExchanges": 79, "byActor": { "worker": 43, "send": 13, "detail": 10, "callback": 13 }, "milestonesMs": { "sendReturned": 212.906125, "claimed": 1148.83875, "providerStarted": 1263.173417, "dispatchReturned": 1312.666417, "providerReturned": 4265.399167 } },
+    { "rttMs": 10, "providerMs": 5500, "observedDetailMs": 7833.120958, "callbackCommittedMs": 6946.807625, "authCalls": 4, "polls": 3, "queries": 72, "transactions": 15, "wireExchanges": 102, "byActor": { "worker": 61, "send": 13, "detail": 15, "callback": 13 }, "milestonesMs": { "sendReturned": 216.285333, "claimed": 1150.275667, "providerStarted": 1267.9885, "dispatchReturned": 1317.001292, "providerReturned": 6770.683667 } }
+  ],
+  "invariantsEachSample": { "simulatedProviderCalls": 1, "guardPassed": true, "settled": true, "facts": 1, "relations": 1, "deliveries": 0 },
+  "limitations": [
+    "One sample per configuration, all retained; no distribution, SLA or final M6 measurement.",
+    "PGlite serializes transactions; Auth/provider are mocked, browser and external HTTP are absent.",
+    "Local CPU activity was not completely isolated; a concurrent test batch was stopped during the measurement window. Do not infer precise causal timing improvements.",
+    "Same fixed worker phase and polling formula as the prior harness; spans overlap and must not be summed as E2E."
+  ],
+  "decision": "Insufficient evidence to meet original 5/8-second gate. Keep local candidate unshipped while assessing application-database latency and post-commit discovery options; no paid repetition on a known-inadequate hypothesis.",
+  "newPaidCalls": 0
+}

@@ -1,0 +1,26 @@
+{
+  "kind": "offline-simulation-comparison",
+  "date": "2026-09-13",
+  "endpoint": "authenticated-committed-detail-not-render",
+  "method": "One elapsed monotonic sample per version/provider delay; PGlite and mocked Auth/provider, same harness and fixed worker phase. Not browser E2E, live provider, SLA or M6.",
+  "options": { "rttMs": 136.984, "authMs": 0, "ackMs": 0, "workerIntervalMs": 1000, "pollIntervalMs": 2500, "pollFloorMs": 500 },
+  "baseline": {
+    "source": "/tmp/sapore-latency-r7.aZhXMm/sapore-sdr",
+    "runtime": "frozen-r7-copy-plus-offline-harness",
+    "samples": [
+      { "providerMs": 3000, "observedDetailMs": 12093.764625, "callbackCommittedMs": 10980.764708, "authCalls": 4, "polls": 3, "queries": 65, "transactions": 13, "wireExchanges": 91, "byActor": { "worker": 46, "send": 13, "detail": 15, "callback": 17 } },
+      { "providerMs": 5500, "observedDetailMs": 14450.969667, "callbackCommittedMs": 13891.545542, "authCalls": 5, "polls": 4, "queries": 74, "transactions": 15, "wireExchanges": 105, "byActor": { "worker": 55, "send": 13, "detail": 20, "callback": 17 } }
+    ]
+  },
+  "candidate": {
+    "runtime": "local-grouped-completion-only-not-published",
+    "engineSha256": "e20153993743ab5320bf0613ef667ec96da5e90d52933b9a6396778e3f898abe",
+    "samples": [
+      { "providerMs": 3000, "observedDetailMs": 11579.514042, "callbackCommittedMs": 10458.363375, "authCalls": 4, "polls": 3, "queries": 61, "transactions": 13, "wireExchanges": 87, "byActor": { "worker": 46, "send": 13, "detail": 15, "callback": 13 } },
+      { "providerMs": 5500, "observedDetailMs": 13917.942333, "callbackCommittedMs": 13361.401291, "authCalls": 5, "polls": 4, "queries": 70, "transactions": 15, "wireExchanges": 101, "byActor": { "worker": 55, "send": 13, "detail": 20, "callback": 13 } }
+    ]
+  },
+  "invariantsEachSample": { "simulatedProviderCalls": 1, "guardPassed": true, "settled": true, "facts": 1, "relations": 1, "deliveries": 0 },
+  "newPaidCalls": 0,
+  "decision": "Do not publish grouped completion alone as a latency solution. Approximately half a second gained in this simulation remains insufficient; measure structural dispatch changes next. Original M6 criteria unchanged."
+}

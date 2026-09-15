@@ -1,0 +1,21 @@
+{
+  "observedAt": "2026-09-14T03:52:49.518Z",
+  "container": "sapore-s4-r9-regression-20260914",
+  "image": "sha256:3e2c5c7f43b79231fb24c2913e37abea82d40e17408858065f1d54ebe99b19ce",
+  "state": {
+    "Status": "exited",
+    "Running": false,
+    "Paused": false,
+    "Restarting": false,
+    "OOMKilled": false,
+    "Dead": false,
+    "Pid": 0,
+    "ExitCode": 0,
+    "Error": "",
+    "StartedAt": "2026-09-14T03:43:59.379129834Z",
+    "FinishedAt": "2026-09-14T03:52:20.823963953Z"
+  },
+  "testCount": 301,
+  "network": "none",
+  "tapSha256": "810203a55eeff08e40480b6ff49eae1f47952f8e227811e72ca290cfb9c7c76b"
+}

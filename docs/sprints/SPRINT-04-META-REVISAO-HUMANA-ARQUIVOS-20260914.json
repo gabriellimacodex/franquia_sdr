@@ -1,0 +1,37 @@
+{
+  "at": "2026-09-14T03:50:42.118Z",
+  "preserved": [
+    {
+      "file": "/Users/gabriellima/Documents/FRANQUIAS/sapore-sdr/docs/sprints/SPRINT-04-META-REVISAO-HUMANA-PACOTE-20260914.json",
+      "sha256": "302fdf69985e10753c4add5e834f3cb67ec8728e32a247c8087523b583d9ecd4"
+    },
+    {
+      "file": "/Users/gabriellima/Documents/FRANQUIAS/sapore-sdr/docs/sprints/SPRINT-04-META-REVISAO-HUMANA-PACOTE-20260914.tap",
+      "sha256": "e4d5b27d314d6e1a289dd214cafd7ff42c7c62d474685475c1359730d58a225c"
+    },
+    {
+      "file": "/Users/gabriellima/Documents/FRANQUIAS/sapore-sdr/docs/sprints/SPRINT-04-META-REVISAO-HUMANA-PACOTE-VERIFICACAO-20260914.json",
+      "sha256": "9921b5890a29bb976bc7b84efb38b1be21fd6affad378b573f1d419b068920db"
+    },
+    {
+      "file": "/Users/gabriellima/Documents/FRANQUIAS/sapore-sdr/docs/sprints/SPRINT-04-META-REVISAO-HUMANA-FRONTEND-20260914.json",
+      "sha256": "a9b09aba79761569b0375bb8b7a9cc9ea0a4420974940fe1fbddb4d1df83320e"
+    },
+    {
+      "file": "/Users/gabriellima/Documents/FRANQUIAS/sapore-sdr/docs/sprints/SPRINT-04-META-REVISAO-HUMANA-FRONTEND-20260914.tap",
+      "sha256": "24b78f5558f68d44dd9e71506a73d7b59f3ac9c7da6b07e854a4c932c1798998"
+    },
+    {
+      "file": "/Users/gabriellima/Documents/FRANQUIAS/sapore-sdr/docs/sprints/SPRINT-04-META-REVISAO-HUMANA-FRONTEND-BUILD-20260914.log",
+      "sha256": "ec2691b885e98ec4aa100174ce548ebcc881af80d1924bc20f5fe7df84a9e491"
+    },
+    {
+      "file": "/Users/gabriellima/Documents/FRANQUIAS/sapore-sdr/docs/sprints/SPRINT-04-META-REVISAO-HUMANA-FRONTEND-TIPOS-20260914.log",
+      "sha256": "0960142eb88d3d7f915cb4d9c5b37775864d31846ca07e46551017bb102d3f03"
+    },
+    {
+      "file": "/Users/gabriellima/Documents/FRANQUIAS/sapore-sdr/docs/sprints/SPRINT-04-META-REVISAO-HUMANA-FRONTEND-LINT-20260914.log",
+      "sha256": "473f49a773f7bed304694d0d520e154c5fb59a1b49cbd85a6e0d43f1819652a2"
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "observedAt": "2026-09-14T04:44:31.200Z",
+  "inspection": {
+    "id": "09f99cf55668896b115eb18eb11fc7aa899094d9ec90ecc0804782a810793c83",
+    "name": "/sapore-s4-r10-regression-20260914",
+    "image": "sha256:cff18e63267fd088a36079347c62d6e928d4be478d83b9cdf456109aa3bf395c",
+    "state": {
+      "Dead": false,
+      "Error": "",
+      "ExitCode": 0,
+      "FinishedAt": "2026-09-14T04:43:51.510141434Z",
+      "OOMKilled": false,
+      "Paused": false,
+      "Pid": 0,
+      "Restarting": false,
+      "Running": false,
+      "StartedAt": "2026-09-14T04:35:16.07254207Z",
+      "Status": "exited"
+    },
+    "network": "none",
+    "readonlyRootfs": true,
+    "memory": 1073741824,
+    "nanoCpus": 1000000000,
+    "pidsLimit": 128,
+    "capDrop": [
+      "ALL"
+    ],
+    "securityOpt": [
+      "no-new-privileges:true"
+    ],
+    "tmpfs": {
+      "/tmp": "rw,nosuid,nodev,size=536870912"
+    },
+    "mounts": [
+      {
+        "Destination": "/app/tests",
+        "Mode": "",
+        "Propagation": "rprivate",
+        "RW": false,
+        "Source": "/opt/sapore-sdr/releases/20260914T043000Z/sapore-sdr/tests",
+        "Type": "bind"
+      },
+      {
+        "Destination": "/app/evaluations",
+        "Mode": "",
+        "Propagation": "rprivate",
+        "RW": false,
+        "Source": "/opt/sapore-sdr/releases/20260914T043000Z/sapore-sdr/evaluations",
+        "Type": "bind"
+      },
+      {
+        "Destination": "/app/compose.yaml",
+        "Mode": "",
+        "Propagation": "rprivate",
+        "RW": false,
+        "Source": "/opt/sapore-sdr/releases/20260914T043000Z/sapore-sdr/compose.yaml",
+        "Type": "bind"
+      },
+      {
+        "Destination": "/app/compose.lab-budget.yaml",
+        "Mode": "",
+        "Propagation": "rprivate",
+        "RW": false,
+        "Source": "/opt/sapore-sdr/releases/20260914T043000Z/sapore-sdr/compose.lab-budget.yaml",
+        "Type": "bind"
+      }
+    ],
+    "command": [
+      "sh",
+      "-c",
+      "node --import tsx --test --test-concurrency=1 --test-reporter=tap tests/*.test.ts"
+    ]
+  },
+  "counts": {
+    "tests": 314,
+    "pass": 314,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "durationMs": 515215.732738,
+  "passed": true,
+  "isolated": true,
+  "artifacts": {
+    "tap": {
+      "path": "/Users/gabriellima/Documents/FRANQUIAS/sapore-sdr/docs/sprints/SPRINT-04-META-ADMISSAO-PUBLICACAO-IMAGEM-20260914.tap",
+      "sha256": "f29273f4df28e884cb93b1a5453e80cbf8d5130b2eb7ca45019a1be906935107"
+    },
+    "stderr": {
+      "path": "/Users/gabriellima/Documents/FRANQUIAS/sapore-sdr/docs/sprints/SPRINT-04-META-ADMISSAO-PUBLICACAO-IMAGEM-20260914.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

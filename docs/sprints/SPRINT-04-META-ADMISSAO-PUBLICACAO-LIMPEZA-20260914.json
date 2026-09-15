@@ -1,0 +1,19 @@
+{
+  "observedAt": "2026-09-14T04:46:55Z",
+  "removedOnly": "09f99cf55668896b115eb18eb11fc7aa899094d9ec90ecc0804782a810793c83",
+  "result": {
+    "chunk_id": "8ffffa",
+    "wall_time_seconds": 0.734813208,
+    "exit_code": 0,
+    "original_token_count": 17,
+    "output": "09f99cf55668896b115eb18eb11fc7aa899094d9ec90ecc0804782a810793c83\n"
+  },
+  "preserved": [
+    "full TAP",
+    "terminal inspection",
+    "candidate image",
+    "release",
+    "r9 rollback",
+    "laboratory data"
+  ]
+}
