@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const IncomingMessageSchema = z.object({
   id: z.string().min(1).max(256), text: z.string().max(16000).default(''),
-  type: z.enum(['text','audio','unsupported']).default('text'),
+  type: z.enum(['text','audio','image','document','unsupported']).default('text'),
   actor: z.enum(['candidate','human','agent']).default('candidate'),
   timestamp: z.string().datetime().optional(), mediaId: z.string().max(256).optional(),
   transcriptOrigin: z.enum(['kapso','openai']).optional(),

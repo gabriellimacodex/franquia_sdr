@@ -10,6 +10,10 @@ const messageSchema = z.object({
   id: z.string().min(1).max(256), timestamp: z.string(), type: z.string(), from: z.string().optional(),
   from_user_id: z.string().optional(), text: z.object({ body: z.string() }).optional(),
   audio: z.object({ id: z.string() }).optional(),
+  image: z.object({ id: z.string(), caption: z.string().optional() }).optional(),
+  document: z.object({ id: z.string(), caption: z.string().optional(), filename: z.string().optional() }).optional(),
+  contacts: z.array(z.object({ name: z.object({ formatted_name: z.string().optional() }).passthrough().optional(),
+    phones: z.array(z.object({ phone: z.string().optional(), wa_id: z.string().optional() }).passthrough()).optional() }).passthrough()).optional(),
   interactive: z.object({ button_reply: z.object({ title: z.string() }).optional(), list_reply: z.object({ title: z.string() }).optional() }).optional(),
   kapso: z.object({ direction: z.enum(['inbound', 'outbound']), status: z.string().optional(), origin: z.string().optional(),
     transcript: z.object({ text: z.string().optional() }).nullable().optional() }).passthrough(),
@@ -28,6 +32,19 @@ export type WebhookOptions = {
   /** Must prove the actual WAMID belongs to this native execution from a verified provider contract. */
   verifyNativeSend?: (input: { conversationId: string; executionId: string; messageId: string; textHash: string; payload: unknown }) => Promise<boolean>;
 };
+
+type Contacts = z.infer<typeof messageSchema>['contacts'];
+function messageType(type: string): 'text' | 'audio' | 'image' | 'document' | 'unsupported' {
+  if (type === 'audio' || type === 'image' || type === 'document') return type;
+  return ['text', 'interactive', 'contacts'].includes(type) ? 'text' : 'unsupported';
+}
+/** A shared contact card becomes candidate text; the referral rules in the prompt decide what to do with it. */
+function contactCardText(contacts: Contacts): string {
+  const card = contacts?.[0];
+  if (!card) return '';
+  const phone = card.phones?.[0]?.wa_id || card.phones?.[0]?.phone || '';
+  return `[Cartão de contato] Nome: ${card.name?.formatted_name || ''} | Telefone: ${phone}`.trim();
+}
 
 function eventName(payload: Record<string, unknown>, fallback?: string): string {
   return typeof payload.event === 'string' ? payload.event : typeof payload.type === 'string' && payload.type.startsWith('whatsapp.')
@@ -107,12 +124,14 @@ async function ingestMessages(store: Store, payloads: Envelope[], event: string,
     if ((event === 'whatsapp.message.received') !== (message.kapso.direction === 'inbound')) throw new ServiceError('WEBHOOK_DIRECTION_MISMATCH');
     const timestamp = Number(message.timestamp) * 1000;
     if (!Number.isFinite(timestamp) || timestamp < 0 || timestamp > Date.now() + 60000) throw new ServiceError('INVALID_MESSAGE_TIMESTAMP');
-    const text = message.text?.body || message.kapso.transcript?.text || message.interactive?.button_reply?.title || message.interactive?.list_reply?.title || '';
+    const text = message.text?.body || message.kapso.transcript?.text || message.interactive?.button_reply?.title || message.interactive?.list_reply?.title
+      || message.image?.caption || message.document?.caption || contactCardText(message.contacts) || '';
     let actor: 'candidate' | 'agent' | 'human' = message.kapso.direction === 'inbound' ? 'candidate' : 'human';
     if (actor === 'human' && await reconcileDelivery(store, channel, item, event, text, options)) actor = 'agent';
+    const mediaId = message.audio?.id || message.image?.id || message.document?.id;
     messages.push({ id: message.id, text, actor, timestamp: new Date(timestamp).toISOString(),
-      type: message.type === 'audio' ? 'audio' : ['text', 'interactive'].includes(message.type) ? 'text' : 'unsupported',
-      ...(message.audio?.id ? { mediaId: message.audio.id } : {}),
+      type: messageType(message.type),
+      ...(mediaId ? { mediaId } : {}),
       ...(message.kapso.transcript?.text ? { transcriptOrigin: 'kapso' } : {}),
     });
   }

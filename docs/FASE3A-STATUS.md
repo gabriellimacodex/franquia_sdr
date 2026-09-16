@@ -44,7 +44,7 @@ O canvas do n8n usa o node **Agent** como cérebro (não HTTP `/v1/responses`), 
 ## Divergência git × deploy
 
 - `integrations/kapso/functions/sapore-session/index.js` no git inclui o guard "prior `unknown` não libera reenvio" (commit `5b5dbf4`); a função deployada na Kapso é a versão Fase 2 **sem** esse guard. Redeploy da function é uma decisão separada.
-- API (imagem r10 em produção) ainda **não** contém: limites do `BRIEFING_PROMPT`, prazo de briefing 180 s, bloco anti-bot em `src/prompts.ts` (cópia de referência; o n8n já tem), e o comando `#reset` de tester. O `#reset` exige a migração `004_candidate_reset` (`ALTER TABLE sdr.candidates ADD COLUMN reset_at`) aplicada pelo runner com a conexão administrativa **antes** de subir a imagem — o runtime só usa a coluna, não a cria.
+- API (imagem r10 em produção) ainda **não** contém: limites do `BRIEFING_PROMPT`, prazo de briefing 180 s, bloco anti-bot em `src/prompts.ts` (cópia de referência; o n8n já tem), o comando `#reset` de tester, e imagem/PDF/cartão de contato → texto (`src/media.ts`; o mapeamento de tipos em `sapore-session/index.js` também mudou e **precisa de redeploy da function na Kapso**, senão imagens continuam chegando como `unsupported`). O `#reset` exige a migração `004_candidate_reset` (`ALTER TABLE sdr.candidates ADD COLUMN reset_at`) aplicada pelo runner com a conexão administrativa **antes** de subir a imagem — o runtime só usa a coluna, não a cria.
 
 ## Rollback da 3A
 

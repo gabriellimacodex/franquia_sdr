@@ -101,8 +101,18 @@ async function handler(request, env) {
     if (!identity) return route('handoff', 'missing_contact_identity');
     const contact = (await json(`${kapsoBase}/whatsapp/contacts/${encodeURIComponent(identity)}`, env.KAPSO_API_KEY, 'GET', undefined, true)).data;
     if (!contact?.id) return route('handoff', 'missing_contact_identity');
-    const text = latest.text?.body || latest.kapso?.transcript?.text ||
-      latest.interactive?.button_reply?.title || latest.interactive?.list_reply?.title || '';
+    // Must match src/webhooks.ts: captions and contact cards become text; media keeps its ID for the backend.
+    const contactCardText = (contacts) => {
+      const card = Array.isArray(contacts) ? contacts[0] : null;
+      if (!card) return '';
+      const phone = (card.phones || [])[0]?.wa_id || (card.phones || [])[0]?.phone || '';
+      return `[Cartão de contato] Nome: ${card.name?.formatted_name || ''} | Telefone: ${phone}`.trim();
+    };
+    const messageText = (m) => m.text?.body || m.kapso?.transcript?.text || m.interactive?.button_reply?.title || m.interactive?.list_reply?.title ||
+      m.image?.caption || m.document?.caption || contactCardText(m.contacts) || '';
+    const messageType = (t) => (t === 'audio' || t === 'image' || t === 'document') ? t : (['text', 'interactive', 'contacts'].includes(t) ? 'text' : 'unsupported');
+    const mediaIdOf = (m) => m.audio?.id || m.image?.id || m.document?.id;
+    const text = messageText(latest);
     const turnInput = {
       phoneNumberId, conversationId, contactId: contact.id,
       ...((contact.wa_id || latest.from || context.phone_number) ? {
@@ -119,12 +129,12 @@ async function handler(request, env) {
         const timestamp = Number(message.timestamp) * 1000;
         return {
           id: message.id,
-          text: message.text?.body || message.kapso?.transcript?.text || message.interactive?.button_reply?.title || message.interactive?.list_reply?.title || '',
-          type: message.type === 'audio' ? 'audio' : ['text', 'interactive'].includes(message.type) ? 'text' : 'unsupported',
+          text: messageText(message),
+          type: messageType(message.type),
           // Unknown outbound senders are conservatively human. Backend can reclassify known WAMIDs.
           actor: message.kapso?.direction === 'inbound' ? 'candidate' : 'human',
           ...(Number.isFinite(timestamp) ? { timestamp: new Date(timestamp).toISOString() } : {}),
-          ...(message.audio?.id ? { mediaId: message.audio.id } : {}),
+          ...(mediaIdOf(message) ? { mediaId: mediaIdOf(message) } : {}),
           ...(message.kapso?.transcript?.text ? { transcriptOrigin: 'kapso' } : {}),
         };
       }),

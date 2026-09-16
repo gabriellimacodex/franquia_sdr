@@ -81,7 +81,7 @@ export class LaboratoryDispatch implements LaboratoryDispatchSpec {
           return { success: false, error: { code: 'INCONSISTENT_SNAPSHOT' } };
         }
         if (preflight.has_audio) return this.capability(tx, preflight.job, 'AUDIO_REQUIRES_TEXT');
-        if (preflight.trigger.type === 'unsupported') return this.capability(tx, preflight.job, 'UNSUPPORTED_MESSAGE');
+        if (['unsupported', 'image', 'document'].includes(preflight.trigger.type)) return this.capability(tx, preflight.job, 'UNSUPPORTED_MESSAGE');
         const loaded = headerSchema.parse(row);
         const { job, candidate, version, messages } = loaded;
         // Runtime import keeps the currently Engine-owned contract single-sourced.

@@ -6,6 +6,7 @@ import { Store, type Channel, type JobRow, type CandidateRow, type ConversationR
 import { ServiceError } from './security.js';
 import type { Config } from './config.js';
 import { transcribeAudio } from './audio.js';
+import { describeMedia } from './media.js';
 import { retrieveKnowledge, buildEmbedding } from './knowledge.js';
 import { UsageSchema } from './usage.js';
 import { reserveLabBudget, settleLabBudget } from './lab-budget.js';
@@ -78,17 +79,20 @@ export class Engine {
  private async dispatchLegacy(channel:Channel,job:JobRow):Promise<void> {
   const dispatchStarted=this.clock();
   const s=[channel.tenantId,channel.brandId];
-  const {audio,latest}=await scoped(this.store.db,channel,async tx=>{
+  type MediaRow={id:string,media_id:string,type:string,text:string};
+  const {audio,media,latest}=await scoped(this.store.db,channel,async tx=>{
    // Independent preflight reads share a round trip, after the existing scope lock.
-   const row=(await tx.query<{audio:{id:string,media_id:string,type:string,text:string}[],latest_type:string|null}>(`SELECT
-    COALESCE((SELECT jsonb_agg(jsonb_build_object('id',id,'media_id',media_id,'type',type,'text',text) ORDER BY provider_timestamp DESC)
-      FROM (SELECT id,media_id,type,text,provider_timestamp FROM sdr.messages WHERE tenant_id=$1 AND brand_id=$2 AND conversation_id=$3 AND actor='candidate' ORDER BY provider_timestamp DESC LIMIT 24) recent
-      WHERE type='audio' AND text=''),'[]'::jsonb) AS audio,
+   const row=(await tx.query<{audio:MediaRow[],media:MediaRow[],latest_type:string|null}>(`WITH recent AS (
+    SELECT id,media_id,type,text,transcript_origin,provider_timestamp FROM sdr.messages WHERE tenant_id=$1 AND brand_id=$2 AND conversation_id=$3 AND actor='candidate' ORDER BY provider_timestamp DESC LIMIT 24)
+    SELECT
+    COALESCE((SELECT jsonb_agg(jsonb_build_object('id',id,'media_id',media_id,'type',type,'text',text) ORDER BY provider_timestamp DESC) FROM recent WHERE type='audio' AND text=''),'[]'::jsonb) AS audio,
+    COALESCE((SELECT jsonb_agg(jsonb_build_object('id',id,'media_id',media_id,'type',type,'text',text) ORDER BY provider_timestamp DESC) FROM recent WHERE type IN ('image','document') AND transcript_origin IS NULL),'[]'::jsonb) AS media,
     (SELECT type FROM sdr.messages WHERE tenant_id=$1 AND brand_id=$2 AND id=$4) AS latest_type`,[...s,job.conversation_id,job.trigger_message_id])).rows[0];
-   return {audio:{rows:row.audio},latest:{rows:row.latest_type===null?[]:[{type:row.latest_type}]}};
+   return {audio:{rows:row.audio},media:{rows:row.media},latest:{rows:row.latest_type===null?[]:[{type:row.latest_type}]}};
   });
-  if(channel.kind==='laboratory'&&audio.rows.length){await this.setCapabilityReply(channel,job,'Nesta etapa do laboratório, envie sua mensagem por texto.');return;}
+  if(channel.kind==='laboratory'&&(audio.rows.length||media.rows.length)){await this.setCapabilityReply(channel,job,'Nesta etapa do laboratório, envie sua mensagem por texto.');return;}
   if(audio.rows.length>3){await this.setCapabilityReply(channel,job,'Recebi vários áudios. Pode resumir por texto os pontos principais para que eu registre corretamente?');return;}
+  if(media.rows.length>3){await this.setCapabilityReply(channel,job,'Recebi vários arquivos. Pode me contar por texto o que eles trazem?');return;}
   for(const message of audio.rows) {
    try {
     const text=await transcribeAudio(message.media_id,channel.phoneNumberId,this.config,this.transport);
@@ -97,7 +101,17 @@ export class Engine {
     await this.setCapabilityReply(channel,job,'Não consegui compreender este áudio com segurança. Pode enviar a informação por texto?'); return;
    }
   }
-  if(latest.rows[0]?.type==='unsupported') { await this.setCapabilityReply(channel,job,'Nesta etapa, consigo conversar por texto e receber áudio. Pode escrever a sua dúvida?'); return; }
+  for(const message of media.rows) {
+   try {
+    const description=await describeMedia(message.media_id,channel.phoneNumberId,message.type as 'image'|'document',this.config,this.transport);
+    // A caption is the candidate's own words; the description is the model's reading of the file.
+    const text=message.text?`${description}\nLegenda: ${message.text}`:description;
+    await scoped(this.store.db,channel,tx=>tx.query("UPDATE sdr.messages SET text=$4,transcript_origin='openai' WHERE tenant_id=$1 AND brand_id=$2 AND id=$3",[...s,message.id,text]));
+   } catch {
+    await this.setCapabilityReply(channel,job,'Não consegui ler este arquivo com segurança. Consigo ler imagens e PDF; pode me contar por texto o que ele traz?'); return;
+   }
+  }
+  if(latest.rows[0]?.type==='unsupported') { await this.setCapabilityReply(channel,job,'Nesta etapa, consigo conversar por texto e receber áudio, imagens e PDF. Pode escrever a sua dúvida?'); return; }
   const prepareStarted=this.clock();
   const payload=await this.prepare(channel,job);
   const preparedAt=this.clock();

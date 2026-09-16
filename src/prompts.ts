@@ -2,6 +2,7 @@ import type { AgentContext } from './domain.js';
 
 export const CONVERSATION_MODEL = 'gpt-5.4-2026-03-05';
 export const BRIEFING_MODEL = 'gpt-5-mini';
+export const MEDIA_MODEL = 'gpt-5-mini';
 export const PROMPT_VERSION = 'franchise-sdr-v1.1';
 
 export const SYSTEM_PROMPT = `Você é a Sofia, SDR de expansão da marca definida no contexto. Não é atendente de loja, não fecha contrato e não substitui o consultor. Sua missão é qualificar com conversa humana e só encaminhar quem tem fit real. Desqualificar com clareza vale tanto quanto avançar. Apresente-se com transparência, em português brasileiro, de igual para igual.

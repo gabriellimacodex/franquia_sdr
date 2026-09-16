@@ -21,6 +21,22 @@ function inbound(id = 'wamid-1', identity = '5511999990001') {
 const options = { eventType: 'whatsapp.message.received',
   resolveContact: async (identity: string) => ({ id: identity === '5511999990001' ? 'contact-1' : 'not-approved', phone: identity }) };
 
+test('image captions, documents and contact cards map to typed messages that keep their media ids', async () => {
+  const { db, store } = await setup();
+  try {
+    const image = inbound('wamid-img'); image.message = { ...image.message, type: 'image', text: undefined, image: { id: 'media-img', caption: 'Fachada que estou olhando' } } as never;
+    const doc = inbound('wamid-doc'); doc.message = { ...doc.message, type: 'document', text: undefined, document: { id: 'media-doc', filename: 'proposta.pdf' } } as never;
+    const card = inbound('wamid-card'); card.message = { ...card.message, type: 'contacts', text: undefined, contacts: [{ name: { formatted_name: 'Marina Souza' }, phones: [{ wa_id: '5511988887777' }] }] } as never;
+    for (const [index, item] of [image, doc, card].entries()) await ingestWebhook(store, item, 'media-' + index, Buffer.from(JSON.stringify(item)), options);
+    const rows = (await db.query<{id:string,type:string,text:string,media_id:string|null}>('SELECT id,type,text,media_id FROM sdr.messages ORDER BY id')).rows;
+    assert.deepEqual(rows, [
+      { id: 'wamid-card', type: 'text', text: '[Cartão de contato] Nome: Marina Souza | Telefone: 5511988887777', media_id: null },
+      { id: 'wamid-doc', type: 'document', text: '', media_id: 'media-doc' },
+      { id: 'wamid-img', type: 'image', text: 'Fachada que estou olhando', media_id: 'media-img' },
+    ]);
+  } finally { await db.close(); }
+});
+
 test('signed v2 batches ingest canonical allowlisted identity exactly once without creating jobs', async () => {
   const { db, store } = await setup();
   try {
