@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { Kapso } from '../src/kapso.js';
+import { setup, input } from './turns-fixture.js';
 
 test('Kapso.sendText posts Cloud API text and returns WAMID', async () => {
   const calls: { path: string; body?: string }[] = [];
@@ -18,7 +19,6 @@ test('Kapso.sendText posts Cloud API text and returns WAMID', async () => {
 });
 
 test('confirmApiSend binds WAMID and marks job sent', async () => {
-  const { setup, input } = await import('./turns.test.js');
   const { db, store } = await setup();
   try {
     const turn = await store.startTurn(input('wamid-in-1', 'oi'));
