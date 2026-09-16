@@ -136,6 +136,11 @@ test('#reset via the Kapso session route confirms to the tester, and the confirm
     assert.equal(sends.length, 1);
     assert.match(sends[0]!, /apaguei nossa conversa anterior/);
     assert.deepEqual((await db.query<{ id: string; actor: string }>('SELECT id, actor FROM sdr.messages')).rows, [{ id: 'wamid.RESET1', actor: 'agent' }]);
+    // The Kapso Decide replays the same latest message on its next pass: no second wipe, no second confirmation.
+    const replay = await app.inject({ method: 'POST', url: '/internal/turns', headers, payload: input('m-reset', '#reset') });
+    assert.deepEqual(replay.json(), { id: '', state: 'ignored', reply: [], contextVersion: 0 });
+    assert.equal(sends.length, 1);
+    assert.equal((await db.query('SELECT * FROM sdr.messages')).rows.length, 1);
     // The confirmation comes back through provider history as an unknown outbound sender, timestamped right after the wipe.
     const next = await app.inject({ method: 'POST', url: '/internal/turns', headers, payload: { ...input('m3', 'Voltei do zero'), messages: [
       { id: 'wamid.RESET1', text: sends[0], actor: 'human', type: 'text', timestamp: new Date().toISOString() },

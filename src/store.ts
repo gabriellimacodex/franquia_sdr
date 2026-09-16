@@ -41,7 +41,12 @@ export class Store {
      const s=[channel.tenantId,channel.brandId];
      const tester=(await tx.query<{label:string,contact_id:string}>(`SELECT label,contact_id FROM sdr.testers WHERE tenant_id=$1 AND brand_id=$2 AND enabled AND (contact_id=$3 OR contact_id=$4)`,[...s,input.contactId,input.contactPhone??''])).rows[0];
      if(!tester) return {channel,accepted:false}; // No unapproved contact content is retained.
-     if(isResetCommand(input.text)) { await this.resetTesterTx(tx,channel,input.contactId); return {channel,accepted:false,reset:true}; }
+     if(isResetCommand(input.text)) {
+       // The Kapso Decide can replay the same latest message on every pass; one command resets and confirms exactly once.
+       const first=await tx.query('INSERT INTO sdr.webhook_receipts(id,payload_hash) VALUES($1,$2) ON CONFLICT DO NOTHING RETURNING id',[digest(`reset:${channel.tenantId}:${channel.brandId}:${input.messageId}`),'reset']);
+       if(!first.rows.length) return {channel,accepted:false};
+       await this.resetTesterTx(tx,channel,input.contactId); return {channel,accepted:false,reset:true};
+     }
      const id=randomUUID();
      await tx.query(`INSERT INTO sdr.candidates(id,tenant_id,brand_id,contact_id,label,lead_state,authorized_contact_id) VALUES($3,$1,$2,$4,$5,$6,$7) ON CONFLICT(tenant_id,brand_id,contact_id) DO NOTHING`,[...s,id,input.contactId,tester.label,JSON.stringify(createLeadState(channel.tenantId,channel.brandId,id)),tester.contact_id]);
      const candidate=(await tx.query<CandidateRow>('SELECT * FROM sdr.candidates WHERE tenant_id=$1 AND brand_id=$2 AND contact_id=$3 FOR UPDATE',[...s,input.contactId])).rows[0];
