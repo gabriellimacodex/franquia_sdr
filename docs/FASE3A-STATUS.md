@@ -50,6 +50,12 @@ O canvas do n8n usa o node **Agent** como cérebro (não HTTP `/v1/responses`), 
 - Function Kapso `sapore-session` (`676ecedd…`) PATCH + deploy às 05:35:12Z com o código de `f751910` (mídia + guard anti-reenvio + `/deliver`). Backup do código anterior = git `bc240c0` (idêntico ao que estava em produção).
 - Primeiro briefing real aceito pela API: exec n8n 128 (05:12Z, 29 s, `accepted: true`) — ainda na r10, com prazo de 60 s; r11 dá 180 s.
 
+## r12 — um envio por balão (2026-09-16)
+
+- `/internal/turns/:id/deliver` envia **um `sendText` por balão** (antes juntava com `\n\n` numa mensagem só). Cada WAMID é gravado como mensagem do agente (`Store.recordAgentMessage`) **antes** de confirmar, porque o histórico do provedor replica todo outbound como remetente desconhecido e um WAMID não reconhecido vira "humano assumiu" (`controlTx handoff`). `deliveries.message_id` guarda o primeiro WAMID; os demais vivem em `sdr.messages`.
+- Falha no primeiro balão → `failApiSend` como antes; falha num balão posterior → confirma o que foi enviado e não reenvia (sem reenvio cego).
+- Teste de rota cobre os dois envios, o registro dos WAMIDs e o replay do histórico sem pausa. O teste `sprint4-journal` "two real processes racing…" é flake de timing (falhou uma vez na suíte completa, 13/13 isolado duas vezes).
+
 ## Divergência git × deploy (histórico; resolvida pela r11)
 
 - `integrations/kapso/functions/sapore-session/index.js` no git inclui o guard "prior `unknown` não libera reenvio" (commit `5b5dbf4`); a função deployada na Kapso é a versão Fase 2 **sem** esse guard. Redeploy da function é uma decisão separada.

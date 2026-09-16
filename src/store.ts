@@ -209,6 +209,16 @@ export class Store {
    });
  }
  /** Fase 2: after Kapso Messages API send, bind WAMID immediately and mark job sent. */
+ /** An API-sent WAMID is an agent message from the start; history replay then cannot infer a human takeover from it. */
+ async recordAgentMessage(id:string,messageId:string,text:string):Promise<void> {
+   const channel=await this.scopeForJob(id);
+   await scoped(this.db,channel,async tx=>{
+     const s=[channel.tenantId,channel.brandId];
+     const job=(await tx.query<Pick<JobRow,'conversation_id'|'candidate_id'>>('SELECT conversation_id,candidate_id FROM sdr.jobs WHERE tenant_id=$1 AND brand_id=$2 AND id=$3',[...s,id])).rows[0];
+     if(!job) return;
+     await tx.query("INSERT INTO sdr.messages(id,tenant_id,brand_id,conversation_id,candidate_id,actor,type,text,provider_timestamp) VALUES($3,$1,$2,$4,$5,'agent','text',$6,now()) ON CONFLICT DO NOTHING",[...s,messageId,job.conversation_id,job.candidate_id,text]);
+   });
+ }
  async confirmApiSend(id:string,messageId:string):Promise<TurnView> {
    const channel=await this.scopeForJob(id);
    return scoped(this.db,channel,async tx=>{

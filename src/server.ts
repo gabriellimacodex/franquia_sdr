@@ -121,8 +121,15 @@ export async function createServer(db:Database,config:Config,options:{transport?
   try {
    const hint=await store.recipientHint(job.id);
    const to=/^\d{10,20}$/.test(hint.authorizedContactId)?hint.authorizedContactId:await kapso.resolveWaId(hint.contactId);
-   const wamid=await kapso.sendText({phoneNumberId:hint.phoneNumberId,to,text:reply.join('\n\n')});
-   const sent=await store.confirmApiSend(job.id,wamid);
+   // One WhatsApp message per bubble. Each WAMID is recorded as an agent message right away so the
+   // provider history never reads the later bubbles as an unknown outbound sender (human takeover).
+   const wamids:string[]=[];
+   for(const bubble of reply) {
+    try { wamids.push(await kapso.sendText({phoneNumberId:hint.phoneNumberId,to,text:bubble})); }
+    catch(error) { if(!wamids.length) throw error; break; } // A later bubble failing must not resend the first.
+    await store.recordAgentMessage(job.id,wamids.at(-1)!,bubble);
+   }
+   const sent=await store.confirmApiSend(job.id,wamids[0]!);
    // After a successful WhatsApp delivery, apply deferred handoff/stop from the model decision.
    const decision=job.result;
    if(decision&&(decision.nextAction==='handoff'||decision.nextAction==='stop')) {

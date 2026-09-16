@@ -2,6 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { Kapso } from '../src/kapso.js';
 import { setup, input } from './turns-fixture.js';
+import { createServer } from '../src/server.js';
+import { testConfig } from './config.js';
 
 test('Kapso.sendText posts Cloud API text and returns WAMID', async () => {
   const calls: { path: string; body?: string }[] = [];
@@ -37,4 +39,36 @@ test('confirmApiSend binds WAMID and marks job sent', async () => {
   } finally {
     await db.close();
   }
+});
+
+test('deliver sends one WhatsApp message per bubble and records every WAMID as an agent message', async () => {
+  const { db, store } = await setup();
+  const sends: string[] = []; let count = 0;
+  const transport: typeof fetch = async (url, init) => {
+    const path = String(url).replace('https://api.kapso.ai', '');
+    if (path.startsWith('/platform/v1/whatsapp/contacts/')) return Response.json({ data: { wa_id: '5511999999999' } });
+    if (path.endsWith('/messages') && init?.method === 'POST') { sends.push(JSON.parse(String(init.body)).text.body); count++; return Response.json({ messages: [{ id: 'wamid.OUT' + count }] }); }
+    throw new Error('unexpected ' + path);
+  };
+  const app = await createServer(db, { ...testConfig, CHANNEL_ENABLED: 'true', NATIVE_CONTROL_VERIFIED: 'true' },
+    { transport, native: async id => ({ id, conversationId: 'c1', workflowId: 'wf-test', status: 'running', controlFingerprint: 'epoch-1' }) });
+  try {
+    const turn = await store.startTurn(input('wamid-in-2', 'oi'));
+    await db.query("UPDATE sdr.jobs SET state='ready', result=$2::jsonb WHERE id=$1", [turn.id, JSON.stringify({
+      bubbles: ['Oi! Sou a Sofia.', 'Qual cidade você considera?'], proposals: [], relations: [], referral: null, sourceRefs: [], nextAction: 'continue', handoffReason: null,
+    })]);
+    const response = await app.inject({ method: 'POST', url: `/internal/turns/${encodeURIComponent(turn.id)}/deliver`,
+      headers: { Authorization: 'Bearer ' + testConfig.KAPSO_FUNCTION_TOKEN }, payload: { executionId: 'execution-1', controlFingerprint: 'epoch-1', contextVersion: turn.contextVersion } });
+    assert.equal(response.statusCode, 200);
+    assert.equal(response.json().state, 'sent');
+    assert.deepEqual(sends, ['Oi! Sou a Sofia.', 'Qual cidade você considera?']);
+    assert.equal((await db.query<{ message_id: string }>('SELECT message_id FROM sdr.deliveries')).rows[0]?.message_id, 'wamid.OUT1');
+    assert.deepEqual((await db.query<{ id: string }>("SELECT id FROM sdr.messages WHERE actor='agent' ORDER BY id")).rows.map(row => row.id), ['wamid.OUT1', 'wamid.OUT2']);
+    // Provider history replays both outbound messages as unknown senders; neither may read as a human takeover.
+    await store.startTurn({ ...input('wamid-in-3', 'São Paulo'), messages: [
+      { id: 'wamid.OUT1', text: 'Oi! Sou a Sofia.', actor: 'human', type: 'text' },
+      { id: 'wamid.OUT2', text: 'Qual cidade você considera?', actor: 'human', type: 'text' },
+    ] });
+    assert.equal((await db.query<{ state: string }>('SELECT state FROM sdr.conversations')).rows[0]?.state, 'automatic');
+  } finally { await app.close(); await db.close(); }
 });
