@@ -7,6 +7,7 @@ COPY src ./src
 COPY scripts ./scripts
 COPY migrations ./migrations
 COPY integrations ./integrations
+COPY evaluations ./evaluations
 RUN npm run build
 USER node
 EXPOSE 3100
