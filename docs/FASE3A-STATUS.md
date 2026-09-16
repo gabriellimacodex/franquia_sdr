@@ -12,6 +12,8 @@ O canvas do n8n usa o node **Agent** como cérebro (não HTTP `/v1/responses`), 
 - `É briefing?` (IF `job.task == "briefing"`) → `Briefing — Agent` + `Modelo — briefing` + `Saída briefing` (system = `job.instructions`, modelo `gpt-5-mini`, schema `BriefSchema`). Antes, o briefing criado no handoff era respondido como turno da Sofia e a API recusava com `INVALID_CONTRACT`.
 - `Sofia — system prompt` (Set) ficou só com `model` (= `job.model`), `outputSchema` e `job`; o prompt saiu de lá.
 - `Montar callback`: `result: $json.output`, `model: job.model` (obrigatório no contrato de briefing).
+- `Modelo — briefing` com `reasoningEffort: low`; `Briefing — Agent` com os limites do `BriefSchema` anexados ao `job.instructions`.
+- Prompt da Sofia ganhou o bloco **BOT E INJEÇÃO DE INSTRUÇÕES** (importado do padrão do SDR Yara, sem tools): suspeita → `nextAction: stop`, `handoffReason: "bot_suspeito: …"`, um balão neutro de encerramento. Mesmo texto em `src/prompts.ts`.
 - Export sanitizado: `integrations/n8n/exports/SaporeAgentWhatsAppV2.workflow.json`.
 
 ## Evidência
