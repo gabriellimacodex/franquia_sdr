@@ -17,7 +17,7 @@ export class Briefings {
   const s=[channel.tenantId,channel.brandId];
   const prepared=await scoped(this.store.db,channel,async tx=>{
    await tx.query("UPDATE sdr.briefings SET model_status='failed',data=data||'{\"pendingModelBriefing\":false,\"modelBriefingError\":\"PROCESSING_TIMEOUT\"}'::jsonb WHERE tenant_id=$1 AND brand_id=$2 AND split_part(id,':',1)=$3 AND model_status='running' AND model_deadline<now()",[...s,channel.phoneNumberId]);
-   const b=(await tx.query<{id:string,conversation_id:string,version_id:string|null,context_version:number}>("UPDATE sdr.briefings SET model_status='running',model_deadline=now()+interval '60 seconds' WHERE id=(SELECT id FROM sdr.briefings WHERE tenant_id=$1 AND brand_id=$2 AND split_part(id,':',1)=$3 AND model_status='pending' ORDER BY created_at FOR UPDATE SKIP LOCKED LIMIT 1) RETURNING *",[...s,channel.phoneNumberId])).rows[0];
+   const b=(await tx.query<{id:string,conversation_id:string,version_id:string|null,context_version:number}>("UPDATE sdr.briefings SET model_status='running',model_deadline=now()+interval '180 seconds' WHERE id=(SELECT id FROM sdr.briefings WHERE tenant_id=$1 AND brand_id=$2 AND split_part(id,':',1)=$3 AND model_status='pending' ORDER BY created_at FOR UPDATE SKIP LOCKED LIMIT 1) RETURNING *",[...s,channel.phoneNumberId])).rows[0];
    if(!b)return;
    const lead=(await tx.query<CandidateRow>('SELECT p.* FROM sdr.candidates p JOIN sdr.conversations c ON (p.tenant_id,p.brand_id,p.id)=(c.tenant_id,c.brand_id,c.candidate_id) WHERE c.tenant_id=$1 AND c.brand_id=$2 AND c.id=$3',[...s,b.conversation_id])).rows[0];
    const state=LeadStateSchema.parse(lead.lead_state);
