@@ -14,7 +14,7 @@ test('database restart preserves identity/history/pending work and recovers an e
  try{
   await seedPilot(db,{testers:[{contactId:'5511999999999',label:'Fictional tester'}]});
   const store=new Store(db);
-  const input=TurnInputSchema.parse({phoneNumberId:'1052683654599692',conversationId:'c1',contactId:'5511999999999',messageId:'m1',text:'Quero conhecer a franquia',executionId:'e1',controlFingerprint:'e1:initial'});
+  const input=TurnInputSchema.parse({phoneNumberId:'1093705843816293',conversationId:'c1',contactId:'5511999999999',messageId:'m1',text:'Quero conhecer a franquia',executionId:'e1',controlFingerprint:'e1:initial'});
   const turn=await store.startTurn(input);
   await db.query("UPDATE sdr.jobs SET state='working',lease_until=now()-interval '1 second',available_at=now()");
   await db.close();

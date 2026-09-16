@@ -13,7 +13,7 @@ test('structured model completion persists evidence and replay/stale completion 
  const db=await testDatabase(),store=new Store(db);
  try{
   await seedPilot(db,{testers:[{contactId:'5511999999999',label:'Fictional tester'}]});
-  const input=TurnInputSchema.parse({phoneNumberId:'1052683654599692',conversationId:'c1',contactId:'5511999999999',messageId:'m1',text:'Tenho entre 250 e 280 mil próprios.',executionId:'e1',controlFingerprint:'e1:initial'});
+  const input=TurnInputSchema.parse({phoneNumberId:'1093705843816293',conversationId:'c1',contactId:'5511999999999',messageId:'m1',text:'Tenho entre 250 e 280 mil próprios.',executionId:'e1',controlFingerprint:'e1:initial'});
   const turn=await store.startTurn(input);const channel=await store.channel(input.phoneNumberId);
   await db.query("UPDATE sdr.jobs SET available_at=now()");const job=(await store.claim(channel))!;
   const calls:string[]=[];const transport:typeof fetch=async url=>{calls.push(String(url));return Response.json({accepted:true},{status:202});};
@@ -39,8 +39,8 @@ test('guard rejection records only violation codes while accepted events omit pr
   await seedPilot(db,{testers:[{contactId:'5511999999999',label:'Fictional tester'}]});
   const engine=new Engine(store,testConfig,async()=>Response.json({accepted:true},{status:202}));
   for(const [index,bubble] of ['Olá, candidato fictício. Qual cidade você considera?','Seu retorno é garantido.'].entries()) {
-   const turn=await store.startTurn(TurnInputSchema.parse({phoneNumberId:'1052683654599692',conversationId:'guard-telemetry',contactId:'5511999999999',messageId:'guard-message-'+index,text:'Quero saber mais.',executionId:'guard-execution',controlFingerprint:'guard-execution:initial'}));
-   const channel=await store.channel('1052683654599692');
+   const turn=await store.startTurn(TurnInputSchema.parse({phoneNumberId:'1093705843816293',conversationId:'guard-telemetry',contactId:'5511999999999',messageId:'guard-message-'+index,text:'Quero saber mais.',executionId:'guard-execution',controlFingerprint:'guard-execution:initial'}));
+   const channel=await store.channel('1093705843816293');
    await db.query('UPDATE sdr.jobs SET available_at=now() WHERE id=$1',[turn.id]);
    const job=await store.claim(channel);assert.ok(job);await engine.dispatch(channel,job);
    const result={bubbles:[bubble],proposals:[],relations:[],referral:null,sourceRefs:[],nextAction:'continue',handoffReason:null};

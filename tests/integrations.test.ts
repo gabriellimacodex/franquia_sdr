@@ -13,6 +13,7 @@ const syntheticEnv = {
   KAPSO_API_KEY: 'synthetic-kapso-key',
   SAPORE_API_URL: 'https://sdr.example.test',
   KAPSO_FUNCTION_TOKEN: 'synthetic-function-token',
+  KAPSO_PHONE_NUMBER_ID: phoneNumberId,
 };
 function workflowRequest(vars: Record<string, string> = {}) {
   return new Request('https://functions.example.test', {

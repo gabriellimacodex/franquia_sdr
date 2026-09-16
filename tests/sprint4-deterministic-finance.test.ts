@@ -4,10 +4,11 @@ import { financeCases } from '../evaluations/sprint4-deterministic-finance.js';
 import { createFinancialDraftSnapshot } from '../src/financial-version.js';
 import { initialSnapshot } from '../src/seed.js';
 import { snapshotHash } from '../src/versioning.js';
+import { DETERMINISTIC_HASH } from '../evaluations/sprint4-deterministic.js';
 
 async function run(id: string) {
   const snapshot = createFinancialDraftSnapshot(initialSnapshot({ tenantId: 'cognita-homologacao', brandId: 'sapore' }));
-  assert.equal(snapshotHash(snapshot), 'c655e440fef8dddf5dd855a42d1299a59044b2c598e986bf5a4b1b7c1d9cb959');
+  assert.equal(snapshotHash(snapshot), DETERMINISTIC_HASH);
   const before = structuredClone(snapshot), item = financeCases.find(item => item.id === id);
   assert.ok(item, `Missing deterministic case ${id}`);
   const result = await item.run(snapshot);

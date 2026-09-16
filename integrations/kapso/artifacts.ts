@@ -45,7 +45,7 @@ export function buildKapsoWorkflow(functionIds: FunctionIds) {
       source: ids.guard, target: label === 'handoff' ? ids.recordHandoff : ids[label], label,
     })),
     { source: ids.send, target: ids.dispatched, label: 'next' },
-    { source: ids.dispatched, target: ids.wait, label: 'next' },
+    { source: ids.dispatched, target: ids.poll, label: 'next' },
     { source: ids.poll, target: ids.guard, label: 'next' },
     { source: ids.wait, target: ids.guard, label: 'next' },
     { source: ids.recordHandoff, target: ids.handoff, label: 'next' },

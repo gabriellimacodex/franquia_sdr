@@ -82,9 +82,9 @@ async function handler(request, env) {
     if (freshHumanResume && (!Number.isFinite(resumeAt) || resumeAt > Date.now())) return route('handoff', 'native_resume_time_unverified');
     if (previous.sapore_dispatch_status === 'unknown' && previous.sapore_turn_id && !freshHumanResume) {
       const priorTurn = await json(`${base}/internal/turns/${encodeURIComponent(previous.sapore_turn_id)}`, env.KAPSO_FUNCTION_TOKEN);
-      // Native send already ran. `unknown` is dispatched awaiting WAMID; only failed/pending turns block the next reply.
-      if (!['sent', 'unknown'].includes(priorTurn.state)) return route('handoff', 'unconfirmed_previous_send');
-      vars.sapore_dispatch_status = priorTurn.state === 'sent' ? 'confirmed' : 'awaiting_receipt';
+      // An ambiguous prior send never authorizes a blind resend; only a confirmed `sent` clears the checkpoint.
+      if (priorTurn.state !== 'sent') return route('handoff', 'unconfirmed_previous_send');
+      vars.sapore_dispatch_status = 'confirmed';
     }
     const historyUrl = new URL(`https://api.kapso.ai/meta/whatsapp/v24.0/${phoneNumberId}/messages`);
     historyUrl.searchParams.set('conversation_id', conversationId);

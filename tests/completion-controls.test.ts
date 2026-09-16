@@ -122,7 +122,7 @@ test('WhatsApp completion remains ready without laboratory message insertion, de
  const db:Database={...actual,transaction:fn=>actual.transaction(tx=>fn({query:async<T>(sql:string,params?:unknown[])=>{queries.push(sql);return tx.query<T>(sql,params);}}))};
  try {
   await seedPilot(actual,{testers:[{contactId:'5511999999999',label:'Fictional tester'}]});
-  const store=new Store(db),input=TurnInputSchema.parse({phoneNumberId:'1052683654599692',conversationId:'wa-controls',contactId:'5511999999999',messageId:'wa-controls-message',text:'Quero conhecer a franquia.',executionId:'wa-execution',controlFingerprint:'wa-initial'});
+  const store=new Store(db),input=TurnInputSchema.parse({phoneNumberId:'1093705843816293',conversationId:'wa-controls',contactId:'5511999999999',messageId:'wa-controls-message',text:'Quero conhecer a franquia.',executionId:'wa-execution',controlFingerprint:'wa-initial'});
   const turn=await store.startTurn(input),channel=await store.channel(input.phoneNumberId);
   assert.equal(channel.kind,'whatsapp');
   await actual.query('UPDATE sdr.jobs SET available_at=now() WHERE id=$1',[turn.id]);

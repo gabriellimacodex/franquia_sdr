@@ -40,7 +40,7 @@ test('human request pauses the lab, invalidates pending replies and never queues
   await lab.send(user,session.value.id,{requestId:randomUUID(),text:'Quero falar com um humano'});
   const detail=await lab.detail(user,session.value.id);assert.ok(detail.ok);assert.equal(detail.value.session.state,'human');
   const brief=(await db.query<{assignment_status:string,version_id:string}>('SELECT * FROM sdr.briefings')).rows[0];assert.equal(brief.assignment_status,'not_applicable');assert.equal(brief.version_id,session.value.versionId);
-  let calls=0;await new Briefings(store,testConfig,async()=>{calls++;return Response.json({});}).dispatch(await store.channel('1052683654599692'));assert.equal(calls,0);
+  let calls=0;await new Briefings(store,testConfig,async()=>{calls++;return Response.json({});}).dispatch(await store.channel('1093705843816293'));assert.equal(calls,0);
   const snapshot=async()=>(await db.query<{messages:number,jobs:number,briefings:number,events:number,deliveries:number}>(`SELECT
    (SELECT count(*)::int FROM sdr.messages) AS messages,
    (SELECT count(*)::int FROM sdr.jobs) AS jobs,
@@ -62,7 +62,7 @@ test('WhatsApp worker cannot claim laboratory jobs; validated replies persist on
   const created=await lab.create(user,{requestId:randomUUID(),label:'Teste',scenario:'free'});assert.ok(created.ok);
   const sent=await lab.send(user,created.value.id,{requestId:randomUUID(),text:'Olá, quero conhecer a franquia.'});assert.ok(sent.ok);assert.ok(sent.value.jobId);
   await db.query('UPDATE sdr.jobs SET available_at=now()');
-  assert.equal(await store.claim(await store.channel('1052683654599692')),undefined);
+  assert.equal(await store.claim(await store.channel('1093705843816293')),undefined);
   const channel=await store.scopeForJob(sent.value.jobId);const job=await store.claim(channel);assert.ok(job);
   const engine=new Engine(store,testConfig,async()=>Response.json({accepted:true}));await engine.dispatch(channel,job);
   const callback={jobId:job.id,contextVersion:job.context_version,result:{bubbles:['Olá! Sou o assistente virtual da Sapore. Em qual cidade você pensa em abrir?'],proposals:[],relations:[],referral:null,sourceRefs:[],nextAction:'continue',handoffReason:null}};

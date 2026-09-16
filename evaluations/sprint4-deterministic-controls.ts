@@ -246,7 +246,7 @@ controlCases.push({
       let calls = 0;
       const briefs = new Briefings(f.store, config, async () => { calls++; assert.fail('No external briefing allowed'); });
       await briefs.dispatch(await f.store.scopeForJob(pending.value.jobId!));
-      await briefs.dispatch(await f.store.channel('1052683654599692'));
+      await briefs.dispatch(await f.store.channel('1093705843816293'));
       const before = await f.counts();
       const blocked = await f.sessions.send(f.user, f.sessionId, { requestId: randomUUID(), text: input[2] });
       assert.ok(!blocked.ok); assert.equal(blocked.error.code, 'SESSION_PAUSED');

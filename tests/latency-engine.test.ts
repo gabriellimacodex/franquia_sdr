@@ -78,7 +78,7 @@ test('completion batches existing memory instead of one round trip per fact',asy
 test('worker channel enumeration returns complete channel contracts in one database query',async()=>{
  const {db,store,channel,calls,reset}=await fixture();
  try {
-  const expected=[await store.channel('1052683654599692'),channel].sort((a,b)=>a.phoneNumberId.localeCompare(b.phoneNumberId));
+  const expected=[await store.channel('1093705843816293'),channel].sort((a,b)=>a.phoneNumberId.localeCompare(b.phoneNumberId));
   reset();const channels=await store.channels();
   assert.equal(calls.queries.length,1);assert.equal(calls.transactions,0);
   assert.deepEqual(channels.sort((a,b)=>a.phoneNumberId.localeCompare(b.phoneNumberId)),expected);
@@ -150,7 +150,7 @@ test('greeting shortcut excludes substantive input, continuations, prior memory,
   const remembered=await create();await db.query('UPDATE sdr.candidates SET revision=2 WHERE id=$1',[remembered.candidateId]);
   const memory=await sessions.send(user,remembered.id,{requestId:randomUUID(),text:'oi'});assert.ok(memory.ok);
   assert.equal((await db.query<{state:string}>('SELECT state FROM sdr.jobs WHERE id=$1',[memory.value.jobId])).rows[0].state,'pending');
-  const otherChannel=await create();await db.query("UPDATE sdr.conversations SET phone_number_id='1052683654599692' WHERE id=$1",[otherChannel.id]);
+  const otherChannel=await create();await db.query("UPDATE sdr.conversations SET phone_number_id='1093705843816293' WHERE id=$1",[otherChannel.id]);
   const nonlab=await sessions.send(user,otherChannel.id,{requestId:randomUUID(),text:'oi'});assert.ok(nonlab.ok);
   assert.equal((await db.query<{state:string}>('SELECT state FROM sdr.jobs WHERE id=$1',[nonlab.value.jobId])).rows[0].state,'pending');
   await seedPilot(db,{tenantId:'another-tenant',testers:[{contactId:'5511999999999',label:'Fictional tester'}]});

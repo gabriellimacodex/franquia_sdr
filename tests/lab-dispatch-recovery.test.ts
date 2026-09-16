@@ -178,7 +178,7 @@ test('WhatsApp recovery keeps its existing backoff and lease behavior',async()=>
  const db=await testDatabase(),store=new Store(db);
  try {
   await seedPilot(db,{testers:[{contactId:'5511999999999',label:'Synthetic WhatsApp recovery'}]});
-  const input=TurnInputSchema.parse({phoneNumberId:'1052683654599692',conversationId:'synthetic-wa',contactId:'5511999999999',messageId:'synthetic-wa-message',text:'Quero conhecer a franquia'});
+  const input=TurnInputSchema.parse({phoneNumberId:'1093705843816293',conversationId:'synthetic-wa',contactId:'5511999999999',messageId:'synthetic-wa-message',text:'Quero conhecer a franquia'});
   const turn=await store.startTurn(input),channel=await store.channel(input.phoneNumberId);
   assert.equal(channel.kind,'whatsapp');
   await db.query('UPDATE sdr.jobs SET available_at=now() WHERE id=$1',[turn.id]);

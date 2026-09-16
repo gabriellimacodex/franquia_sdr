@@ -19,7 +19,7 @@ test('explicit laboratory sends are immediately eligible while WhatsApp retains 
   assert.equal(Number(timing.delay_ms),0);
   assert.equal(Number(timing.deadline_ms),60000);
   const job=await store.claim(await store.scopeForJob(sent.value.jobId));assert.equal(job?.id,sent.value.jobId);
-  const whatsapp=await store.startTurn(TurnInputSchema.parse({phoneNumberId:'1052683654599692',conversationId:'debounce-stays',contactId:'5511999999999',messageId:'wa-message',text:'Olá.',executionId:'wa-execution',controlFingerprint:'wa-initial'}));
+  const whatsapp=await store.startTurn(TurnInputSchema.parse({phoneNumberId:'1093705843816293',conversationId:'debounce-stays',contactId:'5511999999999',messageId:'wa-message',text:'Olá.',executionId:'wa-execution',controlFingerprint:'wa-initial'}));
   const waTiming=(await db.query<{delay_ms:number}>('SELECT extract(epoch from available_at-created_at)*1000 AS delay_ms FROM sdr.jobs WHERE id=$1',[whatsapp.id])).rows[0];
   assert.equal(Number(waTiming.delay_ms),2000);
  } finally {await db.close();}

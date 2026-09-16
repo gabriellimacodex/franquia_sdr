@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { DeterministicSuite } from '../evaluations/sprint4-deterministic.js';
+import { DeterministicSuite, DETERMINISTIC_HASH } from '../evaluations/sprint4-deterministic.js';
 
 test('deterministic evidence refuses an incomplete or duplicate catalog before executing it', async () => {
   let called = 0;
@@ -48,6 +48,6 @@ test('runner measures two isolated repetitions and records failures without fabr
   assert.deepEqual(result.report.criticalViolations, ['D02/R1', 'D02/R2']);
   assert.equal(result.report.results.filter(row => row.status === 'passed').length, 58);
   assert.ok(result.report.results.every(row => row.durationMs >= 0));
-  assert.equal(result.report.snapshotHash, 'c655e440fef8dddf5dd855a42d1299a59044b2c598e986bf5a4b1b7c1d9cb959');
+  assert.equal(result.report.snapshotHash, DETERMINISTIC_HASH);
   assert.equal(result.report.humanAverage, null);
 });

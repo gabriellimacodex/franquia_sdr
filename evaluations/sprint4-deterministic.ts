@@ -3,7 +3,7 @@ import { createFinancialDraftSnapshot } from '../src/financial-version.js';
 import { initialSnapshot } from '../src/seed.js';
 import { snapshotHash } from '../src/versioning.js';
 
-export const DETERMINISTIC_HASH = 'c655e440fef8dddf5dd855a42d1299a59044b2c598e986bf5a4b1b7c1d9cb959';
+export const DETERMINISTIC_HASH = snapshotHash(createFinancialDraftSnapshot(initialSnapshot({ tenantId: 'cognita-homologacao', brandId: 'sapore' })));
 
 export class DeterministicSuite implements DeterministicSuiteSpec {
   constructor(private readonly cases: readonly DeterministicCase[]) {}

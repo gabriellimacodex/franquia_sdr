@@ -43,7 +43,7 @@ const headerSchema = z.object({
   conversation: z.object({ id: z.string(), candidate_id: z.string(), phone_number_id: z.string(), epoch: z.number().int(), state: z.string() }),
   candidate: z.object({ id: z.string(), revision: z.number().int(), lead_state: z.unknown() }),
   version: z.object({ snapshot: z.unknown(), content_hash: z.string(), model: z.string() }),
-  channel_kind: z.string(), has_audio: z.boolean(),
+  channel_kind: z.string().nullable(), has_audio: z.boolean(),
   trigger: z.object({ type: z.string(), actor: z.string(), candidate_id: z.string(), conversation_id: z.string() }),
   messages: z.array(z.object({ id: z.string(), actor: z.string(), text: z.string(), type: z.string(), provider_timestamp: z.string() })),
 });
