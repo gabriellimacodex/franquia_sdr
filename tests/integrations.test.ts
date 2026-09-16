@@ -99,9 +99,8 @@ function sessionNetwork(state = 'ready', authorized = true) {
     if (url.pathname === '/internal/turns') return Response.json({
       id: 'turn-1', state, reply: ['Olá!', 'Qual é sua cidade?'], contextVersion: 3,
     });
-    if (url.pathname.endsWith('/authorize-send')) return Response.json({
-      authorized, state: authorized ? 'ready' : 'stale',
-      reply: ['Olá!', 'Qual é sua cidade?'], attemptId: 'attempt-1',
+    if (url.pathname.endsWith('/deliver')) return Response.json({
+      authorized, state: authorized ? 'sent' : 'stale', reply: [], attemptId: 'attempt-1',
     });
     if (url.pathname.endsWith('/control')) return Response.json({ ok: true });
     throw new Error(`Unexpected request ${url.pathname}`);
@@ -109,12 +108,13 @@ function sessionNetwork(state = 'ready', authorized = true) {
   return { fetch, requests };
 }
 
-test('a ready reply is sent only after fresh native state and backend authorization', async () => {
+test('a ready reply is delivered by the API after fresh native state, and the workflow never sends it again', async () => {
   const network = sessionNetwork();
   const handler = await loadFunction('sapore-session', network.fetch);
   const result = await (await handler(workflowRequest(), syntheticEnv)).json();
-  assert.equal(result.next_edge, 'send');
-  assert.equal(result.vars.sapore_reply_text, 'Olá!\n\nQual é sua cidade?');
+  assert.equal(result.next_edge, 'wait');
+  assert.equal(result.vars.sapore_reply_text, '');
+  assert.equal(result.vars.sapore_dispatch_status, 'confirmed');
   assert.equal(result.vars.sapore_turn_id, 'turn-1');
   assert.equal(result.vars.sapore_attempt_id, 'attempt-1');
   const turn = network.requests.find(item => item.path === '/internal/turns')?.body;
@@ -122,7 +122,7 @@ test('a ready reply is sent only after fresh native state and backend authorizat
   assert.equal(turn.contactId, 'contact-1');
   assert.equal(turn.text, 'Sou de Campinas');
   assert.equal(turn.executionId, 'execution-1');
-  assert.equal(network.requests.at(-1)?.path, '/internal/turns/turn-1/authorize-send');
+  assert.equal(network.requests.at(-1)?.path, '/internal/turns/turn-1/deliver');
 });
 
 test('a pending turn polls without reusing an old reply or authorizing a send', async () => {
@@ -131,7 +131,7 @@ test('a pending turn polls without reusing an old reply or authorizing a send', 
   const result = await (await handler(workflowRequest(), syntheticEnv)).json();
   assert.equal(result.next_edge, 'poll');
   assert.equal(result.vars.sapore_reply_text, '');
-  assert.ok(!network.requests.some(item => item.path.endsWith('/authorize-send')));
+  assert.ok(!network.requests.some(item => item.path.endsWith('/deliver')));
 });
 
 test('unknown delivery and escalated turns go to native handoff without another send', async () => {
@@ -141,7 +141,7 @@ test('unknown delivery and escalated turns go to native handoff without another 
     const result = await (await handler(workflowRequest(), syntheticEnv)).json();
     assert.equal(result.next_edge, 'handoff', state);
     assert.equal(result.vars.sapore_reply_text, '');
-    assert.ok(!network.requests.some(item => item.path.endsWith('/authorize-send')));
+    assert.ok(!network.requests.some(item => item.path.endsWith('/deliver')));
   }
 });
 
@@ -401,7 +401,7 @@ test('a new verified human resume releases the old unknown reference but never r
   assert.equal(result.vars.sapore_dispatch_status, 'reviewed_after_native_resume');
   assert.equal(network.requests.filter(item => item.path === '/internal/turns').length, 1);
   assert.equal(network.requests.filter(item => item.path.endsWith('/control') && item.body.event === 'resume').length, 1);
-  assert.ok(!network.requests.some(item => item.path.endsWith('/authorize-send') || item.path.endsWith('/dispatched')));
+  assert.ok(!network.requests.some(item => item.path.endsWith('/deliver') || item.path.endsWith('/dispatched')));
 });
 
 test('equal native timestamps prefer Handoff over Resume regardless of lexicographic event IDs', async () => {
