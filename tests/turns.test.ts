@@ -161,6 +161,10 @@ test('#reset from a tester wipes memory and provider history cannot restore it',
   const reset=await store.startTurn(input('m-reset','#reset'));
   assert.equal(reset.state,'ignored');assert.equal(reset.reset,true);
   assert.equal((await store.startTurn(input('m-reset','#reset'))).reset,undefined,'the same reset command is idempotent');
+  // A reset as the first message of a new conversation still creates the conversation row, so the confirmation can be recorded there.
+  const fresh=await store.startTurn({...input('m-first','#reset'),conversationId:'c-new'});
+  assert.equal(fresh.reset,true);
+  assert.equal((await db.query("SELECT id FROM sdr.conversations WHERE id='c-new'")).rows.length,1);
   assert.equal((await db.query('SELECT * FROM sdr.messages')).rows.length,0);
   assert.equal((await db.query('SELECT * FROM sdr.jobs')).rows.length,0);
   const candidates=(await db.query<{reset_at:string|null}>('SELECT reset_at FROM sdr.candidates')).rows;

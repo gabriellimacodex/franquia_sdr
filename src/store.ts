@@ -41,18 +41,19 @@ export class Store {
      const s=[channel.tenantId,channel.brandId];
      const tester=(await tx.query<{label:string,contact_id:string}>(`SELECT label,contact_id FROM sdr.testers WHERE tenant_id=$1 AND brand_id=$2 AND enabled AND (contact_id=$3 OR contact_id=$4)`,[...s,input.contactId,input.contactPhone??''])).rows[0];
      if(!tester) return {channel,accepted:false}; // No unapproved contact content is retained.
-     if(isResetCommand(input.text)) {
-       // The Kapso Decide can replay the same latest message on every pass; one command resets and confirms exactly once.
-       const first=await tx.query('INSERT INTO sdr.webhook_receipts(id,payload_hash) VALUES($1,$2) ON CONFLICT DO NOTHING RETURNING id',[digest(`reset:${channel.tenantId}:${channel.brandId}:${input.messageId}`),'reset']);
-       if(!first.rows.length) return {channel,accepted:false};
-       await this.resetTesterTx(tx,channel,input.contactId); return {channel,accepted:false,reset:true};
-     }
      const id=randomUUID();
      await tx.query(`INSERT INTO sdr.candidates(id,tenant_id,brand_id,contact_id,label,lead_state,authorized_contact_id) VALUES($3,$1,$2,$4,$5,$6,$7) ON CONFLICT(tenant_id,brand_id,contact_id) DO NOTHING`,[...s,id,input.contactId,tester.label,JSON.stringify(createLeadState(channel.tenantId,channel.brandId,id)),tester.contact_id]);
      const candidate=(await tx.query<CandidateRow>('SELECT * FROM sdr.candidates WHERE tenant_id=$1 AND brand_id=$2 AND contact_id=$3 FOR UPDATE',[...s,input.contactId])).rows[0];
      await tx.query(`INSERT INTO sdr.conversations(id,tenant_id,brand_id,candidate_id,phone_number_id,execution_id,control_fingerprint) VALUES($3,$1,$2,$4,$5,$6,$7) ON CONFLICT(tenant_id,brand_id,id) DO NOTHING`,[...s,input.conversationId,candidate.id,input.phoneNumberId,input.executionId??null,input.controlFingerprint??null]);
      const conv=(await tx.query<ConversationRow>('SELECT * FROM sdr.conversations WHERE tenant_id=$1 AND brand_id=$2 AND id=$3 FOR UPDATE',[...s,input.conversationId])).rows[0];
      if(conv.candidate_id!==candidate.id || conv.phone_number_id!==input.phoneNumberId) throw new ServiceError('IDENTITY_MISMATCH',409);
+     // A reset needs the conversation row to exist (it may be the first message of a new conversation) so the
+     // confirmation can be recorded there; the Kapso Decide can replay the same message, so one command resets once.
+     if(isResetCommand(input.text)) {
+       const first=await tx.query('INSERT INTO sdr.webhook_receipts(id,payload_hash) VALUES($1,$2) ON CONFLICT DO NOTHING RETURNING id',[digest(`reset:${channel.tenantId}:${channel.brandId}:${input.messageId}`),'reset']);
+       if(!first.rows.length) return {channel,accepted:false};
+       await this.resetTesterTx(tx,channel,input.contactId); return {channel,accepted:false,reset:true};
+     }
      if(input.executionId&&conv.execution_id===null) {
        await tx.query('UPDATE sdr.conversations SET execution_id=$4,control_fingerprint=$5 WHERE tenant_id=$1 AND brand_id=$2 AND id=$3',[...s,conv.id,input.executionId,input.controlFingerprint??null]);
      } else if(input.executionId&&conv.execution_id!==input.executionId) {
