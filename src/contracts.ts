@@ -26,4 +26,4 @@ export const EvaluationSchema = z.object({
   jobId:z.string(),clarity:z.number().int().min(1).max(5),relevance:z.number().int().min(1).max(5),
   naturalness:z.number().int().min(1).max(5),briefingUtility:z.number().int().min(1).max(5),notes:z.string().max(4000),
 }).strict();
-export type TurnView = {id:string,state:'pending'|'ready'|'handoff'|'ignored'|'stale'|'sent'|'unknown',reply:string[],contextVersion:number,errorCode?:string,authorized?:boolean};
+export type TurnView = {id:string,state:'pending'|'ready'|'handoff'|'ignored'|'stale'|'sent'|'unknown',reply:string[],contextVersion:number,errorCode?:string,authorized?:boolean,reset?:boolean};

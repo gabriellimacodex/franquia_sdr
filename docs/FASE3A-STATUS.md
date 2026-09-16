@@ -72,6 +72,12 @@ O canvas do n8n usa o node **Agent** como cérebro (não HTTP `/v1/responses`), 
 - Fix: `dispatching` agora é `pending` na view (a função faz poll e vê `sent` na volta); `dispatched` (envio nativo legado, sem WAMID) continua `unknown`. Asserção em `turns.test.ts`.
 - Briefing: exec 136 rejeitada com `BRIEFING_UNKNOWN_FACT` (modelo inventou `factIds`); limite "somente ids existentes em `lead.facts`" no `Briefing — Agent` (n8n) e em `BRIEFING_PROMPT`.
 
+## r15 — `#reset` com confirmação ao tester (2026-09-16)
+
+- O `#reset` responde ao tester com texto fixo ("apaguei nossa conversa anterior…"), enviado fora do guard pela rota `/internal/turns` (e pelo webhook via `onReset`), para ele saber que pode retomar.
+- Desenho determinístico: o reset **mantém a conversa** (apaga mensagens, jobs, briefings, eventos, fatos e relações; volta a `automatic`) e a confirmação é gravada como mensagem do agente com o WAMID (`Store.recordResetConfirmation`) — o replay do histórico bate no `ON CONFLICT` e nunca vira "humano assumiu". Um desenho só por `reset_at`/timestamp foi descartado: desvio de relógio Meta × banco reabriria o handoff indevido.
+- Deploy r14 (corrida `dispatching`) às 06:42:42Z; r15 em seguida.
+
 ## Divergência git × deploy (histórico; resolvida pela r11)
 
 - `integrations/kapso/functions/sapore-session/index.js` no git inclui o guard "prior `unknown` não libera reenvio" (commit `5b5dbf4`); a função deployada na Kapso é a versão Fase 2 **sem** esse guard. Redeploy da function é uma decisão separada.

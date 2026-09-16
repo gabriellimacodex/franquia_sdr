@@ -35,13 +35,13 @@ export class Store {
    const {rows} = await this.db.query<{phone_number_id:string,tenant_id:string,brand_id:string,enabled:boolean,responsible_user_id:string|null,kind:'whatsapp'|'laboratory'}>('SELECT phone_number_id,tenant_id,brand_id,enabled,responsible_user_id,kind FROM sdr.channels');
    return rows.map(row=>({phoneNumberId:row.phone_number_id,tenantId:row.tenant_id,brandId:row.brand_id,enabled:row.enabled,responsibleUserId:row.responsible_user_id,kind:row.kind}));
  }
- async ingest(input:TurnInput):Promise<{channel:Channel,accepted:boolean}> {
+ async ingest(input:TurnInput):Promise<{channel:Channel,accepted:boolean,reset?:boolean}> {
    const channel = await this.channel(input.phoneNumberId);
    return scoped(this.db,channel,async tx=>{
      const s=[channel.tenantId,channel.brandId];
      const tester=(await tx.query<{label:string,contact_id:string}>(`SELECT label,contact_id FROM sdr.testers WHERE tenant_id=$1 AND brand_id=$2 AND enabled AND (contact_id=$3 OR contact_id=$4)`,[...s,input.contactId,input.contactPhone??''])).rows[0];
      if(!tester) return {channel,accepted:false}; // No unapproved contact content is retained.
-     if(isResetCommand(input.text)) { await this.resetTesterTx(tx,channel,input.contactId); return {channel,accepted:false}; }
+     if(isResetCommand(input.text)) { await this.resetTesterTx(tx,channel,input.contactId); return {channel,accepted:false,reset:true}; }
      const id=randomUUID();
      await tx.query(`INSERT INTO sdr.candidates(id,tenant_id,brand_id,contact_id,label,lead_state,authorized_contact_id) VALUES($3,$1,$2,$4,$5,$6,$7) ON CONFLICT(tenant_id,brand_id,contact_id) DO NOTHING`,[...s,id,input.contactId,tester.label,JSON.stringify(createLeadState(channel.tenantId,channel.brandId,id)),tester.contact_id]);
      const candidate=(await tx.query<CandidateRow>('SELECT * FROM sdr.candidates WHERE tenant_id=$1 AND brand_id=$2 AND contact_id=$3 FOR UPDATE',[...s,input.contactId])).rows[0];
@@ -86,19 +86,34 @@ export class Store {
      return {channel,accepted:true};
    });
  }
- /** Tester-only. Conversations cascade to messages, jobs, deliveries, briefings and events; the lead state restarts. */
+ /** The reset confirmation is an agent message from the start, so provider history replays it as known, never as a human takeover. */
+ async recordResetConfirmation(channel:Channel,conversationId:string,contactId:string,messageId:string,text:string):Promise<void> {
+   await scoped(this.db,channel,async tx=>{
+     const s=[channel.tenantId,channel.brandId];
+     const candidate=(await tx.query<{id:string}>('SELECT id FROM sdr.candidates WHERE tenant_id=$1 AND brand_id=$2 AND contact_id=$3',[...s,contactId])).rows[0];
+     const conversation=(await tx.query<{id:string}>('SELECT id FROM sdr.conversations WHERE tenant_id=$1 AND brand_id=$2 AND id=$3',[...s,conversationId])).rows[0];
+     if(!candidate||!conversation) return;
+     await tx.query("INSERT INTO sdr.messages(id,tenant_id,brand_id,conversation_id,candidate_id,actor,type,text,provider_timestamp) VALUES($3,$1,$2,$4,$5,'agent','text',$6,now()) ON CONFLICT DO NOTHING",[...s,messageId,conversationId,candidate.id,text]);
+     await tx.query('UPDATE sdr.candidates SET reset_at=now() WHERE tenant_id=$1 AND brand_id=$2 AND id=$3',[...s,candidate.id]);
+   });
+ }
+ /** Tester-only. Conversations stay (the native binding remains valid); everything the candidate said or received goes, and the lead state restarts. */
  private async resetTesterTx(tx:Queryable,channel:Channel,contactId:string):Promise<void> {
    const s=[channel.tenantId,channel.brandId];
    const candidate=(await tx.query<CandidateRow>('SELECT * FROM sdr.candidates WHERE tenant_id=$1 AND brand_id=$2 AND contact_id=$3 FOR UPDATE',[...s,contactId])).rows[0];
    if(!candidate) return;
-   await tx.query('DELETE FROM sdr.conversations WHERE tenant_id=$1 AND brand_id=$2 AND candidate_id=$3',[...s,candidate.id]);
+   await tx.query('DELETE FROM sdr.jobs WHERE tenant_id=$1 AND brand_id=$2 AND candidate_id=$3',[...s,candidate.id]);
+   await tx.query('DELETE FROM sdr.messages WHERE tenant_id=$1 AND brand_id=$2 AND candidate_id=$3',[...s,candidate.id]);
+   await tx.query('DELETE FROM sdr.briefings WHERE tenant_id=$1 AND brand_id=$2 AND conversation_id IN (SELECT id FROM sdr.conversations WHERE tenant_id=$1 AND brand_id=$2 AND candidate_id=$3)',[...s,candidate.id]);
+   await tx.query('DELETE FROM sdr.events WHERE tenant_id=$1 AND brand_id=$2 AND conversation_id IN (SELECT id FROM sdr.conversations WHERE tenant_id=$1 AND brand_id=$2 AND candidate_id=$3)',[...s,candidate.id]);
+   await tx.query("UPDATE sdr.conversations SET state='automatic',updated_at=now() WHERE tenant_id=$1 AND brand_id=$2 AND candidate_id=$3",[...s,candidate.id]);
    await tx.query('DELETE FROM sdr.facts WHERE tenant_id=$1 AND brand_id=$2 AND candidate_id=$3',[...s,candidate.id]);
    await tx.query('DELETE FROM sdr.relations WHERE tenant_id=$1 AND brand_id=$2 AND candidate_id=$3',[...s,candidate.id]);
    await tx.query('UPDATE sdr.candidates SET lead_state=$4,revision=revision+1,reset_at=now(),updated_at=now() WHERE tenant_id=$1 AND brand_id=$2 AND id=$3',[...s,candidate.id,JSON.stringify(createLeadState(channel.tenantId,channel.brandId,candidate.id))]);
  }
  async startTurn(input:TurnInput):Promise<TurnView> {
-   const {channel,accepted}=await this.ingest(input);
-   if(!accepted) return {id:'',state:'ignored',reply:[],contextVersion:0};
+   const {channel,accepted,reset}=await this.ingest(input);
+   if(!accepted) return {id:'',state:'ignored',reply:[],contextVersion:0,...(reset?{reset:true}:{})};
    return scoped(this.db,channel,async tx=>{
      const s=[channel.tenantId,channel.brandId];
      const conv=(await tx.query<ConversationRow>('SELECT * FROM sdr.conversations WHERE tenant_id=$1 AND brand_id=$2 AND id=$3 FOR UPDATE',[...s,input.conversationId])).rows[0];

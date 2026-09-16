@@ -158,7 +158,8 @@ test('#reset from a tester wipes memory and provider history cannot restore it',
  try{
   await store.startTurn(input());
   assert.equal((await db.query('SELECT * FROM sdr.messages')).rows.length,1);
-  assert.equal((await store.startTurn(input('m-reset','#reset'))).state,'ignored');
+  const reset=await store.startTurn(input('m-reset','#reset'));
+  assert.equal(reset.state,'ignored');assert.equal(reset.reset,true);
   assert.equal((await db.query('SELECT * FROM sdr.messages')).rows.length,0);
   assert.equal((await db.query('SELECT * FROM sdr.jobs')).rows.length,0);
   const candidates=(await db.query<{reset_at:string|null}>('SELECT reset_at FROM sdr.candidates')).rows;

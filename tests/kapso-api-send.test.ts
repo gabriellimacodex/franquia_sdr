@@ -115,3 +115,34 @@ test('the n8n callback delivers immediately; the later Kapso poll sees sent and 
     assert.equal(sends.length, 2);
   } finally { await app.close(); await db.close(); }
 });
+
+test('#reset via the Kapso session route confirms to the tester, and the confirmation WAMID never replays as a takeover', async () => {
+  const { db, store } = await setup();
+  const sends: string[] = [];
+  const transport: typeof fetch = async (url, init) => {
+    const path = String(url).replace('https://api.kapso.ai', '');
+    if (path.startsWith('/platform/v1/whatsapp/contacts/')) return Response.json({ data: { wa_id: '5511999999999' } });
+    if (path.endsWith('/messages') && init?.method === 'POST') { sends.push(JSON.parse(String(init.body)).text.body); return Response.json({ messages: [{ id: 'wamid.RESET1' }] }); }
+    throw new Error('unexpected ' + path);
+  };
+  const config: Config = { ...testConfig, CHANNEL_ENABLED: 'true', NATIVE_CONTROL_VERIFIED: 'true' };
+  const app = await createServer(db, config, { transport, native: async id => ({ id, conversationId: 'c1', workflowId: 'wf-test', status: 'running', controlFingerprint: 'epoch-1' }) });
+  try {
+    await store.startTurn(input());
+    const headers = { Authorization: 'Bearer ' + testConfig.KAPSO_FUNCTION_TOKEN };
+    const reset = await app.inject({ method: 'POST', url: '/internal/turns', headers, payload: input('m-reset', '#reset') });
+    assert.equal(reset.statusCode, 200);
+    assert.deepEqual(reset.json(), { id: '', state: 'ignored', reply: [], contextVersion: 0, reset: true });
+    assert.equal(sends.length, 1);
+    assert.match(sends[0]!, /apaguei nossa conversa anterior/);
+    assert.deepEqual((await db.query<{ id: string; actor: string }>('SELECT id, actor FROM sdr.messages')).rows, [{ id: 'wamid.RESET1', actor: 'agent' }]);
+    // The confirmation comes back through provider history as an unknown outbound sender, timestamped right after the wipe.
+    const next = await app.inject({ method: 'POST', url: '/internal/turns', headers, payload: { ...input('m3', 'Voltei do zero'), messages: [
+      { id: 'wamid.RESET1', text: sends[0], actor: 'human', type: 'text', timestamp: new Date().toISOString() },
+    ] } });
+    assert.equal(next.json().state, 'pending');
+    assert.deepEqual((await db.query<{ id: string }>('SELECT id FROM sdr.messages ORDER BY id')).rows.map(row => row.id), ['m3', 'wamid.RESET1']);
+    assert.equal((await db.query<{ state: string }>('SELECT state FROM sdr.conversations')).rows[0]?.state, 'automatic');
+    assert.equal(sends.length, 1);
+  } finally { await app.close(); await db.close(); }
+});

@@ -16,7 +16,7 @@ Backend e worker independentes do protótipo e dos workflows existentes. O canal
 - Rascunhos e versões imutáveis, restauração, testes vinculados ao hash e publicação condicionada a relatórios válidos. Publicar não liga o canal.
 - Verificação do papel PostgreSQL de execução e rotina de retenção de até 30 dias, desligada por padrão.
 - Imagens (JPEG/PNG/WebP) e PDF recebidos no WhatsApp viram texto do candidato antes do modelo (`src/media.ts`, Responses API com `MEDIA_MODEL`, mesmo download por ID de mídia usado no áudio); legenda é preservada; cartão de contato vira texto na ingestão. Outros tipos continuam recebendo a resposta de capacidade. O laboratório segue somente texto.
-- Comando `#reset` (mensagem exata) para contatos da allowlist de testers: apaga conversas, fatos, relações e jobs do candidato e marca `reset_at`; histórico do provedor anterior ao reset não é re-ingerido. Sem resposta no WhatsApp; contatos fora da allowlist são ignorados. Requer a migração `004_candidate_reset`.
+- Comando `#reset` (mensagem exata) para contatos da allowlist de testers: apaga mensagens, jobs, briefings, eventos, fatos e relações do candidato (a conversa fica, volta a `automatic`) e marca `reset_at`; histórico do provedor anterior ao reset não é re-ingerido. A API confirma ao tester por WhatsApp (texto fixo, fora do guard) e grava a confirmação como mensagem do agente, para que o replay do histórico não a leia como humano. Contatos fora da allowlist são ignorados. Requer a migração `004_candidate_reset`.
 
 ## Estrutura
 

@@ -29,6 +29,8 @@ export type WebhookOptions = {
   eventType?: string;
   expectedWorkflowId?: string;
   resolveContact?: (identity: string) => Promise<{ id: string; phone?: string }>;
+  /** A tester reset was applied; the caller confirms it to the contact and then moves reset_at past that message. */
+  onReset?: (input: { phoneNumberId: string; conversationId: string; contactId: string; contactPhone?: string }) => Promise<void>;
   /** Must prove the actual WAMID belongs to this native execution from a verified provider contract. */
   verifyNativeSend?: (input: { conversationId: string; executionId: string; messageId: string; textHash: string; payload: unknown }) => Promise<boolean>;
 };
@@ -147,11 +149,12 @@ async function ingestMessages(store: Store, payloads: Envelope[], event: string,
   }
   messages.sort((a, b) => a.timestamp.localeCompare(b.timestamp));
   const latest = messages.at(-1)!;
-  await store.ingest(TurnInputSchema.parse({
+  const ingested = await store.ingest(TurnInputSchema.parse({
     phoneNumberId: payload.phone_number_id, conversationId: payload.conversation.id,
     contactId: contact.id, ...(contact.phone ? { contactPhone: contact.phone } : {}), messageId: latest.id,
     text: latest.text, messages,
   }));
+  if (ingested.reset && options.onReset) await options.onReset({ phoneNumberId: payload.phone_number_id, conversationId: payload.conversation.id, contactId: contact.id, ...(contact.phone ? { contactPhone: contact.phone } : {}) });
 }
 
 async function reconcileDelivery(store: Store, channel: Channel, payload: Envelope, event: string, text: string, options: WebhookOptions): Promise<boolean> {

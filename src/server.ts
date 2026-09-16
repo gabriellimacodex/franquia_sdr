@@ -29,6 +29,16 @@ export async function createServer(db:Database,config:Config,options:{transport?
  await app.register(rateLimit,{max:180,timeWindow:'1 minute'});
  const store=new Store(db),engine=new Engine(store,config,options.transport),kapso=new Kapso(config,options.transport),lab=new Lab(db),briefings=new Briefings(store,config,options.transport);
  const native=options.native??((id:string)=>kapso.native(id));
+ const RESET_CONFIRMATION='Pronto: apaguei nossa conversa anterior e comecei do zero. Pode mandar sua próxima mensagem.';
+ // Tester reset confirmation. Sent outside the guard (fixed text), then reset_at moves past it so history replay skips it.
+ const confirmReset=async(input:{phoneNumberId:string;conversationId:string;contactId:string;contactPhone?:string})=>{
+  try {
+   const channel=await store.channel(input.phoneNumberId);
+   const to=input.contactPhone&&/^\d{10,20}$/.test(input.contactPhone)?input.contactPhone:await kapso.resolveWaId(input.contactId);
+   const wamid=await kapso.sendText({phoneNumberId:input.phoneNumberId,to,text:RESET_CONFIRMATION});
+   await store.recordResetConfirmation(channel,input.conversationId,input.contactId,wamid,RESET_CONFIRMATION);
+  } catch { app.log.warn({code:'RESET_CONFIRMATION_FAILED',status:0},'request_failed'); }
+ };
  const versions=new Versioning(db),sessions=new LabSessions(db);
  const conversationReviews=new ConversationReview(db);
  const unwrap=<T>(result:Result<T>)=>{if(!result.ok)throw new ServiceError(result.error.code,result.error.code==='FORBIDDEN'?403:409);return result.value;};
@@ -54,6 +64,7 @@ export async function createServer(db:Database,config:Config,options:{transport?
     const phone=(input.payload as {phone_number_id?:string}).phone_number_id;
     return !!phone&&kapso.proveOutbound({conversationId:input.conversationId,executionId:input.executionId,messageId:input.messageId,phoneNumberId:phone});
    },
+   onReset:confirmReset,
   });
   return reply.send({received:true});
  });
@@ -65,7 +76,9 @@ export async function createServer(db:Database,config:Config,options:{transport?
   if(state.conversationId!==input.conversationId) throw new ServiceError('NATIVE_SCOPE_MISMATCH',409);
   if(state.status!=='running') return {id:'',state:'handoff',reply:[],contextVersion:0};
   if(state.controlFingerprint!==input.controlFingerprint) throw new ServiceError('NATIVE_CONTEXT_CHANGED',409);
-  return store.startTurn(input);
+  const turn=await store.startTurn(input);
+  if(turn.reset) await confirmReset({phoneNumberId:input.phoneNumberId,conversationId:input.conversationId,contactId:input.contactId,...(input.contactPhone?{contactPhone:input.contactPhone}:{})});
+  return turn;
  });
  app.get<{Params:{id:string}}>('/internal/turns/:id',async request=>store.view((await store.getJob(request.params.id)).job));
  app.get<{Params:{id:string},Querystring:{phoneNumberId:string}}>('/internal/conversations/:id/state',async request=>{
