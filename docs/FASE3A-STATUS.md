@@ -41,7 +41,16 @@ O canvas do n8n usa o node **Agent** como cérebro (não HTTP `/v1/responses`), 
 - Rollback às 00:42Z: trigger reativado; execuções presas `8bc1adc5…` e `75e6feaf…` encerradas via API.
 - Conclusão: **antes de repetir a 3B, provar a entrega Kapso → `/webhooks/kapso` com o trigger ainda ligado** (log de delivery na Kapso + hit no proxy + `webhook_receipts`). Só então desligar o trigger, na ordem exata do plano.
 
-## Divergência git × deploy
+## Deploy r11 (2026-09-16, 05:34Z)
+
+- Migração `004_candidate_reset` aplicada pelo SQL Editor (coluna confirmada via `information_schema`), ledger registrado.
+- Imagem `sapore-sdr:sprint5-media-20260916-r11` construída na release `/opt/sapore-sdr/releases/20260916T050550Z/sapore-sdr` (commit `6e1b3ef`; `src/` idêntico a `f751910`). Um `docker build` puro agora funciona: `Dockerfile` checa `tsconfig.docker.json` (código embarcado, sem `tests/`/`evaluations/`).
+- Regressão dentro da imagem (Node 22, rede `none`): 580 na primeira rodada + 31/31 nos cinco arquivos que dependiam de `docs/`/`compose*.yaml` (montados) e da fixture de `turns` (corrigida em `f751910`). Local (Node 24): 585/585.
+- Troca com zero jobs de WhatsApp ativos: `compose up -d` com `SAPORE_IMAGE=r11`, `runtime.env` e CA inalterados. `/health` e `/ready` 200; `CHANNEL_ENABLED=true`, `NATIVE_CONTROL_VERIFIED=true`, `RETENTION_ENABLED=false`. Rollback: mesmo comando com `sprint4-nat-send-20260915-r10` na release `20260914T043000Z`.
+- Function Kapso `sapore-session` (`676ecedd…`) PATCH + deploy às 05:35:12Z com o código de `f751910` (mídia + guard anti-reenvio + `/deliver`). Backup do código anterior = git `bc240c0` (idêntico ao que estava em produção).
+- Primeiro briefing real aceito pela API: exec n8n 128 (05:12Z, 29 s, `accepted: true`) — ainda na r10, com prazo de 60 s; r11 dá 180 s.
+
+## Divergência git × deploy (histórico; resolvida pela r11)
 
 - `integrations/kapso/functions/sapore-session/index.js` no git inclui o guard "prior `unknown` não libera reenvio" (commit `5b5dbf4`); a função deployada na Kapso é a versão Fase 2 **sem** esse guard. Redeploy da function é uma decisão separada.
 - API (imagem r10 em produção) ainda **não** contém: limites do `BRIEFING_PROMPT`, prazo de briefing 180 s, bloco anti-bot em `src/prompts.ts` (cópia de referência; o n8n já tem), o comando `#reset` de tester, e imagem/PDF/cartão de contato → texto (`src/media.ts`; o mapeamento de tipos em `sapore-session/index.js` também mudou e **precisa de redeploy da function na Kapso**, senão imagens continuam chegando como `unsupported`). O `#reset` exige a migração `004_candidate_reset` (`ALTER TABLE sdr.candidates ADD COLUMN reset_at`) aplicada pelo runner com a conexão administrativa **antes** de subir a imagem — o runtime só usa a coluna, não a cria.
