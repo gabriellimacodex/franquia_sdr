@@ -76,7 +76,7 @@ O canvas do n8n usa o node **Agent** como cérebro (não HTTP `/v1/responses`), 
 
 - O `#reset` responde ao tester com texto fixo ("apaguei nossa conversa anterior…"), enviado fora do guard pela rota `/internal/turns` (e pelo webhook via `onReset`), para ele saber que pode retomar.
 - Desenho determinístico: o reset **mantém a conversa** (apaga mensagens, jobs, briefings, eventos, fatos e relações; volta a `automatic`) e a confirmação é gravada como mensagem do agente com o WAMID (`Store.recordResetConfirmation`) — o replay do histórico bate no `ON CONFLICT` e nunca vira "humano assumiu". Um desenho só por `reset_at`/timestamp foi descartado: desvio de relógio Meta × banco reabriria o handoff indevido.
-- Deploy r14 (corrida `dispatching`) às 06:42:42Z; r15 em seguida.
+- Deploy r14 (corrida `dispatching`) às 06:42:42Z; r15 (`sprint5-reset-confirm-20260916-r15`, commit `e45415c`) às 06:52:27Z, 31/31 na imagem, `/health`/`/ready` 200. Rollback: r14, mesmo comando.
 
 ## Divergência git × deploy (histórico; resolvida pela r11)
 
