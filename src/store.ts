@@ -122,6 +122,14 @@ export class Store {
    const state:TurnView['state']= ['pending','working','running'].includes(job.state)?'pending':job.state==='dispatching'||job.state==='dispatched'?'unknown':job.state as TurnView['state'];
    return {id:job.id,state,reply:state==='ready'?job.result?.bubbles??[]:[],contextVersion:job.context_version,...(job.error_code?{errorCode:job.error_code}:{})};
  }
+ /** The native execution a conversation is bound to, as recorded at ingest; null until the first bound turn. */
+ async nativeBinding(id:string):Promise<{executionId:string,controlFingerprint:string}|null> {
+   const channel=await this.scopeForJob(id);
+   return scoped(this.db,channel,async tx=>{
+     const row=(await tx.query<{execution_id:string|null,control_fingerprint:string|null}>('SELECT c.execution_id,c.control_fingerprint FROM sdr.jobs j JOIN sdr.conversations c ON c.tenant_id=j.tenant_id AND c.brand_id=j.brand_id AND c.id=j.conversation_id WHERE j.tenant_id=$1 AND j.brand_id=$2 AND j.id=$3',[channel.tenantId,channel.brandId,id])).rows[0];
+     return row?.execution_id&&row.control_fingerprint?{executionId:row.execution_id,controlFingerprint:row.control_fingerprint}:null;
+   });
+ }
  async getJob(id:string):Promise<{channel:Channel,job:JobRow}> {
    const channel=await this.scopeForJob(id);
    return scoped(this.db,channel,async tx=>{

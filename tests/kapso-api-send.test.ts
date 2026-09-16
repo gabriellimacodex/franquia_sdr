@@ -4,6 +4,12 @@ import { Kapso } from '../src/kapso.js';
 import { setup, input } from './turns-fixture.js';
 import { createServer } from '../src/server.js';
 import { testConfig } from './config.js';
+import type { Config } from '../src/config.js';
+import { Engine } from '../src/engine.js';
+import { Store } from '../src/store.js';
+import { seedPilot } from '../src/seed.js';
+import { testDatabase } from './db-helper.js';
+import { TurnInputSchema } from '../src/contracts.js';
 
 test('Kapso.sendText posts Cloud API text and returns WAMID', async () => {
   const calls: { path: string; body?: string }[] = [];
@@ -70,5 +76,42 @@ test('deliver sends one WhatsApp message per bubble and records every WAMID as a
       { id: 'wamid.OUT2', text: 'Qual cidade você considera?', actor: 'human', type: 'text' },
     ] });
     assert.equal((await db.query<{ state: string }>('SELECT state FROM sdr.conversations')).rows[0]?.state, 'automatic');
+  } finally { await app.close(); await db.close(); }
+});
+
+test('the n8n callback delivers immediately; the later Kapso poll sees sent and sends nothing', async () => {
+  const db = await testDatabase();
+  const sends: string[] = []; let count = 0; let n8nCalls = 0;
+  const transport: typeof fetch = async (url, init) => {
+    const target = String(url);
+    if (target === testConfig.N8N_WEBHOOK_URL) { n8nCalls++; return Response.json({ accepted: true }); }
+    const path = target.replace('https://api.kapso.ai', '');
+    if (path.endsWith('/messages') && init?.method === 'POST') { sends.push(JSON.parse(String(init.body)).text.body); count++; return Response.json({ messages: [{ id: 'wamid.CB' + count }] }); }
+    throw new Error('unexpected ' + target);
+  };
+  const config: Config = { ...testConfig, CHANNEL_ENABLED: 'true', NATIVE_CONTROL_VERIFIED: 'true' };
+  const app = await createServer(db, config, { transport, native: async id => ({ id, conversationId: 'wa-cb', workflowId: 'wf-test', status: 'running', controlFingerprint: 'wa-initial' }) });
+  try {
+    await seedPilot(db, { testers: [{ contactId: '5511999999999', label: 'Fictional tester' }], responsibleUserId: 'operator-test' });
+    const store = new Store(db);
+    const turn = await store.startTurn(TurnInputSchema.parse({ phoneNumberId: '1093705843816293', conversationId: 'wa-cb', contactId: '5511999999999', contactPhone: '5511999999999',
+      messageId: 'wa-cb-m1', text: 'Quero conhecer a franquia.', executionId: 'wa-execution', controlFingerprint: 'wa-initial' }));
+    const channel = await store.channel('1093705843816293');
+    await db.query('UPDATE sdr.jobs SET available_at=now() WHERE id=$1', [turn.id]);
+    const job = await store.claim(channel); assert.ok(job);
+    await new Engine(store, config, transport).dispatch(channel, job);
+    assert.equal(n8nCalls, 1);
+    const completion = await app.inject({ method: 'POST', url: `/internal/n8n/jobs/${encodeURIComponent(job.id)}/complete`, headers: { Authorization: 'Bearer ' + testConfig.N8N_CALLBACK_TOKEN },
+      payload: { jobId: job.id, contextVersion: job.context_version, result: { bubbles: ['Oi! Sou a Sofia.', 'Qual cidade você considera?'], proposals: [], relations: [], referral: null, sourceRefs: [], nextAction: 'continue', handoffReason: null } } });
+    assert.equal(completion.statusCode, 200);
+    assert.equal(completion.json().accepted, true);
+    assert.deepEqual(sends, ['Oi! Sou a Sofia.', 'Qual cidade você considera?']);
+    assert.equal((await store.getJob(job.id)).job.state, 'sent');
+    const poll = await app.inject({ method: 'POST', url: `/internal/turns/${encodeURIComponent(job.id)}/deliver`, headers: { Authorization: 'Bearer ' + testConfig.KAPSO_FUNCTION_TOKEN },
+      payload: { executionId: 'wa-execution', controlFingerprint: 'wa-initial' } });
+    assert.equal(poll.statusCode, 200);
+    assert.equal(poll.json().state, 'sent');
+    assert.equal(poll.json().authorized, true);
+    assert.equal(sends.length, 2);
   } finally { await app.close(); await db.close(); }
 });

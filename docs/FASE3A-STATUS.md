@@ -57,6 +57,14 @@ O canvas do n8n usa o node **Agent** como cérebro (não HTTP `/v1/responses`), 
 - Deploy: imagem `sapore-sdr:sprint5-bubbles-20260916-r12` (commit `75080f4`), 25/25 nos arquivos relacionados dentro da imagem, troca às 05:48:28Z com zero jobs ativos, `/health`/`/ready` 200. Rollback: r11 (`sprint5-media-20260916-r11`), mesmo comando.
 - Teste de rota cobre os dois envios, o registro dos WAMIDs e o replay do histórico sem pausa. O teste `sprint4-journal` "two real processes racing…" é flake de timing (falhou uma vez na suíte completa, 13/13 isolado duas vezes).
 
+## r13 — envio no callback + latência (2026-09-16)
+
+- Medição em 2 turnos reais (05:50/05:51): job → callback do n8n 8,4–10,4 s (prepare ~1,5 s com embedding, modelo 4,6–5,2 s, `completeReadMs` 1,2–1,6 s); **callback → envio 8,6–10,8 s parados** esperando o `wait_for_response` de 10 s do workflow Kapso chamar `/deliver`. Total até enviar ~19 s; percebido ~21–23 s (buffer Kapso 2 s + função). Meta do plano: 5 s típico / 8 s.
+- Mudança: a lógica do `/deliver` virou `src/delivery.ts` (`deliverTurn`); o callback `/internal/n8n/jobs/:id/complete` chama `deliverTurn` assim que o guard aceita, usando `execution_id`/`control_fingerprint` gravados na conversa (`Store.nativeBinding`). A reserva de envio é única (`authorize`), então o poll da Kapso que chegar depois vê `sent` e não envia (teste de rota cobre os dois caminhos). Falha na entrega no callback só é logada (`DELIVER_AT_COMPLETION_FAILED`); o poll da Kapso continua como segundo caminho.
+- Experimento (reversível): `Modelo — GPT` (Sofia) com `reasoningEffort: low` no n8n desde 06:15Z. Comparar qualidade por um dia; desligar se cair.
+- Prompt da Sofia: apresentação só no primeiro turno, nunca no segundo balão nem em turnos seguintes (n8n + `src/prompts.ts`, 06:0xZ).
+- Flake conhecido: `completion-controls.test.ts` falhou como arquivo uma vez na suíte completa (18 s), 6/6 isolado.
+
 ## Divergência git × deploy (histórico; resolvida pela r11)
 
 - `integrations/kapso/functions/sapore-session/index.js` no git inclui o guard "prior `unknown` não libera reenvio" (commit `5b5dbf4`); a função deployada na Kapso é a versão Fase 2 **sem** esse guard. Redeploy da function é uma decisão separada.

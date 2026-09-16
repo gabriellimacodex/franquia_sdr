@@ -8,6 +8,7 @@ import { scoped } from './database.js';
 import { Store, type ConversationRow, type ControlEvidence } from './store.js';
 import { Engine } from './engine.js';
 import { Kapso, type NativeState } from './kapso.js';
+import { deliverTurn } from './delivery.js';
 import { ControlSchema, TurnInputSchema } from './contracts.js';
 import { ServiceError, tokenMatches, verifySignature } from './security.js';
 import { Lab, authenticateLab } from './lab.js';
@@ -104,45 +105,21 @@ export async function createServer(db:Database,config:Config,options:{transport?
  app.post<{Params:{id:string}}>('/internal/turns/:id/deliver',async request=>{
   const input=z.object({executionId:z.string(),controlFingerprint:z.string(),contextVersion:z.number().optional()}).parse(json(request));
   const {channel,job}=await store.getJob(request.params.id);
-  if(config.CHANNEL_ENABLED!=='true'||config.NATIVE_CONTROL_VERIFIED!=='true'||!channel.responsibleUserId) return {authorized:false,state:'handoff',reply:[],errorCode:'RELEASE_GATE_CLOSED'};
-  if(job.state==='sent') return {...store.view(job),authorized:true,reply:[]};
-  const state=await native(input.executionId);
-  if(state.status!=='running'||state.conversationId!==job.conversation_id||state.controlFingerprint!==input.controlFingerprint) {
-   await store.control(channel,job.conversation_id,'handoff','deliver-guard:'+state.controlFingerprint,input.executionId,state.controlFingerprint);
-   return {authorized:false,state:'handoff',reply:[]};
-  }
-  const authorization=await store.authorize(job.id,input.executionId,input.controlFingerprint);
-  if(!authorization.authorized) return authorization;
-  const reply=authorization.reply;
-  if(!Array.isArray(reply)||reply.length<1||reply.length>2||reply.some(part=>typeof part!=='string'||!part.trim())||reply.join('\n\n').length>4000) {
-   await store.failApiSend(job.id,'INVALID_AUTHORIZED_REPLY');
-   return {authorized:false,state:'handoff',reply:[],errorCode:'INVALID_AUTHORIZED_REPLY'};
-  }
-  try {
-   const hint=await store.recipientHint(job.id);
-   const to=/^\d{10,20}$/.test(hint.authorizedContactId)?hint.authorizedContactId:await kapso.resolveWaId(hint.contactId);
-   // One WhatsApp message per bubble. Each WAMID is recorded as an agent message right away so the
-   // provider history never reads the later bubbles as an unknown outbound sender (human takeover).
-   const wamids:string[]=[];
-   for(const bubble of reply) {
-    try { wamids.push(await kapso.sendText({phoneNumberId:hint.phoneNumberId,to,text:bubble})); }
-    catch(error) { if(!wamids.length) throw error; break; } // A later bubble failing must not resend the first.
-    await store.recordAgentMessage(job.id,wamids.at(-1)!,bubble);
-   }
-   const sent=await store.confirmApiSend(job.id,wamids[0]!);
-   // After a successful WhatsApp delivery, apply deferred handoff/stop from the model decision.
-   const decision=job.result;
-   if(decision&&(decision.nextAction==='handoff'||decision.nextAction==='stop')) {
-    await store.control(channel,job.conversation_id,decision.nextAction==='stop'?'stop':'handoff',job.id+':after-deliver',input.executionId,input.controlFingerprint);
-   }
-   return sent;
-  } catch {
-   return store.failApiSend(job.id,'DELIVERY_FAILED');
-  }
+  return deliverTurn({store,kapso,native,config},channel,job,input.executionId,input.controlFingerprint);
  });
  app.post<{Params:{id:string}}>('/internal/turns/:id/dispatched',async request=>{await store.dispatched(request.params.id);return {recorded:true,status:'awaiting_provider_receipt'};});
  app.post<{Params:{id:string}}>('/internal/n8n/jobs/:id/complete',async request=>{
-  const body=json(request);if(body.jobId!==request.params.id) throw new ServiceError('JOB_MISMATCH',409); return engine.complete(body);
+  const body=json(request);if(body.jobId!==request.params.id) throw new ServiceError('JOB_MISMATCH',409);
+  const completion=await engine.complete(body);
+  if(completion.accepted) {
+   // Send as soon as the guard accepts instead of waiting for the next Kapso poll; the session function then sees `sent` and waits.
+   try {
+    const {channel,job}=await store.getJob(request.params.id);
+    const binding=channel.kind==='whatsapp'&&job.state==='ready'?await store.nativeBinding(job.id):null;
+    if(binding) await deliverTurn({store,kapso,native,config},channel,job,binding.executionId,binding.controlFingerprint);
+   } catch(error) { app.log.warn({code:'DELIVER_AT_COMPLETION_FAILED',status:0},'request_failed'); }
+  }
+  return completion;
  });
  app.post<{Params:{id:string}}>('/internal/n8n/briefings/:id/complete',async request=>{
   const body=json(request);if(body.jobId!==request.params.id)throw new ServiceError('JOB_MISMATCH',409);return briefings.complete(body);
