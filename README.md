@@ -15,6 +15,7 @@ Backend e worker independentes do protótipo e dos workflows existentes. O canal
 - Laboratório com Supabase Auth, autorização por associação à marca, conversas, memória, fontes, versões e avaliação humana. Sem conteúdo real de piloto quando a conexão não está configurada.
 - Rascunhos e versões imutáveis, restauração, testes vinculados ao hash e publicação condicionada a relatórios válidos. Publicar não liga o canal.
 - Verificação do papel PostgreSQL de execução e rotina de retenção de até 30 dias, desligada por padrão.
+- Comando `#reset` (mensagem exata) para contatos da allowlist de testers: apaga conversas, fatos, relações e jobs do candidato e marca `reset_at`; histórico do provedor anterior ao reset não é re-ingerido. Sem resposta no WhatsApp; contatos fora da allowlist são ignorados. Requer a migração `004_candidate_reset`.
 
 ## Estrutura
 

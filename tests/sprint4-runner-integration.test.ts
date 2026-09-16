@@ -50,7 +50,7 @@ async function fixture(t: TestContext) {
  let journal!: Sprint4Journal, bootstrapStorage!: Sprint4BootstrapStorage, archive!: Sprint4EvidenceStorage;
  const closeStores = async () => { for (const store of [journal, bootstrapStorage, archive]) if (store) assert.ok((await store.execute({ action: 'close' })).success); };
  t.after(async () => { await app?.close(); await closeStores(); await db.close(); await rm(directory, { recursive: true, force: true }); });
- for (const migration of ['001_sdr.sql', '002_versions.sql', '003_lab_sessions.sql']) await pg.exec(await readFile(new URL('../migrations/' + migration, import.meta.url), 'utf8'));
+ for (const migration of ['001_sdr.sql', '002_versions.sql', '003_lab_sessions.sql', '004_candidate_reset.sql']) await pg.exec(await readFile(new URL('../migrations/' + migration, import.meta.url), 'utf8'));
  await seedPilot(db, { testers: [{ contactId: '5511999999999', label: syntheticNotice }], adminUserIds: [credential.actorUserId] });
  const draft = await new Versioning(db).saveDraft(scope, createFinancialDraftSnapshot(initialSnapshot(scope)), credential.actorUserId);
  assert.ok(draft.ok);

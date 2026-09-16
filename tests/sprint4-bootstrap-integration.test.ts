@@ -24,7 +24,7 @@ async function fixture(t:TestContext){
  const db:Database={query:(sql,params)=>pg.query(sql,params),transaction:fn=>pg.transaction(tx=>fn(tx as Queryable)),close:()=>pg.close()};
  const stores:Sprint4BootstrapStorage[]=[];let app:Awaited<ReturnType<typeof createServer>>|undefined;
  t.after(async()=>{await app?.close();for(const store of stores)await store.execute({action:'close'});await db.close();await rm(directory,{recursive:true,force:true});});
- for(const name of ['001_sdr.sql','002_versions.sql','003_lab_sessions.sql'])await pg.exec(await readFile(new URL('../migrations/'+name,import.meta.url),'utf8'));
+ for(const name of ['001_sdr.sql','002_versions.sql','003_lab_sessions.sql','004_candidate_reset.sql'])await pg.exec(await readFile(new URL('../migrations/'+name,import.meta.url),'utf8'));
  await seedPilot(db,{testers:[{contactId:'5511999999999',label:'Synthetic bootstrap'}],adminUserIds:[credential.actorUserId]});
  const draft=await new Versioning(db).saveDraft(scope,createFinancialDraftSnapshot(initialSnapshot(scope)),credential.actorUserId);assert.ok(draft.ok);
  const planned=new Sprint4CampaignPlanner().execute({runId:'bootstrap-integration',actorUserId:credential.actorUserId,target:{versionId:draft.value.versionId,contentHash:draft.value.contentHash,model:'gpt-5.4-2026-03-05'}});assert.ok(planned.success);

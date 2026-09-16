@@ -14,7 +14,7 @@ import { LabSessions } from '../src/lab-sessions.js';
 const scope = { tenantId: 'cognita-homologacao', brandId: 'sapore' };
 async function database(): Promise<Database> {
   const pg = new PGlite({ extensions: { vector } });
-  for (const file of ['001_sdr.sql', '002_versions.sql', '003_lab_sessions.sql']) {
+  for (const file of ['001_sdr.sql', '002_versions.sql', '003_lab_sessions.sql', '004_candidate_reset.sql']) {
     await pg.exec(await readFile(new URL('../migrations/' + file, import.meta.url), 'utf8'));
   }
   return { query: (sql, params) => pg.query(sql, params), transaction: fn => pg.transaction(tx => fn(tx as Queryable)), close: () => pg.close() };

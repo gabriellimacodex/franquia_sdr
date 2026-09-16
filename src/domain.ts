@@ -165,6 +165,9 @@ export function deriveQualification(state: LeadState, tenant: TenantConfig): Qua
 
 function normalizeText(value: string): string { return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/\s+/g, ' ').trim(); }
 
+/** Tester-only command: exact "#reset", never a substring of a real message. */
+export function isResetCommand(text: string): boolean { return normalizeText(text) === '#reset'; }
+
 export function detectControlIntent(text: string): 'stop' | 'handoff' | null {
   const normalized = normalizeText(text).replace(/\bnao (pare|quero parar)\b/g, '');
   if (/\bnao quero (?:mais )?(?:contato|receber mensagens)\b/.test(normalized)) return 'stop';

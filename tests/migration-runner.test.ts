@@ -58,7 +58,7 @@ test('migration upgrade grants laboratory runtime access, preserves publisher ac
    }
   }
   assert.deepEqual((await pg.query('SELECT version FROM public.sapore_sdr_migrations ORDER BY version')).rows,
-   ['001_sdr', '002_versions', '003_lab_sessions'].map(version => ({version})));
+   ['001_sdr', '002_versions', '003_lab_sessions', '004_candidate_reset'].map(version => ({version})));
   assert.deepEqual((await pg.query("SELECT role,active FROM sdr.memberships WHERE user_id='existing-reviewer'")).rows,
    [{role: 'reviewer', active: true}]);
   assert.deepEqual((await pg.query('SELECT kind,enabled FROM sdr.channels ORDER BY kind')).rows,
@@ -72,7 +72,7 @@ test('initial migrations succeed without creating or granting a runtime role', a
   await runMigrations(database(pg));
   assert.deepEqual((await pg.query("SELECT rolname FROM pg_roles WHERE rolname='sdr_runtime'")).rows, []);
   assert.deepEqual((await pg.query('SELECT version FROM public.sapore_sdr_migrations ORDER BY version')).rows,
-   ['001_sdr', '002_versions', '003_lab_sessions'].map(version => ({version})));
+   ['001_sdr', '002_versions', '003_lab_sessions', '004_candidate_reset'].map(version => ({version})));
  } finally { await pg.close(); }
 });
 

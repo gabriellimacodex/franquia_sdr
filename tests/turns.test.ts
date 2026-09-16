@@ -159,3 +159,26 @@ test('resume endpoint persists only the native verified control timestamp, never
   assert.equal((await db.query<{state:string}>('SELECT state FROM sdr.conversations')).rows[0]?.state,'human');
  }finally{await server.close();await db.close();}
 });
+
+test('#reset from a tester wipes memory and provider history cannot restore it',async()=>{
+ const {db,store}=await setup();
+ try{
+  await store.startTurn(input());
+  assert.equal((await db.query('SELECT * FROM sdr.messages')).rows.length,1);
+  assert.equal((await store.startTurn(input('m-reset','#reset'))).state,'ignored');
+  assert.equal((await db.query('SELECT * FROM sdr.messages')).rows.length,0);
+  assert.equal((await db.query('SELECT * FROM sdr.jobs')).rows.length,0);
+  const candidates=(await db.query<{reset_at:string|null}>('SELECT reset_at FROM sdr.candidates')).rows;
+  assert.equal(candidates.length,1);assert.ok(candidates[0]!.reset_at);
+  // The provider replays the old turn and the command itself; only the new message is ingested.
+  const before=new Date(Date.now()-60_000).toISOString();
+  const next=await store.startTurn({...input('m3','Voltei do zero'),messages:[
+   {id:'m1',text:'Gostaria de conhecer a franquia',type:'text',actor:'candidate',timestamp:before},
+   {id:'m-reset',text:'#reset',type:'text',actor:'candidate',timestamp:new Date().toISOString()},
+  ]});
+  assert.equal(next.state,'pending');
+  assert.deepEqual((await db.query<{id:string}>('SELECT id FROM sdr.messages')).rows.map(row=>row.id),['m3']);
+  assert.equal((await store.startTurn({...input('m4','#reset'),contactId:'stranger'})).state,'ignored');
+  assert.equal((await db.query('SELECT * FROM sdr.candidates')).rows.length,1);
+ }finally{await db.close();}
+});

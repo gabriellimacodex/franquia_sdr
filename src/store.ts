@@ -1,7 +1,7 @@
 import { createHash, randomUUID } from 'node:crypto';
 import type { Database, Queryable, Scope } from './database.js';
 import { scoped } from './database.js';
-import { createLeadState, detectControlIntent, LeadStateSchema, type LeadState, type AgentDecision } from './domain.js';
+import { createLeadState, detectControlIntent, LeadStateSchema, type LeadState, type AgentDecision,isResetCommand} from './domain.js';
 import type { IncomingMessage, TurnInput, TurnView } from './contracts.js';
 import { ServiceError } from './security.js';
 
@@ -20,7 +20,7 @@ export interface ConversationRow {
  id:string; candidate_id:string; phone_number_id:string; state:string; epoch:number;
  execution_id:string|null; control_fingerprint:string|null; last_inbound_at:Date|null;
 }
-export interface CandidateRow { id:string; lead_state:LeadState; revision:number; label:string; contact_id:string;authorized_contact_id:string }
+export interface CandidateRow { id:string; lead_state:LeadState; revision:number; label:string; contact_id:string;authorized_contact_id:string; reset_at:Date|string|null }
 export const digest = (value:string) => createHash('sha256').update(value).digest('hex');
 
 export class Store {
@@ -41,6 +41,7 @@ export class Store {
      const s=[channel.tenantId,channel.brandId];
      const tester=(await tx.query<{label:string,contact_id:string}>(`SELECT label,contact_id FROM sdr.testers WHERE tenant_id=$1 AND brand_id=$2 AND enabled AND (contact_id=$3 OR contact_id=$4)`,[...s,input.contactId,input.contactPhone??''])).rows[0];
      if(!tester) return {channel,accepted:false}; // No unapproved contact content is retained.
+     if(isResetCommand(input.text)) { await this.resetTesterTx(tx,channel,input.contactId); return {channel,accepted:false}; }
      const id=randomUUID();
      await tx.query(`INSERT INTO sdr.candidates(id,tenant_id,brand_id,contact_id,label,lead_state,authorized_contact_id) VALUES($3,$1,$2,$4,$5,$6,$7) ON CONFLICT(tenant_id,brand_id,contact_id) DO NOTHING`,[...s,id,input.contactId,tester.label,JSON.stringify(createLeadState(channel.tenantId,channel.brandId,id)),tester.contact_id]);
      const candidate=(await tx.query<CandidateRow>('SELECT * FROM sdr.candidates WHERE tenant_id=$1 AND brand_id=$2 AND contact_id=$3 FOR UPDATE',[...s,input.contactId])).rows[0];
@@ -63,6 +64,9 @@ export class Store {
        // can turn an unknown outbound actor into our agent; matching text alone is insufficient.
        if(message.actor==='human'&&(await tx.query('SELECT job_id FROM sdr.deliveries WHERE tenant_id=$1 AND brand_id=$2 AND conversation_id=$3 AND message_id=$4',[...s,input.conversationId,message.id])).rows.length) message.actor='agent';
        const timestamp=message.timestamp??new Date().toISOString();
+       // Provider history replays older turns; nothing before a tester reset (nor the command itself) is re-ingested.
+       if(candidate.reset_at&&Date.parse(timestamp)<=new Date(candidate.reset_at).getTime())continue;
+       if(message.actor==='candidate'&&isResetCommand(message.text))continue;
        if(Date.parse(timestamp)<Date.now()-30*86400000)continue;
        if(Date.parse(timestamp)>Date.now()+60_000) throw new ServiceError('FUTURE_MESSAGE',400);
        const inserted=await tx.query(`INSERT INTO sdr.messages(id,tenant_id,brand_id,conversation_id,candidate_id,actor,type,text,media_id,transcript_origin,provider_timestamp) VALUES($3,$1,$2,$4,$5,$6,$7,$8,$9,$10,$11) ON CONFLICT DO NOTHING RETURNING id`,[...s,message.id,input.conversationId,candidate.id,message.actor,message.type,message.text,message.mediaId??null,message.transcriptOrigin??null,timestamp]);
@@ -81,6 +85,16 @@ export class Store {
      }
      return {channel,accepted:true};
    });
+ }
+ /** Tester-only. Conversations cascade to messages, jobs, deliveries, briefings and events; the lead state restarts. */
+ private async resetTesterTx(tx:Queryable,channel:Channel,contactId:string):Promise<void> {
+   const s=[channel.tenantId,channel.brandId];
+   const candidate=(await tx.query<CandidateRow>('SELECT * FROM sdr.candidates WHERE tenant_id=$1 AND brand_id=$2 AND contact_id=$3 FOR UPDATE',[...s,contactId])).rows[0];
+   if(!candidate) return;
+   await tx.query('DELETE FROM sdr.conversations WHERE tenant_id=$1 AND brand_id=$2 AND candidate_id=$3',[...s,candidate.id]);
+   await tx.query('DELETE FROM sdr.facts WHERE tenant_id=$1 AND brand_id=$2 AND candidate_id=$3',[...s,candidate.id]);
+   await tx.query('DELETE FROM sdr.relations WHERE tenant_id=$1 AND brand_id=$2 AND candidate_id=$3',[...s,candidate.id]);
+   await tx.query('UPDATE sdr.candidates SET lead_state=$4,revision=revision+1,reset_at=now(),updated_at=now() WHERE tenant_id=$1 AND brand_id=$2 AND id=$3',[...s,candidate.id,JSON.stringify(createLeadState(channel.tenantId,channel.brandId,candidate.id))]);
  }
  async startTurn(input:TurnInput):Promise<TurnView> {
    const {channel,accepted}=await this.ingest(input);
