@@ -54,6 +54,7 @@ O canvas do n8n usa o node **Agent** como cérebro (não HTTP `/v1/responses`), 
 
 - `/internal/turns/:id/deliver` envia **um `sendText` por balão** (antes juntava com `\n\n` numa mensagem só). Cada WAMID é gravado como mensagem do agente (`Store.recordAgentMessage`) **antes** de confirmar, porque o histórico do provedor replica todo outbound como remetente desconhecido e um WAMID não reconhecido vira "humano assumiu" (`controlTx handoff`). `deliveries.message_id` guarda o primeiro WAMID; os demais vivem em `sdr.messages`.
 - Falha no primeiro balão → `failApiSend` como antes; falha num balão posterior → confirma o que foi enviado e não reenvia (sem reenvio cego).
+- Deploy: imagem `sapore-sdr:sprint5-bubbles-20260916-r12` (commit `75080f4`), 25/25 nos arquivos relacionados dentro da imagem, troca às 05:48:28Z com zero jobs ativos, `/health`/`/ready` 200. Rollback: r11 (`sprint5-media-20260916-r11`), mesmo comando.
 - Teste de rota cobre os dois envios, o registro dos WAMIDs e o replay do histórico sem pausa. O teste `sprint4-journal` "two real processes racing…" é flake de timing (falhou uma vez na suíte completa, 13/13 isolado duas vezes).
 
 ## Divergência git × deploy (histórico; resolvida pela r11)
