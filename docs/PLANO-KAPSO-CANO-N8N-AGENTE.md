@@ -132,7 +132,7 @@ Achado: hoje trigger Kapso **e** webhook API estão ativos (desenho native-contr
 
 Nenhum ping. Sem código de produto.
 
-### Fase 1 — n8n deixa de ser cano invisível — EM CURSO (2026-09-15)
+### Fase 1 — n8n deixa de ser cano invisível — FEITA 2026-09-15
 
 - [x] Workflow `SaporeAgentWhatsAppV2` criado — https://sdr-n8n.cognitaai.com.br/workflow/SaporeAgentWhatsAppV2
 - [x] Node **Sofia — system prompt** com franchise-sdr-v1.1 no canvas
@@ -144,7 +144,7 @@ Nenhum ping. Sem código de produto.
 
 Fase 1 **fechada**. Detalhe: `backups/fase0-20260915/FASE1-STATUS.md`
 
-### Fase 2 — API envia WhatsApp direto (ainda com workflow Kapso parado só no send)
+### Fase 2 — API envia WhatsApp direto (ainda com workflow Kapso parado só no send) — FEITA 2026-09-15 (ver `FASE2-STATUS.md`; ping de prova pendente)
 
 Objetivo: o send_text da Kapso deixa de ser necessário.
 
@@ -166,7 +166,7 @@ Ping de prova: “oi” → uma resposta. Só então fase 3.
 
 Objetivo: (A) Kapso só transporte; (B) o canvas n8n usa **modo Agent**, não HTTP Responses cru.
 
-#### 3A — Trocar HTTP Responses → node Agent (ainda com Kapso workflow ligado, se Fase 2 já envia pela API)
+#### 3A — Trocar HTTP Responses → node Agent (ainda com Kapso workflow ligado, se Fase 2 já envia pela API) — FEITA 2026-09-16 (ver `FASE3A-STATUS.md`; inclui ramo de briefing)
 
 No workflow `SaporeAgentWhatsAppV2` (ou v3):
 
@@ -180,7 +180,7 @@ No workflow `SaporeAgentWhatsAppV2` (ou v3):
 
 Rollback 3A: recolocar o HTTP Responses (export JSON do Fase 1 fica em `backups/`).
 
-#### 3B — Aposentar Decide/Wait/Send da Kapso
+#### 3B — Aposentar Decide/Wait/Send da Kapso — TENTADA E REVERTIDA 2026-09-16 (ver `FASE3A-STATUS.md`: o webhook `/webhooks/kapso` não recebeu a entrega; provar Kapso → API com o trigger ligado antes de repetir)
 
 Só depois de 3A estável.
 
