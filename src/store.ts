@@ -119,7 +119,8 @@ export class Store {
    });
  }
  view(job:JobRow):TurnView {
-   const state:TurnView['state']= ['pending','working','running'].includes(job.state)?'pending':job.state==='dispatching'||job.state==='dispatched'?'unknown':job.state as TurnView['state'];
+   // `dispatching` is the API sending right now: callers must poll, not treat it as an ambiguous native send.
+   const state:TurnView['state']= ['pending','working','running','dispatching'].includes(job.state)?'pending':job.state==='dispatched'?'unknown':job.state as TurnView['state'];
    return {id:job.id,state,reply:state==='ready'?job.result?.bubbles??[]:[],contextVersion:job.context_version,...(job.error_code?{errorCode:job.error_code}:{})};
  }
  /** The native execution a conversation is bound to, as recorded at ingest; null until the first bound turn. */

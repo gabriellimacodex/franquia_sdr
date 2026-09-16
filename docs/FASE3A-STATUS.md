@@ -66,6 +66,12 @@ O canvas do n8n usa o node **Agent** como cérebro (não HTTP `/v1/responses`), 
 - Prompt da Sofia: apresentação só no primeiro turno, nunca no segundo balão nem em turnos seguintes (n8n + `src/prompts.ts`, 06:0xZ).
 - Flake conhecido: `completion-controls.test.ts` falhou como arquivo uma vez na suíte completa (18 s), 6/6 isolado.
 
+## r14 — corrida entre envio no callback e poll da Kapso (2026-09-16)
+
+- Sintoma (06:29Z): turno enviado e entregue às 06:29:14, mas o poll da Kapso caiu na janela `dispatching` (API enviando); `store.view` mapeava `dispatching` para `unknown`, a função Kapso leu "envio ambíguo" e fez handoff (`sapore_error: unknown`), gerando briefing e prendendo a conversa.
+- Fix: `dispatching` agora é `pending` na view (a função faz poll e vê `sent` na volta); `dispatched` (envio nativo legado, sem WAMID) continua `unknown`. Asserção em `turns.test.ts`.
+- Briefing: exec 136 rejeitada com `BRIEFING_UNKNOWN_FACT` (modelo inventou `factIds`); limite "somente ids existentes em `lead.facts`" no `Briefing — Agent` (n8n) e em `BRIEFING_PROMPT`.
+
 ## Divergência git × deploy (histórico; resolvida pela r11)
 
 - `integrations/kapso/functions/sapore-session/index.js` no git inclui o guard "prior `unknown` não libera reenvio" (commit `5b5dbf4`); a função deployada na Kapso é a versão Fase 2 **sem** esse guard. Redeploy da function é uma decisão separada.

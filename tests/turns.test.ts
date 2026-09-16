@@ -54,6 +54,7 @@ test('single-use send permit fails after tester revocation and never permits bli
   await db.query('UPDATE sdr.testers SET enabled=true');
   assert.equal((await store.authorize(first.id,'execution-1','epoch-1')).authorized,true);
   assert.equal((await store.authorize(first.id,'execution-1','epoch-1')).authorized,false);
+  assert.equal(store.view((await store.getJob(first.id)).job).state,'pending','an in-flight API send must read as pending, never as an ambiguous native send');
   await store.dispatched(first.id);
   assert.equal((await store.getJob(first.id)).job.state,'dispatched');
   assert.equal(store.view((await store.getJob(first.id)).job).state,'unknown');
